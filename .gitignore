@@ -11,7 +11,7 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 .DS_Store
-CMakeLists.txt
 Cmake-build-debug
 .idea
 doxygen
+ft-ls
