@@ -12,12 +12,14 @@
 *		4. Print result
 */
 
-void	FunctionForTest(t_flags *flags, t_folder *folders) { //del this later
+void	FunctionForTest(t_flags *flags, t_file *files)
+{ //del this later
 	printf("flags: -%d -%d, -%d -%d, -%d -%d\n", flags->big_r, flags->little_r, flags->l, flags->a, flags->t, flags->one);
 	
-	t_folder* tmp = folders;
+	t_file* tmp = files;
 	printf("folders:\n");
-	while (tmp) {
+	while (tmp)
+	{
 		printf("\t%s\n", tmp->name);
 		tmp = tmp->next;
 	}
@@ -26,14 +28,14 @@ void	FunctionForTest(t_flags *flags, t_folder *folders) { //del this later
 int		main(int ac, char **av)
 {
 	t_flags		*flags;
-	t_folder	*folders;
+	t_file	*files;
 
 	if (!(flags = init_flags()))
 		return (1);
-	if (!(folders = init_folder()))
+	if (!(files = init_file()))
 		return (1);
-	if (!parser((const char **)av, folders, flags))
+	if (!parser((const char **)av, files, flags, ac))
 		return (1);
-	FunctionForTest(flags, folders);
+	FunctionForTest(flags, files);
 	return (0);
 }

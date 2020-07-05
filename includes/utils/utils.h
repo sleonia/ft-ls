@@ -10,7 +10,7 @@
 #include "types.h"
 
 t_flags		*init_flags(void);
-t_folder	*init_folder(void);
-void		new_folder(t_folder *prev);
+t_file 		*init_file(void);
+void		new_file(t_file *prev);
 
 #endif

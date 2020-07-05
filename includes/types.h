@@ -10,23 +10,26 @@
 #include <stdbool.h>
 
 /*!
-folder
-    - folder name
+file
+    - file name
     - file descriptor
-    - folder inside ???
-    - poiner to next element
+    - file type flag
+    - folder inside is not NULL if is_folder == TRUE
+    - pointer to next element
+    - pointer to prev element
+    - creation time
 */
 
-typedef struct			s_folder
+typedef struct			s_file
 {
 	char				*name;
 	DIR					*fd;
-	struct s_folder		*folders_inside;
-	struct s_folder		*next;
-	/////maybe this should have 2
-	/////connections or even be a tree for speed purposes
-	/////but for now - whatever
-}						t_folder;
+	bool				is_folder;
+	struct s_file		*files_inside;
+	struct s_file		*next;
+	struct s_file		*prev;
+	struct t_time		*created;////only used with -t flag, no need to do it otherwise
+}						t_file;
 
 /*!
 * Parsing ls arguments - directories and flags
@@ -47,5 +50,6 @@ typedef	struct			s_flags
 	bool				a;
 	bool				t;
 	bool				one;
+	bool				no_flags;////added temporarily, should delete if its useless
 }						t_flags;
 #endif

@@ -6,13 +6,23 @@
 *	\return index in user input that equals folder or error flag
 */
 
-int			read_flags(t_flags *flags, const char **args)
+static bool	has_no_flags(t_flags *flags)
+{
+	if (flags->a || flags->l || flags->big_r || flags->little_r ||
+	flags->one || flags->t)
+		return (false);
+	return (flags->no_flags = true);
+}
+
+int			read_flags(t_flags *flags, const char **args, int ac)
 {
 	int 	i;
 	int		index;
 	int		old_index;
 
-	if (!args)
+//	if (!args)
+//		return (1);//////will it ever happen though? args[0] is the executable name, thus args if never NULL. Added ac check instead for now
+	if (ac == 1)
 		return (1);
 	i = 0;
 	old_index = 1;
@@ -21,6 +31,8 @@ int			read_flags(t_flags *flags, const char **args)
 		index = validate_flags(flags, args[i]);
 		old_index = old_index > index ? old_index : index;
 	}
+	if (has_no_flags(flags))
+		old_index = 0;
 	printf("%d\n", old_index);
 	return (old_index);
 }

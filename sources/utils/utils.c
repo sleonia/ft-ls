@@ -10,20 +10,20 @@ t_flags		*init_flags(void)
 	return (flags);
 }
 
-t_folder		*init_folder(void)
+t_file 		*init_file(void)
 {
-	t_folder	*folders;
+	t_file 	*files;
 
-	if (!(folders = (t_folder*)ft_memalloc(sizeof(t_folder))))
+	if (!(files = (t_file*)ft_memalloc(sizeof(t_file))))
 		return (NULL);
-	return (folders);
+	return (files);
 }
 
-void			new_folder(t_folder *prev)
+void			new_file(t_file *prev)
 {
-	t_folder	*folders;
+	t_file 	*file;
 
-	folders = init_folder();
+	file = init_file();
 	if (prev)
-		prev->next = folders;
+		prev->next = file;
 }
