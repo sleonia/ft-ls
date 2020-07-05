@@ -20,6 +20,7 @@ static void collect_flags(t_flags *flags, const char arg)
 }
 
 /*
+*	\Teturn index in user input that equals folder
 */
 
 int		validate_flags(t_flags *flags, const char *arg)
@@ -28,7 +29,7 @@ int		validate_flags(t_flags *flags, const char *arg)
 
 	if (arg[0] != '-')
 	{
-		return (1);
+		return (0);
 	}
 	i = 0;
 	while (arg[++i])
@@ -36,7 +37,12 @@ int		validate_flags(t_flags *flags, const char *arg)
 		if (arg[i] == 'R' || arg[i] == 'r' || arg[i] == 'l'
 			|| arg[i] == 'a' || arg[i] == 't' || arg[i] == '1')
 		{
+			//ft_putchar(arg[i]);
 			collect_flags(flags, arg[i]);
+		}
+		else
+		{
+			//here we print usage and return index, that equals folders
 		}
 	}
 	return (0);

@@ -1,6 +1,15 @@
 #include "parser/parser.h"
 
-t_folder				*read_folders(const char **args)
+bool		read_folders(t_folder *folders, const char **args)
 {
-	return (NULL);
+	if (!args)
+	{
+		folders->folder_name = ft_strdup("./");
+		folders->fd = opendir("./");
+	}
+	else
+	{
+		//do something
+	}
+	return (true);
 }

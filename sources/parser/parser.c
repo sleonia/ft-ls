@@ -1,7 +1,8 @@
 #include "parser/parser.h"
+#include "utils/utils.h"
 
 /*
-	Test:
+	Tests:
 
 	ft_ls -9					-> KO
 	ft_ls -a					-> OK
@@ -13,9 +14,11 @@
 	ft_ls -aR1 ../ ./ -a		-> OK
 */
 
+
+
 bool			parser(const char **av, t_folder *folders, t_flags *flags)
 {
-	flags = read_flags(av);
-	folders = read_folders(av);
+	read_flags(flags, av);
+	read_folders(folders, av);
 	return (true);
 }

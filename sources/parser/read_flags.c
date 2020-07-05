@@ -6,27 +6,23 @@
 *	When an error occurs print usage and return NULL
 */
 
-t_flags 	*read_flags(const char **args)
+bool		read_flags(t_flags *flags, const char **args)
 {
-	t_flags	*flags;
 	int 	i;
+	int		k;
 
 	if (!args)
 		return (NULL);
-	if (!(flags = (t_flags*)ft_memalloc(sizeof(t_flags))))
-		return (NULL);
 	i = -1;
+
 	while (args[++i])
 	{
-		if (validate_flags(flags, args[i])) //func for check -a -5645 or ./folder/
+		k = validate_flags(flags, args[i]);
+		if (k)
 		{
-			
+			//
 		}
 
 	}
-
-	i = 0;
-	//while (args[++i])
-		//collect_flags(flags, args[i]);
-	return (flags);
+	return (true);	
 }

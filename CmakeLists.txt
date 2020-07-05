@@ -11,7 +11,9 @@ include_directories(libft)
 include_directories (
 				"includes/"
 				"includes/folder/"
+				"includes/output/"
 				"includes/parser/"
+				"includes/utils/"
 			)
 
 add_executable(ft-ls
@@ -88,8 +90,7 @@ add_executable(ft-ls
 				sources/parser/read_flags.c
 				sources/parser/read_folders.c
 				sources/parser/validate_flags.c
-
+				sources/output/output.c
+				sources/utils/utils.c
 				sources/main.c
-				#sources/read_folders.c
-				#sources/free_stuff.c
 )
