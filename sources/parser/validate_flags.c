@@ -39,7 +39,7 @@ int		validate_flags(t_flags *flags, const char *arg)
 			collect_flags(flags, arg[i]);
 		}
 		else
-		{}
+		{}////////exit here with usage
 	}
 	return (!arg[i] ? 1 : i);
 }
