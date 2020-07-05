@@ -20,8 +20,6 @@ int			read_flags(t_flags *flags, const char **args, int ac)
 	int		index;
 	int		old_index;
 
-//	if (!args)
-//		return (1);//////will it ever happen though? args[0] is the executable name, thus args if never NULL. Added ac check instead for now
 	if (ac == 1)
 		return (1);
 	i = 0;

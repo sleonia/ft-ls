@@ -2,6 +2,7 @@
 # define OUTPUT_H
 
 #include "libft.h"
+#include <errno.h>
 
 /*!
 * \file
@@ -9,5 +10,6 @@
 */
 
 void        print_illegal_opt(const char);
+void 		errno_exit();
 
 #endif
