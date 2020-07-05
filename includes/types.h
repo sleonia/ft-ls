@@ -3,7 +3,7 @@
 
 /*!
 * \file
-* \brief Structs in program
+* \brief Types of structs in program
 */
 
 #include <dirent.h>
@@ -19,10 +19,10 @@ folder
 
 typedef struct			s_folder
 {
-	char				*folder_name;
+	char				*name;
 	DIR					*fd;
-	struct s_folders	*folders_inside;
-	struct s_folders	*next;
+	struct s_folder		*folders_inside;
+	struct s_folder		*next;
 	/////maybe this should have 2
 	/////connections or even be a tree for speed purposes
 	/////but for now - whatever

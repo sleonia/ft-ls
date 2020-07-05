@@ -18,3 +18,12 @@ t_folder		*init_folder(void)
 		return (NULL);
 	return (folders);
 }
+
+void			new_folder(t_folder *prev)
+{
+	t_folder	*folders;
+
+	folders = init_folder();
+	if (prev)
+		prev->next = folders;
+}

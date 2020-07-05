@@ -4,21 +4,23 @@
 /*
 	Tests:
 
-	ft_ls -9					-> KO
-	ft_ls -a					-> OK
-	ft_ls -a ../				-> OK
-	ft_ls -aR ../				-> OK
-	ft_ls -aR1 ../				-> OK
-	ft_ls -aR1554 ../			-> KO
-	ft_ls -aR1 ../ -a			-> OK
-	ft_ls -aR1 ../ ./ -a		-> OK
+	./ft-ls -9					-> KO
+	./ft-ls -a					-> OK
+	./ft-ls -a ../				-> OK
+	./ft-ls -aR ../				-> OK
+	./ft-ls -aR1 ../			-> OK
+	./ft-ls -aR1554 ../			-> KO
+	./ft-ls -aR1 ../ -a			-> OK
+	./ft-ls -aR1 ../ ./ -a		-> OK
 */
 
 
 
 bool			parser(const char **av, t_folder *folders, t_flags *flags)
 {
-	read_flags(flags, av);
-	read_folders(folders, av);
+	int			index;
+
+	index =	read_flags(flags, av);
+	read_folders(index, folders, av);
 	return (true);
 }

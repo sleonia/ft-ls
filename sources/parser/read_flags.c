@@ -2,27 +2,25 @@
 #include "output/output.h"
 
 /*
-*	Read flags and validate them
-*	When an error occurs print usage and return NULL
+*	Read flags, validate and collect them.
+*	\return index in user input that equals folder or error flag
 */
 
-bool		read_flags(t_flags *flags, const char **args)
+int			read_flags(t_flags *flags, const char **args)
 {
 	int 	i;
-	int		k;
+	int		index;
+	int		old_index;
 
 	if (!args)
-		return (NULL);
-	i = -1;
-
+		return (1);
+	i = 0;
+	old_index = 1;
 	while (args[++i])
 	{
-		k = validate_flags(flags, args[i]);
-		if (k)
-		{
-			//
-		}
-
+		index = validate_flags(flags, args[i]);
+		old_index = old_index > index ? old_index : index;
 	}
-	return (true);	
+	printf("%d\n", old_index);
+	return (old_index);
 }

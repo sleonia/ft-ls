@@ -14,8 +14,8 @@
 */
 
 bool		parser(const char **, t_folder *, t_flags *);
-bool		read_flags(t_flags *, const char **);
-bool		read_folders(t_folder *,const char **);
+int			read_flags(t_flags *, const char **);
+bool		read_folders(int, t_folder *,const char **);
 int			validate_flags(t_flags *, const char *);
 
 #endif

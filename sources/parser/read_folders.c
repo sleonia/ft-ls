@@ -1,15 +1,27 @@
 #include "parser/parser.h"
+#include "utils/utils.h"
 
-bool		read_folders(t_folder *folders, const char **args)
+static void	fill_folder(const char *name, t_folder *folder)
 {
+	folder->name = (char *)name;
+	folder->fd = opendir(name);
+}
+
+bool		read_folders(int index, t_folder *folders, const char **args)
+{
+	t_folder *tmp;
+
+	tmp = folders;
 	if (!args)
-	{
-		folders->folder_name = ft_strdup("./");
-		folders->fd = opendir("./");
-	}
+		fill_folder("./", folders);
 	else
 	{
-		//do something
+		while (args[index++])
+		{
+			fill_folder(args[index], tmp);
+			new_folder(tmp);
+			tmp = tmp->next;
+		}
 	}
 	return (true);
 }
