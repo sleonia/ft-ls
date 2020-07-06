@@ -33,12 +33,13 @@ bool		read_files(int index, t_file *files, const char **args, int ac)
 	t_file *tmp;
 
 	tmp = files;
-	if (ac == 1)
+	if (ac == 1 || !args[index + 1])
 		fill_file("./", files);
 	else
 	{
 		while (args[index++])
 		{
+			//write(1, "2", 1);
 			fill_file(args[index], tmp);
 			new_file(tmp);
 			tmp = tmp->next;

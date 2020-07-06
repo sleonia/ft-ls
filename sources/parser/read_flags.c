@@ -14,7 +14,7 @@ static bool	has_no_flags(t_flags *flags)
 	return (flags->no_flags = true);
 }
 
-int			read_flags(t_flags *flags, const char **args, int ac)
+int			read_flags(t_flags *flags, const char **args, int ac)  //переписать логику возврата функции
 {
 	int 	i;
 	int		index;
@@ -29,8 +29,8 @@ int			read_flags(t_flags *flags, const char **args, int ac)
 		index = validate_flags(flags, args[i]);
 		old_index = old_index > index ? old_index : index;
 	}
-	if (has_no_flags(flags))
-		old_index = 1;
+	//if (has_no_flags(flags))
+		//old_index = 1;
 	printf("%d\n", old_index);
 	return (old_index);
 }

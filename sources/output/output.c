@@ -5,10 +5,10 @@ void        print_illegal_opt(const char symb)
 	ft_putstr("ls: illegal option -- ");
 	ft_putchar(symb);
 	ft_putstr("\n\
-		usage: ls [-@ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1%] [file ...]\n");
+usage: ls [-@ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1%] [file ...]\n");
 }
 
-void 			errno_exit()
+void 		errno_exit(void)
 {
 	perror(strerror(errno));
 	exit(0);

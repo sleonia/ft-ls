@@ -10,6 +10,6 @@
 */
 
 void        print_illegal_opt(const char);
-void 		errno_exit();
+void 		errno_exit(void);
 
 #endif

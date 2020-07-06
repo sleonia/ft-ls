@@ -1,4 +1,5 @@
 #include "parser/parser.h"
+#include "output/output.h"
 
 /*
 */
@@ -39,7 +40,11 @@ int		validate_flags(t_flags *flags, const char *arg)
 			collect_flags(flags, arg[i]);
 		}
 		else
-		{}////////exit here with usage
+		{
+			print_illegal_opt(arg[i]);
+			exit(0);			
+		}
 	}
-	return (!arg[i] ? 1 : i);
+	return (!arg[i] ? i - 1 : i);
+	//return (!arg[i] ? 1 : i);
 }
