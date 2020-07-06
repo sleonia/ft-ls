@@ -4,14 +4,14 @@ project(ft_ls C)
 set(CMAKE_C_STANDARD 11)
 
 include_directories(includes)
-include_directories(includes/folder)
+include_directories(includes/file)
 include_directories(includes/output)
 include_directories(includes/parser)
 include_directories(includes/utils)
 include_directories(libft)
 
 add_executable(ft_ls
-        includes/folder/folder.h
+        includes/file/file.h
         includes/output/output.h
         includes/parser/parser.h
         includes/utils/utils.h
@@ -87,7 +87,7 @@ add_executable(ft_ls
         sources/output/output.c
         sources/parser/parser.c
         sources/parser/read_flags.c
-        sources/parser/read_folders.c
+        sources/parser/read_files.c
         sources/parser/validate_flags.c
         sources/utils/utils.c
         sources/main.c)

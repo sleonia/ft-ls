@@ -19,7 +19,7 @@ static void collect_flags(t_flags *flags, const char arg)
 		flags->one = true;
 }
 
-/*
+/*!
 *	\return index in user input that equals folder or error flag
 */
 

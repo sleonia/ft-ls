@@ -1,7 +1,7 @@
 #include "parser/parser.h"
 #include "output/output.h"
 
-/*
+/*!
 *	Read flags, validate and collect them.
 *	\return index in user input that equals folder or error flag
 */
@@ -30,7 +30,7 @@ int			read_flags(t_flags *flags, const char **args, int ac)
 		old_index = old_index > index ? old_index : index;
 	}
 	if (has_no_flags(flags))
-		old_index = 0;
+		old_index = 1;
 	printf("%d\n", old_index);
 	return (old_index);
 }
