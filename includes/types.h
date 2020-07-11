@@ -8,6 +8,7 @@
 
 #include <dirent.h>
 #include <stdbool.h>
+#include <sys/stat.h>
 
 /*!
 file
@@ -20,15 +21,20 @@ file
     - creation time
 */
 
-typedef struct			s_file
+typedef struct			s_file////////maybe i should make it more readable, this shit has become too big to debug. lol kek some of my old projects are fucking crazy
 {
 	char				*name;
+	char 				*full_path;
 	DIR					*fd;
-	bool				is_folder;
+	bool				is_directory;
 	struct s_file		*files_inside;
+	struct s_file		*origin;////the directory containing this file, may be useful, will delete if not
 	struct s_file		*next;
 	struct s_file		*prev;
 	struct t_time		*created;////only used with -t flag, no need to do it otherwise
+	struct stat			stat;
+	struct dirent		*dirent;
+	bool				ignore;
 }						t_file;
 
 /*!

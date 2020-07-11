@@ -19,11 +19,38 @@ t_file 		*init_file(void)
 	return (files);
 }
 
-void			new_file(t_file *prev)
+t_file			*new_file(t_file *prev)//this didnt work with void because of a copy of pointer being sent as arg inside of the actual pointer thus the resulted *file leaked while staying NULL
 {
 	t_file 	*file;
 
-	file = init_file();
+	if (!(file = init_file()))
+		return (NULL);
 	if (prev)
+	{
 		prev->next = file;
+		file->prev = prev;
+	}
+	return (file);
+}
+
+char *build_path(t_file *file)//////this shit will break on a file with no name, this is intended, don't fix it
+{
+	char *buf;
+	char *result;
+	t_file *file_counter;
+
+	result = ft_strdup(file->name);////protect me
+	file_counter = file;
+	if (file->origin)
+	{
+		while (file_counter->origin)
+		{
+			buf = ft_strjoin("/", result);/////protect me
+			ft_strdel(&result);
+			result = ft_strjoin(file_counter->origin->name, buf);
+			ft_strdel(&buf);
+			file_counter = file_counter->origin;
+		}
+	}
+	return (result);
 }

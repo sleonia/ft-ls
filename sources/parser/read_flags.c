@@ -29,8 +29,7 @@ int			read_flags(t_flags *flags, const char **args, int ac)  //переписа�
 		index = validate_flags(flags, args[i]);
 		old_index = old_index > index ? old_index : index;
 	}
-	//if (has_no_flags(flags))
-		//old_index = 1;
+	flags->no_flags = has_no_flags(flags);
 	printf("%d\n", old_index);
 	return (old_index);
 }
