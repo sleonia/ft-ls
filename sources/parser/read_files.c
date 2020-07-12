@@ -117,6 +117,7 @@ bool		read_files(int index, t_file *files, const char **args, int ac, t_flags *f
 			fill_file(args[index], tmp, flags);
 			new_file(tmp);//////don't forget to clean this shit in case we have one arg, unix-trigger boyz won't get us this easy!
 			tmp = tmp->next;
+			index++;
 		}
 	}
 	return (true);

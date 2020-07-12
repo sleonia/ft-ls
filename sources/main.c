@@ -19,7 +19,10 @@ void	FunctionForTest(t_flags *flags, t_file *files)
 	
 	t_file* tmp = files;
 	printf("folders:\n");
-	print_files_test(files, flags);
+	if (!flags->big_r)
+		print_directory(files->files_inside, flags);
+	else
+		print_all_things(files, flags);
 }
 
 int		main(int ac, char **av)
