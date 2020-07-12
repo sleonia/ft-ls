@@ -58,10 +58,7 @@ char *build_path(t_file *file)//////this shit will break on a file with no name,
 char *build_path_for_arg(char *name)
 {
 	char *result;
-	char *buf;
 
-	buf = ft_strjoin(name, "/");
-	result = ft_strjoin("./", buf);
-	ft_strdel(&buf);
+	result = ft_strjoin("./", name);
 	return (result);
 }
