@@ -15,30 +15,50 @@ void 		errno_exit(void)
 	exit(0);
 }
 
-void 		print_files_test(t_file *file, t_flags *flags)
+static bool should_print(t_file *file, t_flags *flags)
+{
+	if (ft_strequ(file->name, ".") || ft_strequ(file->name, ".."))
+	{
+		if (flags->a)
+			return (true);
+		return (false);
+	}
+	return (true);
+}
+
+void 		print_all_things(t_file *file, t_flags *flags)
 {
 	t_file *counter;
-	t_file *origin;
-	bool	done;
+	int 	num_dirs;
 
-	done = false;
-	origin = file;
-	counter = origin->files_inside;
-	while (!done)
+	counter = file->files_inside;
+	print_directory(counter, flags);
+	while (counter)
 	{
-		if (!counter)
+		if (!ft_strequ(counter->name, ".") && !ft_strequ(counter->name, "..") && counter->is_directory)
 		{
-			done = true;
-			break;
+			ft_putendl(counter->full_path);///////плюс двоеточие
+			print_all_things(counter, flags);
 		}
-		if (!counter->name)
-		{
-			/////this here is a **hack** delete it when you get rid of empty elements in file lists
-			done = true;
-			break;
-		}
-		if (!ft_strequ(counter->name, ".") && !ft_strequ(counter->name, "..") && !flags->a)
-			ft_putendl(counter->name);
+
 		counter = counter->next;
 	}
+}
+
+void 		print_directory(t_file *file, t_flags *flags)
+{
+	t_file *counter;
+
+	counter = file;
+	while(counter)
+	{
+		if (should_print(counter, flags))
+			print_file(counter, flags);
+		counter = counter->next;
+	}
+}
+
+void 		print_file(t_file *file, t_flags *flags)
+{
+	ft_putendl(file->name);
 }

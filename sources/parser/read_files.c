@@ -120,8 +120,6 @@ bool		read_files(int index, t_file *files, const char **args, int ac, t_flags *f
 //
 	else
 	{
-		if (flags->no_flags)
-			index--;
 		while (args[index]/*args[++index]*/)////so at "ls directory_name" index == 1 so we try to read from args[2] right away, losing args[1] filename D:< anyway if we dont checking args[++] will return NOT NULL
 		//and lol THEN it will actually do the ++ thing which leads to attempt to read from NULL and an obvious segv. FOR NOW it works like this, needs more tests
 		{
