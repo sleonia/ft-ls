@@ -14,22 +14,19 @@ static bool	has_no_flags(t_flags *flags)
 	return (flags->no_flags = true);
 }
 
-int			read_flags(t_flags *flags, const char **args, int ac)  //переписать логику возврата функции
+int			read_flags(t_flags *flags, const char **args, int ac)
 {
 	int 	i;
-	int		index;
-	int		old_index;
 
 	if (ac == 1)
 		return (1);
 	i = 0;
-	old_index = 1;
-	while (args[++i])
-	{
-		index = validate_flags(flags, args[i]);
-		old_index = old_index > index ? old_index : index;
+	while (args[++i]) {
+		if (validate_flags(flags, args[i]) != 0) {
+			break ;
+		}
 	}
 	flags->no_flags = has_no_flags(flags);
-	printf("%d\n", old_index);/////get rid of printf
-	return (old_index);
+	printf("flags: -%d -%d, -%d -%d, -%d -%d\n", flags->big_r, flags->little_r, flags->l, flags->a, flags->t, flags->one);
+	return (i);
 }

@@ -35,16 +35,13 @@ int		validate_flags(t_flags *flags, const char *arg)
 	{
 		if (arg[i] == 'R' || arg[i] == 'r' || arg[i] == 'l'
 			|| arg[i] == 'a' || arg[i] == 't' || arg[i] == '1')
-		{
-			//ft_putchar(arg[i]);
 			collect_flags(flags, arg[i]);
-		}
 		else
 		{
 			print_illegal_opt(arg[i]);
-			exit(0);			
+			exit(0);
 		}
 	}
-	return (!arg[i] ? i - 1 : i);
-	//return (!arg[i] ? 1 : i);
+	return (0);
+	//return (!arg[i] ? i - 1 : i);
 }
