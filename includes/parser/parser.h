@@ -19,7 +19,7 @@
 bool		parser(const char **, t_file *, t_flags *, int);
 int			read_flags(t_flags *, const char **, int);
 bool		read_files(int, t_file *,const char **, int, t_flags *);
-void		fill_file(const char *name, t_file *file);
+void		fill_file(const char *name, t_file *file, t_flags *flags);
 int			validate_flags(t_flags *, const char *);
 
 #endif

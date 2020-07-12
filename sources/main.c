@@ -1,6 +1,7 @@
 #include "types.h"
 #include "utils/utils.h"
 #include "parser/parser.h"
+#include "output.h"
 
 /*!
 * \file
@@ -18,11 +19,7 @@ void	FunctionForTest(t_flags *flags, t_file *files)
 	
 	t_file* tmp = files;
 	printf("folders:\n");
-	while (tmp)
-	{
-		printf("\t%s\n", tmp->name);
-		tmp = tmp->next;
-	}
+	print_files_test(files, flags);
 }
 
 int		main(int ac, char **av)
@@ -36,6 +33,7 @@ int		main(int ac, char **av)
 		return (1);
 	if (!parser((const char **)av, files, flags, ac))
 		return (1);
+	//aftercare();
 	FunctionForTest(flags, files);
 	return (0);
 }

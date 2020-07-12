@@ -30,6 +30,6 @@ int			read_flags(t_flags *flags, const char **args, int ac)  //переписа�
 		old_index = old_index > index ? old_index : index;
 	}
 	flags->no_flags = has_no_flags(flags);
-	printf("%d\n", old_index);
+	printf("%d\n", old_index);/////get rid of printf
 	return (old_index);
 }
