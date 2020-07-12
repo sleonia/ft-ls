@@ -22,7 +22,8 @@ int			read_flags(t_flags *flags, const char **args, int ac)
 		return (1);
 	i = 0;
 	while (args[++i]) {
-		if (validate_flags(flags, args[i]) != 0) {
+		if (validate_flags(flags, args[i]) != 0)
+		{
 			break ;
 		}
 	}
