@@ -9,6 +9,7 @@
 #include <dirent.h>
 #include <stdbool.h>
 #include <sys/stat.h>
+#include <time.h>
 
 /*!
 file
@@ -31,7 +32,7 @@ typedef struct			s_file////////maybe i should make it more readable, this shit h
 	struct s_file		*origin;////the directory containing this file, may be useful, will delete if not
 	struct s_file		*next;
 	struct s_file		*prev;
-	struct t_time		*created;////only used with -t flag, no need to do it otherwise
+	time_t				time;////only used with -t flag, no need to do it otherwise
 	struct stat			stat;
 	struct dirent		*dirent;
 	bool				ignore;

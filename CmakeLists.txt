@@ -90,4 +90,5 @@ add_executable(ft_ls
         sources/parser/read_files.c
         sources/parser/validate_flags.c
         sources/utils/utils.c
+        sources/utils/time.c
         sources/main.c)

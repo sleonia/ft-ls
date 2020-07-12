@@ -55,7 +55,7 @@ char *build_path(t_file *file)//////this shit will break on a file with no name,
 	return (result);
 }
 
-char *build_path_for_arg(char *name)
+char *build_path_for_arg(const char *name)
 {
 	char *result;
 

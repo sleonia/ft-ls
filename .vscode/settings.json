@@ -1,0 +1,12 @@
+{
+	"files.associations": {
+		"__config": "cpp",
+		"__nullptr": "cpp",
+		"locale": "cpp",
+		"__locale": "cpp",
+		"chrono": "cpp",
+		"ctime": "cpp",
+		"iterator": "cpp",
+		"algorithm": "cpp"
+	}
+}

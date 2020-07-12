@@ -43,5 +43,4 @@ int		validate_flags(t_flags *flags, const char *arg)
 		}
 	}
 	return (0);
-	//return (!arg[i] ? i - 1 : i);
 }
