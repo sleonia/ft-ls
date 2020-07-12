@@ -45,9 +45,9 @@ char *build_path(t_file *file)//////this shit will break on a file with no name,
 	{
 		while (file_counter->origin)
 		{
-			buf = ft_strjoin("/", result);/////protect me
+			buf = ft_strjoin("/", result);/////protect me but first check if it's needed
 			ft_strdel(&result);
-			result = ft_strjoin(file_counter->origin->name, buf);
+			result = ft_strjoin(file_counter->origin->name, buf);/////protect me
 			ft_strdel(&buf);
 			file_counter = file_counter->origin;
 		}
@@ -59,6 +59,6 @@ char *build_path_for_arg(char *name)
 {
 	char *result;
 
-	result = ft_strjoin("./", name);
+	result = ft_strjoin("./", name);///protect me
 	return (result);
 }
