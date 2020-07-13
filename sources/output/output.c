@@ -28,8 +28,8 @@ static bool should_print(t_file *file, t_flags *flags)
 
 void 		print_all_things(t_file *file, t_flags *flags)
 {
-	t_file *counter;
 	int 	num_dirs;
+	t_file *counter;
 
 	counter = file->files_inside;
 	print_directory(counter, flags);

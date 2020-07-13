@@ -16,9 +16,9 @@
 
 void	FunctionForTest(t_flags *flags, t_file *files)
 { //del this later
-	printf("flags: -%d -%d, -%d -%d, -%d -%d\n", flags->big_r, flags->little_r, flags->l, flags->a, flags->t, flags->one);
-	
+	//printf("flags: -%d -%d, -%d -%d, -%d -%d\n", flags->big_r, flags->little_r, flags->l, flags->a, flags->t, flags->one);
 	t_file* tmp = files;
+
 	printf("folders:\n");
 	if (!flags->big_r)
 		print_directory(files->files_inside, flags);
@@ -37,8 +37,8 @@ int		main(int ac, char **av)
 		return (1);
 	if (!parser((const char **)av, files, flags, ac))
 		return (1);
-	//if (flags->t || flags->little_r)
-		//sort((const t_flags*)flags, &files);
+	if (flags->t || flags->little_r)
+		sort((const t_flags*)flags, &files);
 	FunctionForTest(flags, files);
 	return (0);
 }
