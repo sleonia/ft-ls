@@ -1,7 +1,8 @@
 #include "types.h"
 #include "utils/utils.h"
 #include "parser/parser.h"
-#include "output.h"
+#include "output/output.h"
+#include "sort/sort.h"
 
 /*!
 * \file
@@ -28,7 +29,7 @@ void	FunctionForTest(t_flags *flags, t_file *files)
 int		main(int ac, char **av)
 {
 	t_flags		*flags;
-	t_file	*files;
+	t_file		*files;
 
 	if (!(flags = init_flags()))
 		return (1);
@@ -36,7 +37,8 @@ int		main(int ac, char **av)
 		return (1);
 	if (!parser((const char **)av, files, flags, ac))
 		return (1);
-	//aftercare();
+	//if (flags->t || flags->little_r)
+		//sort((const t_flags*)flags, &files);
 	FunctionForTest(flags, files);
 	return (0);
 }

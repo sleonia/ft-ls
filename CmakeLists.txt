@@ -8,6 +8,7 @@ include_directories(includes/file)
 include_directories(includes/output)
 include_directories(includes/parser)
 include_directories(includes/utils)
+include_directories(includes/sort)
 include_directories(libft)
 
 add_executable(ft_ls
@@ -91,4 +92,5 @@ add_executable(ft_ls
         sources/parser/validate_flags.c
         sources/utils/utils.c
         sources/utils/time.c
+        sources/sort/sort.c
         sources/main.c)

@@ -4,16 +4,16 @@ using namespace std;
 
 struct List {
 	List() {}
-	List(int a) : a_(a) {}
-	List(int a, List* next) : a_(a), next_(next) {}
-	int a_;
+	List(int a) : field_(a) {}
+	List(int a, List* next) : field_(a), next_(next) {}
+	int field_;
 	struct List* next_;
 };
 
 void	Print(List* head) {
 	List* tmp = head;
 	while (tmp) {
-		cout << tmp->a_ << ' ';
+		cout << tmp->field_ << ' ';
 		tmp = tmp->next_;
 	}
 	cout << "\n";
@@ -29,32 +29,33 @@ void FrontBackSplit(List* head, List** a, List** b) {
 			fast = fast->next_;
 		}
 	}
+	*a = head;
+	*b = slow->next_;
 	slow->next_ = nullptr;
 }
 
 List*	SortedMerge(List* a, List* b) {
 	List* res = nullptr;
-	if (!a) { res = b; return res;}
-	if (!b) { res = a; return res;}
-	if (a->a_ <= b->a_) {
-		res->a_ = a->a_;
+	if (!a) { return b;}
+	if (!b) { return a;}
+	if (a->field_ <= b->field_) {
+		res = a;
 		res->next_ = SortedMerge(a->next_, b);
 	} else {
-		res->a_ = b->a_;
+		res = b;
 		res->next_ = SortedMerge(a, b->next_);
 	}
 	return res;
 }
 
 void	MergeSort(List** head) {
-	List* tmp;
+	List* tmp = *head;
 	List* a;
 	List* b;
 
-	if (!head || !*head) {
+	if (!tmp || !tmp->next_) {
 		return ;
 	}
-	tmp = *head;
 	FrontBackSplit(tmp, &a, &b);
 	MergeSort(&a);
 	MergeSort(&b);
@@ -64,7 +65,7 @@ void	MergeSort(List** head) {
 void push(List** head_ref, int new_data) 
 { 
     List* new_node = new List(); 
-    new_node->a_ = new_data; 
+    new_node->field_ = new_data; 
     new_node->next_ = (*head_ref); 
     (*head_ref) = new_node; 
 } 
