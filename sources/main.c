@@ -14,14 +14,17 @@
 *		4. Print result
 */
 
-void	FunctionForTest(t_flags *flags, t_file *files)
+void	FunctionForTest(const t_flags *flags, t_file *files)
 { //del this later
-	//printf("flags: -%d -%d, -%d -%d, -%d -%d\n", flags->big_r, flags->little_r, flags->l, flags->a, flags->t, flags->one);
 	t_file* tmp = files;
 
-	printf("folders:\n");
 	if (!flags->big_r)
-		print_directory(files->files_inside, flags);
+	{
+		//ft_putstr("total "); //ls -l total doesnt working
+		//ft_putnbr(tmp->stat.st_blksize);
+		//ft_putchar('\n');
+		print_directory(files->files_inside, (const t_flags*)flags);
+	}
 	else
 		print_all_things(files, flags);
 }

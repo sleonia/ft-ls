@@ -50,6 +50,5 @@ void		sort(const t_flags *flags, t_file **files)
 {
 	//if () //maybe here need condition by flags
 	//printf("* %p, ** %p, next %p\n", files, &files, (*files)->next);
-	//merge_sort(files);
 	merge_sort(&(*files)->files_inside);
 }

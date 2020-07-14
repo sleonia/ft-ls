@@ -28,6 +28,5 @@ int			read_flags(t_flags *flags, const char **args, int ac)
 		}
 	}
 	flags->no_flags = has_no_flags(flags);
-	printf("flags: -%d -%d, -%d -%d, -%d -%d\n", flags->big_r, flags->little_r, flags->l, flags->a, flags->t, flags->one);
 	return (i);
 }

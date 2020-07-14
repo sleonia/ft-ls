@@ -1,13 +1,8 @@
 #include "output/output.h"
 #include "types.h"
-
-void        print_illegal_opt(const char symb)
-{
-	ft_putstr("ls: illegal option -- ");
-	ft_putchar(symb);
-	ft_putstr("\n\
-usage: ls [-@ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1%] [file ...]\n");
-}
+#include <pwd.h>
+#include <grp.h>
+#include <sys/types.h>
 
 void 		errno_exit(void)
 {
@@ -15,7 +10,7 @@ void 		errno_exit(void)
 	exit(0);
 }
 
-static bool should_print(t_file *file, t_flags *flags)
+static bool should_print(t_file *file, const t_flags *flags)
 {
 	if (ft_strequ(file->name, ".") || ft_strequ(file->name, ".."))
 	{
@@ -26,7 +21,7 @@ static bool should_print(t_file *file, t_flags *flags)
 	return (true);
 }
 
-void 		print_all_things(t_file *file, t_flags *flags)
+void 		print_all_things(t_file *file, const t_flags *flags)
 {
 	int 	num_dirs;
 	t_file *counter;
@@ -45,20 +40,68 @@ void 		print_all_things(t_file *file, t_flags *flags)
 	}
 }
 
-void 		print_directory(t_file *file, t_flags *flags)
+void 		print_directory(t_file *file, const t_flags *flags)
 {
-	t_file *counter;
+	t_file *tmp;
 
-	counter = file;
-	while(counter)
+	tmp = file;
+	while(tmp)
 	{
-		if (should_print(counter, flags))
-			print_file(counter, flags);
-		counter = counter->next;
+		if (should_print(tmp, flags))
+		{
+			print_file((const t_file*)tmp, flags);
+			if (tmp->next)
+				ft_putchar('\n');
+		}
+		tmp = tmp->next;
 	}
 }
 
-void 		print_file(t_file *file, t_flags *flags)
+/*!
+*	Example of ctime(&file->stat.st_mtime) -> Tue Jul 14 02:36:07 2020
+*/
+
+static void	print_time(const t_file *file)
 {
-	ft_putendl(file->name);
+	char	ftime[13];
+	char	*tmptime;
+	int		i;
+
+	tmptime = ctime(&(file->stat.st_ctime)) + 4;
+	ft_memset(ftime, ' ', sizeof(ftime));
+	ftime[0] = tmptime[4];
+	ftime[1] = tmptime[5];
+	ftime[3] = tmptime[0];
+	ftime[4] = tmptime[1];
+	ftime[5] = tmptime[2];
+	ftime[12] = 0;
+	i = 6;
+	while (++i < 12)
+		ftime[i] = tmptime[i];
+	ft_putstr(ftime);
+	ft_putchar(' ');
+}
+
+void		print_all_info(const t_file *file)
+{
+	ft_putstr("-rw-r--r-- "); //print rights
+	ft_putnbr(file->stat.st_nlink);
+	ft_putchar(' ');
+	ft_putstr((getpwuid(file->stat.st_uid))->pw_name);
+	ft_putchar(' ');
+	ft_putstr(getgrgid(file->stat.st_gid)->gr_name);
+	ft_putchar(' ');
+	ft_putnbr(file->stat.st_size);
+	ft_putchar(' ');
+	print_time(file);
+	ft_putchar(' ');
+	ft_putstr(file->name);
+}
+
+void 		print_file(const t_file *file, const t_flags *flags)
+{
+	if (flags->l)
+		print_all_info(file);
+	else
+		ft_putstr(file->name);
 }

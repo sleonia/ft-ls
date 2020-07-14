@@ -86,6 +86,7 @@ add_executable(ft_ls
         libft/get_next_line.h
         libft/libft.h
         sources/output/output.c
+        sources/output/usages.c
         sources/parser/parser.c
         sources/parser/read_flags.c
         sources/parser/read_files.c
