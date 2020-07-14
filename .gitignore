@@ -15,3 +15,5 @@ Cmake-build-debug
 doxygen
 ft-ls
 ft_ls
+build
+.vscode

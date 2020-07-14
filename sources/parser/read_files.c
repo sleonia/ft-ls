@@ -75,7 +75,7 @@ void	fill_file(const char *name, t_file *file, t_flags *flags)
 	if (!file->full_path)
 		file->full_path = build_path(file);
 	ft_memset(&file_stat, 0, sizeof(struct stat));
-	if (stat(file->full_path, &file_stat))
+	if (stat(file->full_path, &file_stat) < 0)
 		errno_exit();
 	file->stat = file_stat;
 	if (flags->t || flags->little_r)

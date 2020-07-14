@@ -15,5 +15,6 @@ void 		errno_exit(void);
 void 		print_directory(t_file *file, const t_flags *flags);
 void 		print_file(const t_file *file, const t_flags *flags);
 void 		print_all_things(t_file *file, const t_flags *flags);
+void		print_all_info(const struct stat *stat, const char *name);
 
 #endif
