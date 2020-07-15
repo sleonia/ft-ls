@@ -10,7 +10,7 @@
 static bool	has_no_flags(t_flags *flags)
 {
 	if (flags->a || flags->l || flags->big_r || flags->little_r ||
-		flags->g || flags->one || flags->t)
+		flags->g || flags->one || flags->t || flags->m)
 		return (false);
 	return (flags->no_flags = true);
 }

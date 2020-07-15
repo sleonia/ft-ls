@@ -71,8 +71,10 @@ void 		print_file(const t_file *file, const t_flags *flags, const bool is_next)
 			printf("\n");
 		else
 		{	
-			if (is_next) //не работает нормально при ./ft_ls
-				printf(" ");
+			if (is_next && flags->m)
+				printf(", ");
+			else if (is_next)
+				printf(", ");
 			else
 				printf("\n");
 		}

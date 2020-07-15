@@ -47,6 +47,7 @@ typedef struct			s_file////////maybe i should make it more readable, this shit h
 *   - a
 *   - t
 *   - g
+*   - m
 *   - 1
 */
 
@@ -58,6 +59,7 @@ typedef	struct			s_flags
 	bool				a;
 	bool				t;
 	bool				g;
+	bool				m;
 	bool				one;
 	bool				no_flags;////added temporarily, should delete if its useless
 }						t_flags;
