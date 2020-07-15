@@ -7,6 +7,7 @@
 *	- create structs
 *	- build full path to a file
 *	- calculate length of nbr
+*	- take config for output on file
 */
 
 #include "types.h"
@@ -18,5 +19,6 @@ t_conf		*new_conf(void);
 char 		*build_path(t_file *file);
 char 		*build_path_for_arg(const char *name);
 int			nbrlen(long long nbr);
+void		take_config(const char *name, const struct stat *stat, t_conf *conf);
 
 #endif

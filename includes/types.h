@@ -65,13 +65,26 @@ typedef	struct			s_flags
 }						t_flags;
 
 /*!
-*	Struct for correct output of ls -l
+*	Struct for correct output of ls
+*	  filed:
+*		- total size
+*		- count of files
+*		- rights len
 */
 
 typedef	struct			s_conf
 {
-	int					total;
-	
+	unsigned			total;
+	unsigned			count;
+	unsigned			rights_len;
+	unsigned			links_len;
+	unsigned			creator_len;
+	unsigned			group_len;
+	unsigned			size_len;
+	/*
+	unsigned			data_len;
+	*/
+	unsigned			name_len;
 }						t_conf;
 
 #endif

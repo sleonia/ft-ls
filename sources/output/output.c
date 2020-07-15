@@ -51,7 +51,7 @@ void 		print_directory(t_file *file, const t_flags *flags, const t_conf *conf)
 		{
 			if (tmp->name)
 			{
-				print_file((const t_file*)tmp, flags, tmp->next ? true : false);
+				print_file((const t_file*)tmp, flags, tmp->next ? true : false, conf);
 			}
 			//if (tmp->next)
 			//	ft_putchar('\n');
@@ -60,12 +60,12 @@ void 		print_directory(t_file *file, const t_flags *flags, const t_conf *conf)
 	}
 }
 
-void 		print_file(const t_file *file, const t_flags *flags, const bool is_next)
+void 		print_file(const t_file *file, const t_flags *flags, const bool is_next, const t_conf *conf)
 {
 	//if (flags->)
 	//print_with_color(&file->stat, file->name);
 	if (flags->l || flags->g)
-		print_all_info(&file->stat, flags->g, (const char *)file->name);
+		print_all_info(&file->stat, conf, flags->g, (const char *)file->name);
 	else
 	{
 		printf("%s", file->name);
@@ -87,13 +87,8 @@ void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
 { //del this later or rename
 	t_file* tmp = (t_file *)files;
 
-	if (!flags->big_r)
-	{
-		//ft_putstr("total "); //ls -l total doesnt working
-		//ft_putnbr(tmp->stat.st_blksize);
-		//ft_putchar('\n');
-		print_directory(files->files_inside, (const t_flags*)flags, conf);
-	}
-	else
+	if (flags->big_r)
 		print_all_things((t_file *)files, flags, conf); //change to const t_file files in declaration in func
+	else
+		print_directory(files->files_inside, (const t_flags*)flags, conf);
 }

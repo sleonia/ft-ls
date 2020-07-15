@@ -85,10 +85,10 @@ void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 		//printf ("%s\n", file->name);
 		errno_exit();
 	}
-	conf->total += stat_.st_blocks;
 	file->stat = stat_;
 	if (flags->t || flags->little_r)
 		file->time = stat_.st_mtime;
+	take_config(name, &file->stat, conf);
 	if (S_ISDIR(stat_.st_mode))
 		fill_directory(file, file->full_path, flags, conf);
 	else

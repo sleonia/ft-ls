@@ -59,15 +59,15 @@ static void		print_rights(const mode_t mode)
 	printf("%s ", rights);
 }
 
-void			print_all_info(const struct stat *stat,
+void			print_all_info(const struct stat *stat, const t_conf *conf,
 					const bool is_flag_g, const char *name)
 {
 	print_rights(stat->st_mode);
-	printf("%d ", stat->st_nlink);
+	printf("%*d ", conf->links_len + 1, stat->st_nlink);
 	if (!is_flag_g)
-		printf("%s ", (getpwuid(stat->st_uid))->pw_name);
-	printf("%s ", getgrgid(stat->st_gid)->gr_name);
-	printf("%lld ", stat->st_size);
+		printf("%-*s ", conf->creator_len + 1, (getpwuid(stat->st_uid))->pw_name);
+	printf("%-*s ", conf->group_len, getgrgid(stat->st_gid)->gr_name);
+	printf("%*lld ", conf->size_len + 1, stat->st_size);
 	print_time(&stat->st_mtime);
 	printf("%s\n", name);
 }
