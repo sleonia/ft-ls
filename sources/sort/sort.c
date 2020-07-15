@@ -2,6 +2,11 @@
 #include "libft.h"
 #include <stdio.h>
 
+/*!
+* \file
+* \brief
+*/
+
 void front_back_split(t_file* head, t_file** a, t_file** b)
 {
 	t_file* slow;

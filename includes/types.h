@@ -12,14 +12,14 @@
 #include <time.h>
 
 /*!
-file
-    - file name
-    - file descriptor
-    - file type flag
-    - folder inside is not NULL if is_folder == TRUE
-    - pointer to next element
-    - pointer to prev element
-    - creation time
+* file:
+*     - file name
+*     - file descriptor
+*     - file type flag
+*     - folder inside is not NULL if is_folder == TRUE
+*     - pointer to next element
+*     - pointer to prev element
+*     - creation time
 */
 
 typedef struct			s_file////////maybe i should make it more readable, this shit has become too big to debug. lol kek some of my old projects are fucking crazy
@@ -46,6 +46,7 @@ typedef struct			s_file////////maybe i should make it more readable, this shit h
 *   - l
 *   - a
 *   - t
+*   - g
 *   - 1
 */
 

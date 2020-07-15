@@ -2,7 +2,8 @@
 #include "output/output.h"
 
 /*!
-*	Validate and collect all flags to t_flags struct
+* \file
+* \brief Validate and collect all flags to t_flags struct
 */
 
 static void collect_flags(t_flags *flags, const char arg)

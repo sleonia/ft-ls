@@ -14,21 +14,6 @@
 *		4. Print result
 */
 
-void	FunctionForTest(const t_flags *flags, t_file *files)
-{ //del this later or rename
-	t_file* tmp = files;
-
-	if (!flags->big_r)
-	{
-		//ft_putstr("total "); //ls -l total doesnt working
-		//ft_putnbr(tmp->stat.st_blksize);
-		//ft_putchar('\n');
-		print_directory(files->files_inside, (const t_flags*)flags);
-	}
-	else
-		print_all_things(files, flags);
-}
-
 int		main(int ac, char **av)
 {
 	t_flags		*flags;
@@ -42,6 +27,6 @@ int		main(int ac, char **av)
 		return (1);
 	if (flags->t || flags->little_r)
 		sort((const t_flags*)flags, &files);
-	FunctionForTest(flags, files);
+	print((const t_flags*)flags, (const t_file*)files);
 	return (0);
 }

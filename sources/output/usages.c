@@ -1,5 +1,10 @@
 #include "output/output.h"
 
+/*!
+* \file
+* \brief
+*/
+
 void		print_illegal_opt(const char symb)
 {
 	ft_putstr("ls: illegal option -- ");

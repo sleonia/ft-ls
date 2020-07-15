@@ -1,6 +1,11 @@
 #include "utils/utils.h"
 #include "libft.h"
 
+/*!
+* \file
+* \brief
+*/
+
 t_flags		*init_flags(void)
 {
 	t_flags	*flags;

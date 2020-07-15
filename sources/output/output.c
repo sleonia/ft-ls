@@ -1,6 +1,11 @@
 #include "output/output.h"
 #include "types.h"
 
+/*!
+* \file
+* \brief
+*/
+
 void 		errno_exit(void)
 {
 	perror(strerror(errno));
@@ -72,4 +77,19 @@ void 		print_file(const t_file *file, const t_flags *flags, const bool is_next)
 				printf("\n");
 		}
 	}
+}
+
+void			print(const t_flags *flags, const t_file *files)
+{ //del this later or rename
+	t_file* tmp = (t_file *)files;
+
+	if (!flags->big_r)
+	{
+		//ft_putstr("total "); //ls -l total doesnt working
+		//ft_putnbr(tmp->stat.st_blksize);
+		//ft_putchar('\n');
+		print_directory(files->files_inside, (const t_flags*)flags);
+	}
+	else
+		print_all_things((t_file *)files, flags); //change to const t_file files in declaration in func
 }

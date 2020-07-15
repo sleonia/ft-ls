@@ -2,6 +2,11 @@
 #include "utils/utils.h"
 #include "output/output.h"
 
+/*!
+* \file
+* \brief
+*/
+
 static bool	directory_to_ignore(t_file *file, t_flags *flags)
 {
 	int depth;

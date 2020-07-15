@@ -3,10 +3,9 @@
 
 /*!
 * \file
-* \brief Some utils
-	- create structs
-	- build full path to a file
-	- get time
+* \brief Some utils:
+*	- create structs
+*	- build full path to a file
 */
 
 #include "types.h"

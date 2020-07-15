@@ -1,6 +1,11 @@
 #include "parser/parser.h"
 #include "utils/utils.h"
 
+/*!
+* \file
+* \brief Main func of parser. Call parsing flags and files
+*/
+
 bool			parser(const char **av, t_file *files, t_flags *flags, int ac)
 {
 	int			index;

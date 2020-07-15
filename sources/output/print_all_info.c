@@ -5,7 +5,20 @@
 #include <sys/types.h>
 
 /*!
-*	Example of ctime(&file->stat.st_mtime) -> Tue Jul 14 02:36:07 2020
+*	What is info about file/link/folder?
+*		-rwxr-xr-x   1 a18573961  staff  38528 14 Jul 21:16 ft_ls
+*	Transcript:
+*		- rights
+*		- count of link
+*		- name of creator
+*		- name of group
+*		- size of bytes
+*		- time
+*		- file name
+*/
+
+/*!
+*	Example of ctime(time) -> Tue Jul 14 02:36:07 2020
 */
 
 static void		print_time(const time_t *time)
@@ -45,19 +58,6 @@ static void		print_rights(const mode_t mode)
 	rights[10] = 0;
 	printf("%s ", rights);
 }
-
-/*!
-*	What is info about file/link/folder?
-*		-rwxr-xr-x   1 a18573961  staff  38528 14 Jul 21:16 ft_ls
-*	Transcript:
-*		- rights
-*		- count of link
-*		- name of creator
-*		- name of group
-*		- size of bytes
-*		- time
-*		- file name
-*/
 
 void			print_all_info(const struct stat *stat,
 					const bool is_flag_g, const char *name)

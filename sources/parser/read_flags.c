@@ -2,7 +2,8 @@
 #include "output/output.h"
 
 /*!
-*	Read flags, validate and collect them.
+*	\file
+*	\brief Read flags, validate and collect them.
 *	\return index in user input that equals folder or error flag
 */
 

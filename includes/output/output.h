@@ -19,6 +19,7 @@ void			print_all_info(const struct stat *stat,
 void 			print_file(const t_file *file,
 					const t_flags *flags, const bool is_next);
 void			print_with_color(const struct stat *stat, const char *name);
+void			print(const t_flags *flags, const t_file *files);
 
 /*!
 *	Colors
