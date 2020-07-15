@@ -56,6 +56,7 @@ typedef	struct			s_flags
 	bool				l;
 	bool				a;
 	bool				t;
+	bool				g;
 	bool				one;
 	bool				no_flags;////added temporarily, should delete if its useless
 }						t_flags;

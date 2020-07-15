@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(ft_ls C)
 
 set(CMAKE_C_STANDARD 11)
+#add_compile_options(-g -Wall -Wextra -Werror)
 
 include_directories(includes)
 include_directories(includes/file)
@@ -87,6 +88,7 @@ add_executable(ft_ls
         libft/libft.h
         sources/output/output.c
         sources/output/print_all_info.c
+        sources/output/color.c
         sources/output/usages.c
         sources/parser/parser.c
         sources/parser/read_flags.c

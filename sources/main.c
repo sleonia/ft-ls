@@ -15,7 +15,7 @@
 */
 
 void	FunctionForTest(const t_flags *flags, t_file *files)
-{ //del this later
+{ //del this later or rename
 	t_file* tmp = files;
 
 	if (!flags->big_r)

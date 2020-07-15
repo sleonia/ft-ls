@@ -1,7 +1,8 @@
 #include "parser/parser.h"
 #include "output/output.h"
 
-/*
+/*!
+*	Validate and collect all flags to t_flags struct
 */
 
 static void collect_flags(t_flags *flags, const char arg)
@@ -16,6 +17,8 @@ static void collect_flags(t_flags *flags, const char arg)
 		flags->little_r = true;
 	if (arg == 't')
 		flags->t = true;
+	if (arg == 'g')
+		flags->g = true;
 	if (arg == '1')
 		flags->one = true;
 }
@@ -33,7 +36,7 @@ int		validate_flags(t_flags *flags, const char *arg)
 	i = 0;
 	while (arg[++i])
 	{
-		if (arg[i] == 'R' || arg[i] == 'r' || arg[i] == 'l'
+		if (arg[i] == 'R' || arg[i] == 'r' || arg[i] == 'l' || arg[i] == 'g'
 			|| arg[i] == 'a' || arg[i] == 't' || arg[i] == '1')
 			collect_flags(flags, arg[i]);
 		else

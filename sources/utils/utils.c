@@ -39,6 +39,7 @@ char *build_path(t_file *file)//////this shit will break on a file with no name,
 	char *result;
 	t_file *file_counter;
 
+
 	result = ft_strdup(file->name);////protect me
 	file_counter = file;
 	if (file->origin)

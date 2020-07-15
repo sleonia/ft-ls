@@ -28,18 +28,22 @@ static void		print_time(const time_t *time)
 	printf("%s ", buffer);
 }
 
-static void		print_rights(const struct stat *stat)
+static void		print_rights(const mode_t mode)
 {
-	printf((S_ISDIR(stat->st_mode)) ? "d" : "-");
-    printf((stat->st_mode & S_IRUSR) ? "r" : "-");
-    printf((stat->st_mode & S_IWUSR) ? "w" : "-");
-    printf((stat->st_mode & S_IXUSR) ? "x" : "-");
-    printf((stat->st_mode & S_IRGRP) ? "r" : "-");
-    printf((stat->st_mode & S_IWGRP) ? "w" : "-");
-    printf((stat->st_mode & S_IXGRP) ? "x" : "-");
-    printf((stat->st_mode & S_IROTH) ? "r" : "-");
-    printf((stat->st_mode & S_IWOTH) ? "w" : "-");
-    printf((stat->st_mode & S_IXOTH) ? "x " : "- ");
+	char		rights[11];
+
+	rights[0] = (S_ISDIR(mode)) ? 'd' : '-';
+	rights[1] = (mode & S_IRUSR) ? 'r' : '-';
+	rights[2] = (mode & S_IWUSR) ? 'w' : '-';
+	rights[3] = (mode & S_IXUSR) ? 'x' : '-';
+	rights[4] = (mode & S_IRGRP) ? 'r' : '-';
+	rights[5] = (mode & S_IWGRP) ? 'w' : '-';
+	rights[6] = (mode & S_IXGRP) ? 'x' : '-';
+	rights[7] = (mode & S_IROTH) ? 'r' : '-';
+	rights[8] = (mode & S_IWOTH) ? 'w' : '-';
+	rights[9] = (mode & S_IXOTH) ? 'x' : '-';
+	rights[10] = 0;
+	printf("%s ", rights);
 }
 
 /*!
@@ -55,11 +59,13 @@ static void		print_rights(const struct stat *stat)
 *		- file name
 */
 
-void			print_all_info(const struct stat *stat, const char *name)
+void			print_all_info(const struct stat *stat,
+					const bool is_flag_g, const char *name)
 {
-	print_rights(stat);
+	print_rights(stat->st_mode);
 	printf("%d ", stat->st_nlink);
-	printf("%s ", (getpwuid(stat->st_uid))->pw_name);
+	if (!is_flag_g)
+		printf("%s ", (getpwuid(stat->st_uid))->pw_name);
 	printf("%s ", getgrgid(stat->st_gid)->gr_name);
 	printf("%lld ", stat->st_size);
 	print_time(&stat->st_mtime);
