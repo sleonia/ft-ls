@@ -63,4 +63,15 @@ typedef	struct			s_flags
 	bool				one;
 	bool				no_flags;////added temporarily, should delete if its useless
 }						t_flags;
+
+/*!
+*	Struct for correct output of ls -l
+*/
+
+typedef	struct			s_conf
+{
+	int					total;
+	
+}						t_conf;
+
 #endif

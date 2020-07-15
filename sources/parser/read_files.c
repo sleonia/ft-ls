@@ -29,7 +29,7 @@ static bool	directory_to_ignore(t_file *file, t_flags *flags)
 	return (false);
 }
 
-static void fill_files_inside_dir(t_file *file, t_flags *flags)
+static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 {
 	t_file *file_counter;
 	bool	done;
@@ -46,13 +46,13 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags)
 			done = true;
 			break;////check leak, empty entry created?
 		}
-		fill_file(file_counter->dirent->d_name, file_counter, flags);
+		fill_file(file_counter->dirent->d_name, file_counter, flags, conf);
 		file_counter = new_file(file_counter);
 		file_counter->origin = file;
 	}
 }
 
-static void fill_directory(t_file *file, const char *name, t_flags *flags)
+static void fill_directory(t_file *file, const char *name, t_flags *flags, t_conf *conf)
 {
 	t_file 			*file_counter;
 
@@ -60,7 +60,7 @@ static void fill_directory(t_file *file, const char *name, t_flags *flags)
 	file_counter->is_directory = true;
 	file_counter->fd = opendir(name);
 	if (!directory_to_ignore(file_counter, flags))
-		fill_files_inside_dir(file_counter, flags);
+		fill_files_inside_dir(file_counter, flags, conf);
 }
 
 
@@ -72,24 +72,25 @@ static void fill_non_directory(t_file *file, const char *name)
 	file_counter->is_directory = false;
 }
 
-void	fill_file(const char *name, t_file *file, t_flags *flags)
+void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 {
-	struct stat	file_stat;
+	struct stat	stat_;
 	if (!file->name)
 		file->name = ft_strdup(name);////protect me and do a ft_strdup unless you make sure you don't lose the pointer, caught a segv here with previous version
 	if (!file->full_path)
 		file->full_path = build_path(file);
-	ft_memset(&file_stat, 0, sizeof(struct stat));
-	if (stat(file->full_path, &file_stat) < 0)
+	ft_memset(&stat_, 0, sizeof(struct stat));
+	if (stat(file->full_path, &stat_) < 0)
 	{
 		//printf ("%s\n", file->name);
 		errno_exit();
 	}
-	file->stat = file_stat;
+	conf->total += stat_.st_blocks;
+	file->stat = stat_;
 	if (flags->t || flags->little_r)
-		file->time = file_stat.st_mtime;
-	if (S_ISDIR(file_stat.st_mode))
-		fill_directory(file, file->full_path, flags);
+		file->time = stat_.st_mtime;
+	if (S_ISDIR(stat_.st_mode))
+		fill_directory(file, file->full_path, flags, conf);
 	else
 		fill_non_directory(file, name);
 }
@@ -106,13 +107,16 @@ static bool has_args(char **args, int ac/*or whatever else is needed maybe flags
 }
 
 
-bool		read_files(int index, t_file *files, const char **args, int ac, t_flags *flags)
+t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
 {
+	t_conf	*conf;
 	t_file	*tmp;
 
 	tmp = files;
+	if (!(conf = new_conf()))
+		return (NULL);
 	if (!args[index]) {
-		fill_file("./", files, flags);
+		fill_file("./", files, flags, conf);
 	}
 	else
 	{
@@ -122,11 +126,11 @@ bool		read_files(int index, t_file *files, const char **args, int ac, t_flags *f
 		//and lol THEN it will actually do the ++ thing which leads to attempt to read from NULL and an obvious segv. FOR NOW it works like this, needs more tests
 		{
 			tmp->full_path = build_path_for_arg(args[index]);
-			fill_file(args[index], tmp, flags);
+			fill_file(args[index], tmp, flags, conf);
 			new_file(tmp);//////don't forget to clean this shit in case we have one arg, unix-trigger boyz won't get us this easy!
 			tmp = tmp->next;
 			index++;
 		}
 	}
-	return (true);
+	return (conf);
 }

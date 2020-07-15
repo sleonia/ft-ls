@@ -12,14 +12,12 @@
 
 void    	    print_illegal_opt(const char);
 void 			errno_exit(void);
-void 			print_directory(t_file *file, const t_flags *flags);
-void 			print_all_things(t_file *file, const t_flags *flags);
-void			print_all_info(const struct stat *stat,
-					const bool is_flag_g, const char *name);
-void 			print_file(const t_file *file,
-					const t_flags *flags, const bool is_next);
+void 			print_directory(t_file *file, const t_flags *flags, const t_conf *conf);
+void 			print_all_things(t_file *file, const t_flags *flags, const t_conf *conf);
+void			print_all_info(const struct stat *stat, const bool is_flag_g, const char *name);
+void 			print_file(const t_file *file, const t_flags *flags, const bool is_next);
 void			print_with_color(const struct stat *stat, const char *name);
-void			print(const t_flags *flags, const t_file *files);
+void			print(const t_flags *flags, const t_file *files, const t_conf *conf);
 
 /*!
 *	Colors

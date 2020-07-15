@@ -38,6 +38,15 @@ t_file			*new_file(t_file *prev)//this didnt work with void because of a copy of
 	return (file);
 }
 
+t_conf			*new_conf(void)
+{
+	t_conf		*conf;
+
+	if (!(conf = (t_conf*)ft_memalloc(sizeof(t_conf))))
+		return (NULL);
+	return (conf);
+}
+
 char *build_path(t_file *file)//////this shit will break on a file with no name, this is intended, don't fix it
 {
 	char *buf;
@@ -67,4 +76,19 @@ char *build_path_for_arg(const char *name)
 
 	result = ft_strjoin("./", name);///protect me
 	return (result);
+}
+
+int			nbrlen(long long nbr)
+{
+	int		i;
+
+	i = 0;
+	if (!nbr)
+		return (1);
+	while (nbr)
+	{
+		nbr = nbr / 10;
+		i++;
+	}
+	return (i);
 }

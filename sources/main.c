@@ -18,15 +18,16 @@ int		main(int ac, char **av)
 {
 	t_flags		*flags;
 	t_file		*files;
+	t_conf		*conf;
 
 	if (!(flags = init_flags()))
 		return (1);
 	if (!(files = init_file()))
 		return (1);
-	if (!parser((const char **)av, files, flags, ac))
+	if (!(conf = parser((const char **)av, files, flags, ac)))
 		return (1);
 	if (flags->t || flags->little_r)
 		sort((const t_flags*)flags, &files);
-	print((const t_flags*)flags, (const t_file*)files);
+	print((const t_flags*)flags, (const t_file*)files, (const t_conf*)conf);
 	return (0);
 }

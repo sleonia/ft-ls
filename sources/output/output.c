@@ -19,30 +19,32 @@ static bool should_print(const char *name, const bool flag_a)
 	return (true);
 }
 
-void 		print_all_things(t_file *file, const t_flags *flags)
+void 		print_all_things(t_file *file, const t_flags *flags, const t_conf *conf)
 {
 	//int 	num_dirs; //for what?
 	t_file *counter;
 
 	counter = file->files_inside;
-	print_directory(counter, flags);
+	print_directory(counter, flags, conf);
 	while (counter)
 	{
 		if (!ft_strequ(counter->name, ".") && !ft_strequ(counter->name, "..") && counter->is_directory)
 		{
 			printf("%s\n", counter->full_path);///////плюс двоеточие
-			print_all_things(counter, flags);
+			print_all_things(counter, flags, conf);
 		}
 
 		counter = counter->next;
 	}
 }
 
-void 		print_directory(t_file *file, const t_flags *flags)
+void 		print_directory(t_file *file, const t_flags *flags, const t_conf *conf)
 {
 	t_file *tmp;
 
 	tmp = file;
+	if (flags->l || flags->g)
+		printf("total: %d\n", conf->total);
 	while(tmp)
 	{
 		if (should_print(tmp->name, flags->a))
@@ -81,7 +83,7 @@ void 		print_file(const t_file *file, const t_flags *flags, const bool is_next)
 	}
 }
 
-void			print(const t_flags *flags, const t_file *files)
+void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
 { //del this later or rename
 	t_file* tmp = (t_file *)files;
 
@@ -90,8 +92,8 @@ void			print(const t_flags *flags, const t_file *files)
 		//ft_putstr("total "); //ls -l total doesnt working
 		//ft_putnbr(tmp->stat.st_blksize);
 		//ft_putchar('\n');
-		print_directory(files->files_inside, (const t_flags*)flags);
+		print_directory(files->files_inside, (const t_flags*)flags, conf);
 	}
 	else
-		print_all_things((t_file *)files, flags); //change to const t_file files in declaration in func
+		print_all_things((t_file *)files, flags, conf); //change to const t_file files in declaration in func
 }
