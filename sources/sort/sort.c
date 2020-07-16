@@ -7,13 +7,13 @@
 ** \brief
 */
 
-static void front_back_split(t_file* head, t_file** a, t_file** b)
+static void front_back_split(t_file* head, t_file** left, t_file** right)
 {
 	t_file* slow;
 	t_file* fast;
 
 	slow = head;
-	fast = fast->next;
+	fast = head->next;
 	while (fast)
 	{
 		fast = fast->next;
@@ -23,76 +23,76 @@ static void front_back_split(t_file* head, t_file** a, t_file** b)
 			fast = fast->next;
 		}
 	}
-	*a = head;
-	*b = slow->next;
+	*left = head;
+	*right = slow->next;
 	slow->next = NULL;
 }
 
-static t_file*	sorted_merge_by_time(t_file* a, t_file* b)
+static t_file*	sorted_merge_by_time(t_file* left, t_file* right)
 {
 	t_file* res;
 
 	res = NULL;
-	if (!a)
-		return (b);
-	if (!b)
-		return (a);
-	if (a->time >= b->time)
+	if (!left)
+		return (right);
+	if (!right)
+		return (left);
+	if (left->time >= right->time)
 	{
-		res = a;
-		res->next = sorted_merge_by_time(a->next, b);
+		res = left;
+		res->next = sorted_merge_by_time(left->next, right);
 	}
 	else
 	{
-		res = b;
-		res->next = sorted_merge_by_time(a, b->next);
+		res = right;
+		res->next = sorted_merge_by_time(left, right->next);
 	}
 	return res;
 }
 
-static t_file*	sorted_merge_by_ascii(t_file* a, t_file* b)
+static t_file*	sorted_merge_by_ascii(t_file* left, t_file* right)
 {
 	t_file* res;
 
 	res = NULL;
-	if (!a)
-		return (b);
-	if (!b)
-		return (a);
-	if (a->name && b->name && strcmp(a->name, b->name) > 0)
+	if (!left)
+		return (right);
+	if (!right)
+		return (left);
+	if (left->name && right->name && strcmp(left->name, left->name) > 0)
 	{
-		res = a;
-		res->next = sorted_merge_by_ascii(a->next, b);
+		res = left;
+		res->next = sorted_merge_by_ascii(left->next, right);
 	}
 	else
 	{
-		res = b;
-		res->next = sorted_merge_by_ascii(a, b->next);
+		res = right;
+		res->next = sorted_merge_by_ascii(left, right->next);
 	}
 	return res;
 }
 
-void	merge_sort(const bool is_ascii, const bool is_time, t_file** head)
+void	merge_sort(bool is_ascii, bool is_time, t_file** head)
 {
 	t_file* tmp;
-	t_file* a;
-	t_file* b;
+	t_file* left;
+	t_file* right;
 
 	tmp = *head;
 	if (!tmp || !tmp->next) {
 		return ;
 	}
-	front_back_split(tmp, &a, &b);
-	merge_sort(is_ascii, is_time, &a);
-	merge_sort(is_ascii, is_time, &b);
+	front_back_split(tmp, &left, &right);
+	merge_sort(is_ascii, is_time, &left);
+	merge_sort(is_ascii, is_time, &right);
 	if (is_ascii)
-		*head = sorted_merge_by_ascii(a, b);
+		*head = sorted_merge_by_ascii(left, right);
 	else
-		*head = sorted_merge_by_time(a, b);
+		*head = sorted_merge_by_time(left, right);
 }
 
 /*!
-* https://www.geeksforgeeks.org/merge-sort-for-linked-list/
+** https://www.geeksforgeeks.org/merge-sort-for-linked-list/
 */
 
 void		sort(const t_flags *flags, t_file *files)
