@@ -12,8 +12,8 @@
 #include <unistd.h>
 
 /*!
-* \file
-* \brief Functions for parse input by flags and folders
+** \file
+** \brief Functions for parse input by flags and folders
 */
 
 t_conf	*parser(const char **av, t_file *files, t_flags *flags, int ac);

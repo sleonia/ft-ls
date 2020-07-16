@@ -2,8 +2,8 @@
 #include "output/output.h"
 
 /*!
-* \file
-* \brief Validate and collect all flags to t_flags struct
+** \file
+** \brief Validate and collect all flags to t_flags struct
 */
 
 static void collect_flags(t_flags *flags, const char arg)
@@ -24,10 +24,14 @@ static void collect_flags(t_flags *flags, const char arg)
 		flags->m = true;
 	if (arg == '1')
 		flags->one = true;
+	if (arg == 'f')
+		flags->f = true;
+	if (arg == 'i')
+		flags->i = true;
 }
 
 /*!
-*	\return index in user input that equals folder or error flag
+**	\return index in user input that equals folder or error flag
 */
 
 int		validate_flags(t_flags *flags, const char *arg)
@@ -40,7 +44,8 @@ int		validate_flags(t_flags *flags, const char *arg)
 	while (arg[++i])
 	{
 		if (arg[i] == 'R' || arg[i] == 'r' || arg[i] == 'l' || arg[i] == 'a'
-		|| arg[i] == 't' || arg[i] == 'g' || arg[i] == 'm' || arg[i] == '1')
+		|| arg[i] == 't' || arg[i] == 'g' || arg[i] == 'm' || arg[i] == '1'
+		|| arg[i] == 'f' || arg[i] == 'i')
 			collect_flags(flags, arg[i]);
 		else
 		{

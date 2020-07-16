@@ -6,8 +6,8 @@
 #include <errno.h>
 
 /*!
-* \file
-* \brief Functions for print output
+** \file
+** \brief Functions for print output
 */
 
 void    	    print_illegal_opt(const char);
@@ -20,7 +20,7 @@ void			print_with_color(const struct stat *stat_, const char *name);
 void			print(const t_flags *flags, const t_file *files, const t_conf *conf);
 
 /*!
-*	Colors
+**	Colors
 */
 
 #define ANSI_COLOR_RED        "\x1b[31m"

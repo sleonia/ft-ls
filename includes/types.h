@@ -2,8 +2,8 @@
 # define TYPES_H
 
 /*!
-* \file
-* \brief Types of structs in program
+** \file
+** \brief Types of structs in program
 */
 
 #include <dirent.h>
@@ -12,14 +12,14 @@
 #include <time.h>
 
 /*!
-* file:
-*     - file name
-*     - file descriptor
-*     - file type flag
-*     - folder inside is not NULL if is_folder == TRUE
-*     - pointer to next element
-*     - pointer to prev element
-*     - creation time
+** file:
+**     - file name
+**     - file descriptor
+**     - file type flag
+**     - folder inside is not NULL if is_folder == TRUE
+**     - pointer to next element
+**     - pointer to prev element
+**     - creation time
 */
 
 typedef struct			s_file////////maybe i should make it more readable, this shit has become too big to debug. lol kek some of my old projects are fucking crazy
@@ -39,16 +39,18 @@ typedef struct			s_file////////maybe i should make it more readable, this shit h
 }						t_file;
 
 /*!
-* Parsing ls arguments - directories and flags
-* struct for program flags contain:
-*   - R
-*   - r
-*   - l
-*   - a
-*   - t
-*   - g
-*   - m
-*   - 1
+** Parsing ls arguments - directories and flags
+** struct for program flags contain:
+**   - R
+**   - r
+**   - l
+**   - a
+**   - t
+**   - g
+**   - m
+**   - 1
+**   - f
+**   - i
 */
 
 typedef	struct			s_flags
@@ -61,15 +63,17 @@ typedef	struct			s_flags
 	bool				g;
 	bool				m;
 	bool				one;
+	bool				f;
+	bool				i;
 	bool				no_flags;////added temporarily, should delete if its useless
 }						t_flags;
 
 /*!
-*	Struct for correct output of ls
-*	  filed:
-*		- total size
-*		- count of files
-*		- rights len
+**	Struct for correct output of ls
+**	  filed:
+**		- total size
+**		- count of files
+**		- rights len
 */
 
 typedef	struct			s_conf
@@ -81,10 +85,8 @@ typedef	struct			s_conf
 	unsigned			creator_len;
 	unsigned			group_len;
 	unsigned			size_len;
-	/*
-	unsigned			data_len;
-	*/
 	unsigned			name_len;
+	unsigned			inode_nbr_len;
 }						t_conf;
 
 #endif

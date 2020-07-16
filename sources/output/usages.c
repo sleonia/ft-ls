@@ -1,8 +1,8 @@
 #include "output/output.h"
 
 /*!
-* \file
-* \brief
+** \file
+** \brief
 */
 
 void		print_illegal_opt(const char symb)

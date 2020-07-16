@@ -18,6 +18,17 @@ static int	nbrlen(long long nbr)
 	return (i);
 }
 
+/*!
+**	\brief Take config (size) for output:
+**		- conf->total
+**		- conf->links_len
+**		- conf->creator_len
+**		- conf->group_len
+**		- conf->size_len
+**		- conf->name_len
+*/
+
+
 void		take_config(const char *name, const struct stat *stat_, t_conf *conf)
 {
 	int		len;
@@ -33,4 +44,6 @@ void		take_config(const char *name, const struct stat *stat_, t_conf *conf)
 	conf->size_len < len ? conf->size_len = len : 0;
 	len = ft_strlen(name);
 	conf->name_len < len ? conf->name_len = len : 0;
+	len = nbrlen(stat_->st_ino);
+	conf->inode_nbr_len < len ? conf->inode_nbr_len = len : 0;
 }

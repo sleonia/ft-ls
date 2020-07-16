@@ -4,10 +4,10 @@
 #include "types.h"
 
 /*!
-* \file
-* \brief Sort:
-*	- by ascii
-*	- by time
+** \file
+** \brief Sort:
+**	- by ascii
+**	- by time
 */
 
 void		sort(const t_flags *flags, t_file *files);

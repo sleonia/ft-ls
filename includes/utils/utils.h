@@ -1,16 +1,16 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-/*!
-* \file
-* \brief Some utils:
-*	- create structs
-*	- build full path to a file
-*	- calculate length of nbr
-*	- take config for output on file
-*/
-
 #include "types.h"
+
+/*!
+** \file
+** \brief Some utils:
+**	- create structs
+**	- build full path to a file
+**	- calculate length of nbr
+**	- take config for output on file
+*/
 
 t_flags		*init_flags(void);
 t_file 		*init_file(void);

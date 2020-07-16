@@ -2,8 +2,8 @@
 #include <sys/stat.h>
 
 /*!
-* \file
-* \brief Print content with color
+** \file
+** \brief Print content with color
 */
 
 void			print_with_color(const struct stat *stat_, const char *name)

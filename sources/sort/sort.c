@@ -3,8 +3,8 @@
 #include <stdio.h>
 
 /*!
-* \file
-* \brief
+** \file
+** \brief
 */
 
 static void front_back_split(t_file* head, t_file** a, t_file** b)

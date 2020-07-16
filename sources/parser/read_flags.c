@@ -2,15 +2,15 @@
 #include "output/output.h"
 
 /*!
-*	\file
-*	\brief Read flags, validate and collect them.
-*	\return index in user input that equals folder or error flag
+**	\file
+**	\brief Read flags, validate and collect them.
+**	\return index in user input that equals folder or error flag
 */
 
 static bool	has_no_flags(t_flags *flags)
 {
 	if (flags->a || flags->l || flags->big_r || flags->little_r ||
-		flags->g || flags->one || flags->t || flags->m)
+		flags->g || flags->one || flags->t || flags->m || flags->f || flags->i)
 		return (false);
 	return (flags->no_flags = true);
 }

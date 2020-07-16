@@ -2,8 +2,8 @@
 #include "libft.h"
 
 /*!
-* \file
-* \brief
+** \file
+** \brief
 */
 
 t_flags		*init_flags(void)

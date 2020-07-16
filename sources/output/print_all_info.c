@@ -5,20 +5,20 @@
 #include <sys/types.h>
 
 /*!
-*	What is info about file/link/folder?
-*		-rwxr-xr-x   1 a18573961  staff  38528 14 Jul 21:16 ft_ls
-*	Transcript:
-*		- rights
-*		- count of link
-*		- name of creator
-*		- name of group
-*		- size of bytes
-*		- time
-*		- file name
+**	What is info about file/link/folder?
+**		-rwxr-xr-x   1 a18573961  staff  38528 14 Jul 21:16 ft_ls
+**	Transcript:
+**		- rights
+**		- count of link
+**		- name of creator
+**		- name of group
+**		- size of bytes
+**		- time
+**		- file name
 */
 
 /*!
-*	Example of ctime(time) -> Tue Jul 14 02:36:07 2020
+**	Example of ctime(time) -> Tue Jul 14 02:36:07 2020
 */
 
 static void		print_time(const time_t *time)
