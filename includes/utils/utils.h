@@ -18,7 +18,7 @@ t_file		*new_file(t_file *prev);
 t_conf		*new_conf(void);
 char 		*build_path(t_file *file);
 char 		*build_path_for_arg(const char *name);
-int			nbrlen(long long nbr);
+
 void		take_config(const char *name, const struct stat *stat, t_conf *conf);
 
 #endif

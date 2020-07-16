@@ -12,7 +12,7 @@
 *		2. Parsing input agruments by flags
 *		3. Parsing input agruments by folders
 *			calculate sizes for output
-*		4. Processing flags
+*		4. If -r or -t flags -> sort
 *		5. Print result
 */
 
