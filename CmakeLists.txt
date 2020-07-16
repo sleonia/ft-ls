@@ -84,15 +84,23 @@ add_executable(ft_ls
         libft/get_next_line.c
         libft/get_next_line.h
         libft/libft.h
+
         sources/output/output.c
+        sources/output/print_file.c
+        sources/output/print_directory.c
+        sources/output/print_all_things.c
         sources/output/print_all_info.c
         sources/output/color.c
         sources/output/usages.c
+
         sources/parser/parser.c
         sources/parser/read_flags.c
         sources/parser/read_files.c
         sources/parser/validate_flags.c
+
         sources/utils/utils.c
         sources/utils/config.c
+
         sources/sort/sort.c
+
         sources/main.c)
