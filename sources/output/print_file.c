@@ -1,5 +1,6 @@
 #include "output/output.h"
 #include "types.h"
+#include <sys/ioctl.h>
 
 /*!
 ** \file

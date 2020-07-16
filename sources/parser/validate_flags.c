@@ -25,7 +25,10 @@ static void collect_flags(t_flags *flags, const char arg)
 	if (arg == '1')
 		flags->one = true;
 	if (arg == 'f')
+	{
 		flags->f = true;
+		flags->a = true;
+	}
 	if (arg == 'i')
 		flags->i = true;
 }
