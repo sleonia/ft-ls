@@ -9,9 +9,11 @@
 * \brief Main file
 *	How if works:
 *		1. Init structs
-*		2. Parsing input agruments by flags and folders
-*		3. Processing flags
-*		4. Print result
+*		2. Parsing input agruments by flags
+*		3. Parsing input agruments by folders
+*			calculate sizes for output
+*		4. Processing flags
+*		5. Print result
 */
 
 int		main(int ac, char **av)
@@ -27,7 +29,7 @@ int		main(int ac, char **av)
 	if (!(conf = parser((const char **)av, files, flags, ac)))
 		return (1);
 	if (flags->t || flags->little_r)
-		sort((const t_flags*)flags, &files);
+		sort((const t_flags*)flags, files);
 	print((const t_flags*)flags, (const t_file*)files, (const t_conf*)conf);
 	return (0);
 }

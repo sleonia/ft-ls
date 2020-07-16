@@ -19,7 +19,7 @@ static bool should_print(const char *name, const bool flag_a)
 	return (true);
 }
 
-void 		print_all_things(t_file *file, const t_flags *flags, const t_conf *conf)
+void 		print_all_things(const t_file *file, const t_flags *flags, const t_conf *conf)
 {
 	//int 	num_dirs; //for what?
 	t_file *counter;
@@ -38,11 +38,11 @@ void 		print_all_things(t_file *file, const t_flags *flags, const t_conf *conf)
 	}
 }
 
-void 		print_directory(t_file *file, const t_flags *flags, const t_conf *conf)
+void 		print_directory(const t_file *file, const t_flags *flags, const t_conf *conf)
 {
 	t_file *tmp;
 
-	tmp = file;
+	tmp = (t_file *)file;
 	if (flags->l || flags->g)
 		printf("total: %d\n", conf->total);
 	while(tmp)
@@ -62,13 +62,13 @@ void 		print_directory(t_file *file, const t_flags *flags, const t_conf *conf)
 
 void 		print_file(const t_file *file, const t_flags *flags, const bool is_next, const t_conf *conf)
 {
-	//if (flags->)
-	//print_with_color(&file->stat, file->name);
 	if (flags->l || flags->g)
 		print_all_info(&file->stat, conf, flags->g, (const char *)file->name);
+
+	//printf("%llu ", file->stat.st_ino); //for -i flag
 	else
 	{
-		printf("%s", file->name);
+		print_with_color((const struct stat*)&file->stat, (const char*)file->name);
 		if (flags->one)
 			printf("\n");
 		else
@@ -76,7 +76,7 @@ void 		print_file(const t_file *file, const t_flags *flags, const bool is_next, 
 			if (is_next && flags->m)
 				printf(", ");
 			else if (is_next)
-				printf(", ");
+				printf(" ");
 			else
 				printf("\n");
 		}
@@ -84,11 +84,11 @@ void 		print_file(const t_file *file, const t_flags *flags, const bool is_next, 
 }
 
 void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
-{ //del this later or rename
+{
 	t_file* tmp = (t_file *)files;
 
 	if (flags->big_r)
-		print_all_things((t_file *)files, flags, conf); //change to const t_file files in declaration in func
+		print_all_things((const t_file *)files, flags, conf);
 	else
 		print_directory(files->files_inside, (const t_flags*)flags, conf);
 }
