@@ -34,6 +34,6 @@ void 		print_directory(const t_file *file,
 		}
 		tmp = tmp->next;
 	}
-	if (flags->l & flags->g)
+	if (!flags->l && !flags->g)
 		printf("\n");
 }
