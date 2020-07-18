@@ -26,4 +26,5 @@ void free_all(t_file *files, t_conf *conf, t_flags *flags)
 	if (flags)
 		free(flags);
 	free_file(files);
+	exit(0);
 }
