@@ -59,7 +59,7 @@ static t_file*	sorted_merge_by_ascii(t_file* left, t_file* right)
 		return (right);
 	if (!right)
 		return (left);
-	if (left->name && right->name && strcmp(left->name, left->name) > 0)
+	if (left->name && right->name && ft_strcmp(right->name, left->name) > 0)
 	{
 		res = left;
 		res->next = sorted_merge_by_ascii(left->next, right);
