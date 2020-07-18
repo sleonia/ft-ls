@@ -37,10 +37,20 @@ static t_file*	sorted_merge_by_time(t_file* left, t_file* right)
 		return (right);
 	if (!right)
 		return (left);
-	if (left->time >= right->time)
+	if (left->time > right->time)
 	{
 		res = left;
 		res->next = sorted_merge_by_time(left->next, right);
+	}
+	else if (left->time == right->time && ft_strcmp(right->name, left->name) > 0)
+	{
+		res = left;
+		res->next = sorted_merge_by_time(left->next, right);
+	}
+	else if (left->time == right->time)
+	{
+		res = right;
+		res->next = sorted_merge_by_time(left, right->next);		
 	}
 	else
 	{
@@ -97,10 +107,10 @@ void	merge_sort(bool is_ascii, bool is_time, t_file** head)
 
 void		sort(const t_flags *flags, t_file *files)
 {
-	if (!flags->f && !flags->t)
-		merge_sort(true, false, &(files->files_inside));
-	else if (flags->t)
+	if (flags->t)
 		merge_sort(false, flags->t, &(files->files_inside));
 	else if (flags->little_r)
 		reverse(&files);
+	else
+		merge_sort(true, false, &(files->files_inside));
 }
