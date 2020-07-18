@@ -35,7 +35,7 @@ typedef struct			s_file////////maybe i should make it more readable, this shit h
 	time_t				time;////only used with -t flag, no need to do it otherwise
 	struct stat			stat;
 	struct dirent		*dirent;
-	bool				ignore;
+	bool				no_ignore;
 }						t_file;
 
 /*!
@@ -65,7 +65,7 @@ typedef	struct			s_flags
 	bool				one;
 	bool				f;
 	bool				i;
-	bool				no_flags;////added temporarily, should delete if its useless
+	bool				no_flags;
 }						t_flags;
 
 /*!

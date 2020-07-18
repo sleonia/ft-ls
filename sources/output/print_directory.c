@@ -6,10 +6,11 @@
 ** \brief
 */
 
-static bool should_print(const char *name, const bool flag_a)
+static bool should_print(t_file *file, t_flags *flags)
 {
-	if (ft_strequ(name, ".") || ft_strequ(name, ".."))
-		return (flag_a ? true : false);
+	if ((ft_strequ(file->name, ".") || ft_strequ(file->name, ".."))
+	&& !file->no_ignore)
+		return (flags->a ? true : false);
 	return (true);
 }
 
@@ -24,7 +25,7 @@ void 		print_directory(const t_file *file,
 		printf("total: %d\n", conf->total);
 	while(tmp)
 	{
-		if (should_print(tmp->name, flags->a))
+		if (should_print(tmp, flags))
 		{
 			if (tmp->name)
 			{

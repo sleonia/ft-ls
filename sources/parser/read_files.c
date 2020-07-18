@@ -13,8 +13,9 @@ static bool	directory_to_ignore(t_file *file, t_flags *flags)
 	t_file *depth_counter;
 
 	depth = 0;
-	if (ft_strequ(file->name, ".") || ft_strequ(file->name, ".."))//////maybe something else will be added
-		return (file->ignore = true);
+	if ((ft_strequ(file->name, ".") || ft_strequ(file->name, ".."))
+	&& !file->no_ignore)//////maybe something else will be added
+		return (!(file->no_ignore = false));
 	if (!flags->big_r)
 	{
 		depth_counter = file;
@@ -122,14 +123,14 @@ t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
 	{
 		if (flags->no_flags) //maybe del this
 			index--;
-		while (args[++index])////so at "ls directory_name" index == 1 so we try to read from args[2] right away, losing args[1] filename D:< anyway if we dont checking args[++] will return NOT NULL
-		//and lol THEN it will actually do the ++ thing which leads to attempt to read from NULL and an obvious segv. FOR NOW it works like this, needs more tests
+		while (args[++index])
 		{
+			tmp->no_ignore = true;
 			tmp->full_path = build_path_for_arg(args[index]);
 			fill_file(args[index], tmp, flags, conf);
 			new_file(tmp);//////don't forget to clean this shit in case we have one arg, unix-trigger boyz won't get us this easy!
 			tmp = tmp->next;
-			index++;
+//			index++;
 		}
 	}
 	return (conf);
