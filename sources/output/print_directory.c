@@ -6,7 +6,7 @@
 ** \brief
 */
 
-static bool should_print(t_file *file, t_flags *flags)
+static bool should_print(t_file *file, const t_flags *flags)
 {
 	if ((ft_strequ(file->name, ".") || ft_strequ(file->name, ".."))
 	&& !file->no_ignore)

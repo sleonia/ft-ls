@@ -28,8 +28,7 @@ int		main(int ac, char **av)
 		return (1);
 	if (!(conf = parser((const char **)av, files, flags, ac)))
 		return (1);
-	if (!flags->f && (flags->t || flags->little_r))
-		sort((const t_flags*)flags, files);
+	sort((const t_flags*)flags, files);
 	print((const t_flags*)flags, (const t_file*)files, (const t_conf*)conf);
 	return (0);
 }

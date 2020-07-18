@@ -97,5 +97,8 @@ void	merge_sort(bool is_ascii, bool is_time, t_file** head)
 
 void		sort(const t_flags *flags, t_file *files)
 {
-	merge_sort(flags->little_r, flags->t, &(files->files_inside));
+	if (!flags->f && !flags->t)
+		merge_sort(true, false, &(files->files_inside));
+	else if (flags->t)
+		merge_sort(false, flags->t, &(files->files_inside));
 }
