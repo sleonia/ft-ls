@@ -132,6 +132,12 @@ t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
 			tmp = tmp->next;
 //			index++;
 		}
+		if (!tmp->name)
+		{
+			tmp->prev->next = NULL;
+			free(tmp);
+			tmp = NULL;
+		}
 	}
 	return (conf);
 }

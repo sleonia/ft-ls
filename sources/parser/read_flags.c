@@ -22,9 +22,14 @@ int			read_flags(t_flags *flags, const char **args, int ac)
 	if (ac == 1)
 		return (1);
 	i = 0;
-	while (args[++i]) {
-		if (validate_flags(flags, args[i]) != 0)
+	while (args[++i])
+	{
+		if (validate_flags(flags, args[i]))
+		{
+			if (i)
+				i--;
 			break ;
+		}
 	}
 	flags->no_flags = has_no_flags(flags);
 	return (i);
