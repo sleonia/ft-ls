@@ -99,8 +99,11 @@ void		sort(const t_flags *flags, t_file *files)
 {
 	if (flags->t)
 		merge_sort(false, flags->t, &(files->files_inside));
-	else if (flags->little_r)
-		reverse(&files);
-	else if (!flags->f)
-		merge_sort(true, false, &(files->files_inside));
+	else
+	{
+		if (!flags->f)
+			merge_sort(true, false, &(files->files_inside));
+		if (flags->little_r)
+			reverse(&files);
+	}
 }
