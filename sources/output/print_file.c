@@ -8,7 +8,7 @@
 */
 
 void 		print_file(const t_file *file, const t_flags *flags,
-						const bool is_next, const t_conf *conf)
+						bool is_next, const t_conf *conf)
 {
 	if (flags->i)
 		printf("%*llu ", conf->inode_nbr_len + 1, file->stat.st_ino);

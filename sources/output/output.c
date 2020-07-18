@@ -14,4 +14,5 @@ void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
 		print_all_things((const t_file *)files, flags, conf);
 	else
 		print_directory(files->files_inside, (const t_flags*)flags, conf);
+	print_column(NULL, NULL, NULL, NULL);
 }

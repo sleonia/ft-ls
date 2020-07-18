@@ -17,7 +17,7 @@
 **		- file name
 */
 
-/*!
+/*
 **	Example of ctime(time) -> Tue Jul 14 02:36:07 2020
 */
 
@@ -60,7 +60,7 @@ static void		print_rights(const mode_t mode)
 }
 
 void			print_all_info(const struct stat *stat_, const t_conf *conf,
-					const bool is_flag_g, const char *name)
+					bool is_flag_g, const char *name)
 {
 	print_rights(stat_->st_mode);
 	printf("%*d ", conf->links_len + 1, stat_->st_nlink);

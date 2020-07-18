@@ -29,7 +29,7 @@ void 		print_directory(const t_file *file,
 		{
 			if (tmp->name)
 			{
-				is_last = tmp->next && tmp->next->next ? true : false;
+				is_last = tmp->next ? true : false;
 				print_file((const t_file*)tmp, flags, is_last, conf);
 			}
 		}

@@ -90,6 +90,7 @@ add_executable(ft_ls
         sources/output/print_directory.c
         sources/output/print_all_things.c
         sources/output/print_all_info.c
+        sources/output/print_column.c
         sources/output/color.c
         sources/output/usages.c
 
@@ -102,5 +103,6 @@ add_executable(ft_ls
         sources/utils/config.c
 
         sources/sort/sort.c
+        sources/sort/reverse.c
 
         sources/main.c)

@@ -14,9 +14,10 @@ void    	    print_illegal_opt(const char);
 void 			errno_exit(void);
 void 			print_directory(const t_file *file, const t_flags *flags, const t_conf *conf);
 void 			print_all_things(const t_file *file, const t_flags *flags, const t_conf *conf);
-void			print_all_info(const struct stat *stat_, const t_conf *conf, const bool is_flag_g, const char *name);
-void 			print_file(const t_file *file, const t_flags *flags, const bool is_next, const t_conf *conf);
+void			print_all_info(const struct stat *stat_, const t_conf *conf, bool is_flag_g, const char *name);
+void 			print_file(const t_file *file, const t_flags *flags, bool is_next, const t_conf *conf);
 void			print_with_color(const struct stat *stat_, const char *name);
+void			print_column(const t_file *file, const t_flags *flags, bool is_next, const t_conf *conf);
 void			print(const t_flags *flags, const t_file *files, const t_conf *conf);
 
 /*!
