@@ -51,6 +51,12 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 		file_counter = new_file(file_counter);
 		file_counter->origin = file;
 	}
+	if (!file_counter->name)
+	{
+		file_counter->prev->next = NULL;
+		free(file_counter);
+		file_counter = NULL;///this is nice but not NECESSARY
+	}
 }
 
 static void fill_directory(t_file *file, const char *name, t_flags *flags, t_conf *conf)
