@@ -7,7 +7,7 @@
 ** \brief
 */
 
-static void	front_back_split(t_file *head, t_file **left, t_file **right)
+static void	front_back_split(t_file *head, t_file *left, t_file *right)
 {
 	t_file *slow;
 	t_file *fast;
@@ -23,8 +23,8 @@ static void	front_back_split(t_file *head, t_file **left, t_file **right)
 			fast = fast->next;
 		}
 	}
-	*left = head;
-	*right = slow->next;
+	left = head;
+	right = slow->next;
 	slow->next = NULL;
 }
 
@@ -77,32 +77,34 @@ static t_file	*sorted_merge_by_ascii(t_file *left, t_file *right)
 	return (res);
 }
 
-void	merge_sort(bool is_ascii, bool is_time, t_file **head)
+void	merge_sort(bool is_ascii, bool is_time, t_file *head)
 {
 	t_file *tmp;
 	t_file *left;
 	t_file *right;
 
-	tmp = *head;
+	tmp = head;
+	left = NULL;
+	right = NULL;
 	if (!tmp || !tmp->next)
 		return ;
-	front_back_split(tmp, &left, &right);
-	merge_sort(is_ascii, is_time, &left);
-	merge_sort(is_ascii, is_time, &right);
+	front_back_split(tmp, left, right);
+	merge_sort(is_ascii, is_time, left);
+	merge_sort(is_ascii, is_time, right);
 	if (is_ascii)
-		*head = sorted_merge_by_ascii(left, right);
+		head = sorted_merge_by_ascii(left, right);
 	else
-		*head = sorted_merge_by_time(left, right);
+		head = sorted_merge_by_time(left, right);
 }
 
 void		sort(const t_flags *flags, t_file *files)
 {
 	if (flags->t)
-		merge_sort(false, flags->t, &(files->files_inside));
+		merge_sort(false, flags->t, files->files_inside);
 	else
 	{
 		if (!flags->f)
-			merge_sort(true, false, &(files->files_inside));
+			merge_sort(true, false, files->files_inside);
 		if (flags->little_r)
 			reverse(&files);
 	}

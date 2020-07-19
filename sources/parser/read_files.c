@@ -128,7 +128,7 @@ t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
 	else
 	{
 		if (flags->no_flags) //maybe del this
-			index--;
+			index = 0;
 		while (args[++index])
 		{
 			tmp->no_ignore = true;
