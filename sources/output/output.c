@@ -15,6 +15,7 @@ static void 	print_one(t_file *files, t_flags *flags, t_conf *conf)
 {
 	if (S_ISDIR(files->stat.st_mode))
 	{
+//		print_directory_v2(files->files_inside, flags, conf);
 		print_directory(files->files_inside, flags, conf);
 		ft_putchar('\n');///delete me
 
@@ -45,6 +46,7 @@ static void 	print_many(t_file *files, t_flags *flags, t_conf *conf)
 		{
 			printf("%s:\n", counter->name);
 			print_directory(counter->files_inside, flags, conf);
+	//		print_directory_v2(counter->files_inside, flags, conf);
 		}
 		counter = counter->next;
 	}

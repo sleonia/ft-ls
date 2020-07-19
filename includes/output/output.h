@@ -19,6 +19,8 @@ void 			print_file(const t_file *file, const t_flags *flags, bool is_next, const
 void			print_with_color(const struct stat *stat_, const char *name);
 void			print_column(const t_file *file, const t_flags *flags, bool is_next, const t_conf *conf);
 void			print(const t_flags *flags, const t_file *files, const t_conf *conf);
+/*test me*/
+void 	print_directory_v2(t_file *file, t_flags *flags, t_conf *conf);
 
 /*!
 **	Colors

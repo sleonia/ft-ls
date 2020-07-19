@@ -35,6 +35,8 @@ typedef struct			s_file////////maybe i should make it more readable, this shit h
 	struct stat			stat;
 	struct dirent		*dirent;
 	bool				no_ignore;
+	bool				done;
+	char 				*error;/////NULL 4 valid stuff, HASVALUE in case an error was detected. Use this instead of immediate exit
 }						t_file;
 
 /*!

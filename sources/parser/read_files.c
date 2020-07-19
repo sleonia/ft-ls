@@ -126,7 +126,9 @@ t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
 	tmp = files;
 	if (!(conf = new_conf()))
 		return (NULL);
-	if (!args[index]) {
+	if (!args[index])
+	{
+		files->no_ignore = true;
 		fill_file("./", files, flags, conf);
 	}
 	else

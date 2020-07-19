@@ -56,7 +56,7 @@ static void		print_rights(const mode_t mode)
 	rights[8] = (mode & S_IWOTH) ? 'w' : '-';
 	rights[9] = (mode & S_IXOTH) ? 'x' : '-';
 	rights[10] = 0;
-	printf("%s ", rights);
+	printf("%s ", rights);//printf
 }
 
 void			print_all_info(const struct stat *stat_, const t_conf *conf,
@@ -66,8 +66,8 @@ void			print_all_info(const struct stat *stat_, const t_conf *conf,
 	printf("%*d ", conf->links_len + 1, stat_->st_nlink);
 	if (!is_flag_g)
 		printf("%-*s ", conf->creator_len + 1, (getpwuid(stat_->st_uid))->pw_name);
-	printf("%-*s ", conf->group_len, getgrgid(stat_->st_gid)->gr_name);
-	printf("%*lld ", conf->size_len + 1, stat_->st_size);
+	printf("%-*s ", conf->group_len, getgrgid(stat_->st_gid)->gr_name);//printf
+	printf("%*lld ", conf->size_len + 1, stat_->st_size);//printf
 	print_time(&stat_->st_mtime);
 	print_with_color(stat_, name);
 	printf("\n");
