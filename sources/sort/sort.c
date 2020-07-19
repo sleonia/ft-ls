@@ -106,4 +106,15 @@ void		sort(const t_flags *flags, t_file *files)
 		if (flags->little_r)
 			reverse(&files);
 	}
+
+	//{
+		//t_file *tmp = files->files_inside;
+		//while (tmp)
+		//{
+			//printf("prev: %s ", tmp->prev == NULL ? "" :  tmp->prev->name);
+			//printf("\t\t\tcurr: %s ", tmp->name);
+			//printf("\n");
+			//tmp = tmp->next;
+		//}
+	//}
 }
