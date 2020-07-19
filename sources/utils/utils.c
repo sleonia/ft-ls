@@ -31,10 +31,7 @@ t_file			*new_file(t_file *prev)//this didnt work with void because of a copy of
 	if (!(file = init_file()))
 		return (NULL);
 	if (prev)
-	{
 		prev->next = file;
-		file->prev = prev;
-	}
 	return (file);
 }
 

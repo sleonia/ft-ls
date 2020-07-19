@@ -53,7 +53,6 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 	}
 	if (!file_counter->name)
 	{
-		file_counter->prev->next = NULL;
 		free(file_counter);
 		file_counter = NULL;///this is nice but not NECESSARY
 	}
@@ -82,6 +81,7 @@ static void fill_non_directory(t_file *file, const char *name)
 void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 {
 	struct stat	stat_;
+
 	if (!file->name)
 		file->name = ft_strdup(name);////protect me and do a ft_strdup unless you make sure you don't lose the pointer, caught a segv here with previous version
 	if (!file->full_path)
@@ -139,11 +139,7 @@ t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
 //			index++;
 		}
 		if (!tmp->name)
-		{
-			tmp->prev->next = NULL;
-			free(tmp);
-			tmp = NULL;
-		}
+			ft_memdel((void **)&tmp);
 	}
 	return (conf);
 }
