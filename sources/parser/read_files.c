@@ -13,8 +13,8 @@ static bool	directory_to_ignore(t_file *file, t_flags *flags)
 	t_file *depth_counter;
 
 	depth = 0;
-	if ((ft_strequ(file->name, ".") || ft_strequ(file->name, ".."))
-	&& !file->no_ignore)//////maybe something else will be added
+	//if ((ft_strequ(file->name, ".") || ft_strequ(file->name, ".."))
+	if (file->name[0] == '.' && !file->no_ignore)//////maybe something else will be added
 		return (!(file->no_ignore = false));
 	if (!flags->big_r)
 	{
@@ -33,6 +33,7 @@ static bool	directory_to_ignore(t_file *file, t_flags *flags)
 static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 {
 	t_file *file_counter;
+	t_file *sleonia_i_tut_slomal;
 	bool	done;
 
 	file_counter = NULL;
@@ -48,11 +49,13 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 			break;////check leak, empty entry created?
 		}
 		fill_file(file_counter->dirent->d_name, file_counter, flags, conf);
+		sleonia_i_tut_slomal = file_counter;
 		file_counter = new_file(file_counter);
 		file_counter->origin = file;
 	}
 	if (!file_counter->name)
 	{
+		sleonia_i_tut_slomal->next = NULL;
 		free(file_counter);
 		file_counter = NULL;///this is nice but not NECESSARY
 	}
@@ -118,6 +121,7 @@ t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
 {
 	t_conf	*conf;
 	t_file	*tmp;
+	t_file 	*sleonia_vse_polomal;
 
 	tmp = files;
 	if (!(conf = new_conf()))
@@ -134,12 +138,17 @@ t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
 			tmp->no_ignore = true;
 			tmp->full_path = build_path_for_arg(args[index]);
 			fill_file(args[index], tmp, flags, conf);
-			new_file(tmp);//////don't forget to clean this shit in case we have one arg, unix-trigger boyz won't get us this easy!
-			tmp = tmp->next;
+			sleonia_vse_polomal = tmp;
+			tmp = new_file(tmp);//////don't forget to clean this shit in case we have one arg, unix-trigger boyz won't get us this easy!
+//			tmp = tmp->next;
 //			index++;
 		}
 		if (!tmp->name)
+		{
+			sleonia_vse_polomal->next = NULL;
 			ft_memdel((void **)&tmp);
+		}
+
 	}
 	return (conf);
 }

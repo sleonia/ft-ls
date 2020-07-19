@@ -8,8 +8,7 @@
 
 static bool should_print(t_file *file, const t_flags *flags)
 {
-	if ((ft_strequ(file->name, ".") || ft_strequ(file->name, ".."))
-	&& !file->no_ignore)
+	if (file->name[0] == '.' && !file->no_ignore)
 		return (flags->a ? true : false);
 	return (true);
 }

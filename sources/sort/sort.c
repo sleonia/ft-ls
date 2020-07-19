@@ -84,6 +84,8 @@ void	merge_sort(bool is_ascii, bool is_time, t_file **head)
 	t_file *right;
 
 	tmp = *head;
+	left = NULL;
+	right = NULL;
 	if (!tmp || !tmp->next)
 		return ;
 	front_back_split(tmp, &left, &right);
@@ -98,11 +100,19 @@ void	merge_sort(bool is_ascii, bool is_time, t_file **head)
 void		sort(const t_flags *flags, t_file *files)
 {
 	if (flags->t)
+	{
+		merge_sort(false, flags->t, &(files));
 		merge_sort(false, flags->t, &(files->files_inside));
+	}
+
 	else
 	{
 		if (!flags->f)
+		{
+			merge_sort(true, false, &(files));
 			merge_sort(true, false, &(files->files_inside));
+		}
+
 		if (flags->little_r)
 			reverse(&files);
 	}
