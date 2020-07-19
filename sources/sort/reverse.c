@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-void	reverse(t_file **files) //reverse files->prev
+void	reverse(t_file **files)
 {
 	t_file *current;
 	t_file *prev;
