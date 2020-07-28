@@ -7,6 +7,7 @@
 ** \brief
 */
 
+/*
 static void	front_back_split(t_file *head, t_file **left, t_file **right)
 {
 	t_file *slow;
@@ -97,6 +98,9 @@ void	merge_sort(bool is_ascii, bool is_time, t_file **head)
 		*head = sorted_merge_by_time(left, right);
 }
 
+*/
+
+/* TEST */
 
 static void	swap(t_file *a, t_file *b) {
 	t_file *tmp;
@@ -106,29 +110,46 @@ static void	swap(t_file *a, t_file *b) {
 	b = tmp;
 }
 
-void		bubble_sort(bool is_ascii, bool is_time, t_file **head) { //only for test
-	t_file *i;
-	t_file *k;
+void sortedInsert(t_file**, t_file*);
 
-	if (!head || !*head)
-		return ;
-	i = *head;
-	while (i) {
-		k = i;
-		while (k && k->next && k->next->next) {
-			if (i->time > k->time) {
-				swap(i, k);
-			} else if (i->time == k->time && ft_strcmp(k->name, i->name) > 0) {
-				swap(i, k);
-			} else {
-				swap(k, i);
-			}
-			k = k->next;
-		}
-		i = i->next;
-	}
-}
+void insertionSort(t_file **head_ref) 
+{ 
+    t_file *sorted = NULL; 
+  
+    t_file *current = *head_ref; 
+    while (current != NULL) 
+    { 
+        t_file *next = current->next; 
+        sortedInsert(&sorted, current); 
+        current = next; 
+    } 
+    *head_ref = sorted; 
+} 
+  
+void sortedInsert(t_file** head_ref, t_file* new_node) 
+{ 
+    t_file* current;
 
+    if (*head_ref == NULL || (*head_ref)->time < new_node->time)
+    {
+        new_node->next = *head_ref;
+        *head_ref = new_node;
+    }
+    //else if (*head_ref == NULL || (*head_ref)->time == new_node->time && ft_strcmp(new_node->name, (*head_ref)->name) > 0) {
+
+	//}
+	else
+    {
+        current = *head_ref; 
+        while (current->next!=NULL && 
+               current->next->time < new_node->time) 
+        { 
+            current = current->next; 
+        } 
+        new_node->next = current->next; 
+        current->next = new_node; 
+    } 
+} 
 
 void		sort(const t_flags *flags, t_file *files)
 {
@@ -151,16 +172,16 @@ void		sort(const t_flags *flags, t_file *files)
 			reverse(&files);
 	}
 	*/
-	bubble_sort(true, false, &files);
-	bubble_sort(true, false, &(files->files_inside));
-	//{
-		//t_file *tmp = files->files_inside;
-		//while (tmp)
-		//{
-			//printf("prev: %s ", tmp->prev == NULL ? "" :  tmp->prev->name);
-			//printf("\t\t\tcurr: %s ", tmp->name);
-			//printf("\n");
-			//tmp = tmp->next;
-		//}
-	//}
+	//bubble_sort(false, true, &files);
+	//bubble_sort(false, true, &(files->files_inside));
+	insertionSort(&files);
+	{
+		t_file *tmp = files;
+		while (tmp)
+		{
+			printf("%s ", tmp->name);
+			tmp = tmp->next;
+		}
+			printf("\n");
+	}
 }
