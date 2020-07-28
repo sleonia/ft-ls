@@ -97,8 +97,42 @@ void	merge_sort(bool is_ascii, bool is_time, t_file **head)
 		*head = sorted_merge_by_time(left, right);
 }
 
+
+static void	swap(t_file *a, t_file *b) {
+	t_file *tmp;
+
+	tmp = a;
+	a = b;
+	b = tmp;
+}
+
+void		bubble_sort(bool is_ascii, bool is_time, t_file **head) { //only for test
+	t_file *i;
+	t_file *k;
+
+	if (!head || !*head)
+		return ;
+	i = *head;
+	while (i) {
+		k = i;
+		while (k && k->next && k->next->next) {
+			if (i->time > k->time) {
+				swap(i, k);
+			} else if (i->time == k->time && ft_strcmp(k->name, i->name) > 0) {
+				swap(i, k);
+			} else {
+				swap(k, i);
+			}
+			k = k->next;
+		}
+		i = i->next;
+	}
+}
+
+
 void		sort(const t_flags *flags, t_file *files)
 {
+		/*
 	if (flags->t)
 	{
 		merge_sort(false, flags->t, &(files));
@@ -116,7 +150,9 @@ void		sort(const t_flags *flags, t_file *files)
 		if (flags->little_r)
 			reverse(&files);
 	}
-
+	*/
+	bubble_sort(true, false, &files);
+	bubble_sort(true, false, &(files->files_inside));
 	//{
 		//t_file *tmp = files->files_inside;
 		//while (tmp)
