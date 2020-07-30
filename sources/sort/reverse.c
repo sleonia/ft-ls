@@ -2,13 +2,14 @@
 
 #include <stdio.h>
 
-void	reverse(t_file **files)
+void	reverse(t_file **files) //rewrite func
 {
 	t_file *current;
 	t_file *prev;
 	t_file *next;
 
-	if (!files || !*files)
+	//if (!files || !*files)
+	if (!files)
 		return ;
 	current = *files;
 	prev = NULL;

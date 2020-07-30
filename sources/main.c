@@ -29,10 +29,6 @@ int		main(int ac, char **av)
 	if (!(conf = parser((const char **)av, files, flags, ac)))
 		return (1);
 	sort((const t_flags*)flags, &files);
-	printf("_____\n");
-	//printf("%s\n", files->name);
-	//printf("%s\n", files->next->name);
-	//printf("%p\n", files);
 	print((const t_flags*)flags, (const t_file*)files, (const t_conf*)conf);
 	return (0);
 }

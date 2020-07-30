@@ -7,7 +7,6 @@
 ** \brief
 */
 
-///*
 static void	front_back_split(t_file *head, t_file **left, t_file **right)
 {
 	t_file *slow;
@@ -85,6 +84,8 @@ void	merge_sort(bool is_ascii, bool is_time, t_file **head)
 	t_file *left;
 	t_file *right;
 
+	if ((*head)->files_inside)
+		merge_sort(is_ascii, is_time, &(*head)->files_inside);
 	tmp = *head;
 	if (!tmp || !tmp->next)
 		return ;
@@ -97,102 +98,15 @@ void	merge_sort(bool is_ascii, bool is_time, t_file **head)
 		*head = sorted_merge_by_time(left, right);
 }
 
-//*/
-
-/* TEST */
-
-static void	swap(t_file *a, t_file *b) {
-	t_file *tmp;
-
-	tmp = a;
-	a = b;
-	b = tmp;
-}
-
-void sortedInsert(t_file**, t_file*);
-
-void insertionSort(t_file **head_ref) 
-{ 
-    t_file *sorted = NULL; 
-  
-    t_file *current = *head_ref; 
-    while (current != NULL) 
-    { 
-        t_file *next = current->next; 
-        sortedInsert(&sorted, current); 
-        current = next; 
-    } 
-    *head_ref = sorted; 
-} 
-  
-void sortedInsert(t_file** head_ref, t_file* new_node) 
-{ 
-    t_file* current;
-
-    if (*head_ref == NULL || (*head_ref)->time < new_node->time)
-    {
-        new_node->next = *head_ref;
-        *head_ref = new_node;
-    }
-    else if (*head_ref == NULL || ((*head_ref)->time == new_node->time && strcmp(new_node->name, (*head_ref)->name) > 0)) {
-        new_node->next = *head_ref;
-        *head_ref = new_node;
-	}
-	else
-    {
-        current = *head_ref; 
-        while (current->next!=NULL && 
-               current->next->time < new_node->time) 
-        { 
-            current = current->next; 
-        } 
-        new_node->next = current->next; 
-        current->next = new_node; 
-    } 
-} 
-
 void		sort(const t_flags *flags, t_file **files)
 {
-	//printf("%p\n", files);
 	if (flags->t)
-	{
 		merge_sort(false, true, files);
-		merge_sort(false, true, &(*files)->files_inside);
-	}
 	else
 	{
 		if (!flags->f)
-		{
 			merge_sort(true, false, files);
-			merge_sort(true, false, &(*files)->files_inside);
-		}
-
 		if (flags->little_r)
 			reverse(files);
 	}
-	//printf("%p\n", files);
-	////////
-	//{
-	//	t_file *tmp = *files;
-	//	while (tmp)
-	//	{
-	//		//printf("%s ", tmp->name);
-	//		tmp = tmp->next;
-	//	}
-	//		//printf("\n");
-	//}
-
-	//{
-	//	t_file *tmp = (*files)->files_inside;
-	//	while (tmp)
-	//	{
-	//		//printf("%s ", tmp->name);
-	//		printf("%s | %ld\n", tmp->name, tmp->time);
-	//		tmp = tmp->next;
-	//	}
-	//		//printf("\n");
-	//}
-	//printf("%p\n", *files);
-	//printf("%s ", (*files)->name);
-	//printf("}\n");
 }
