@@ -19,14 +19,13 @@ static void 	print_one(t_file *files, const t_flags *flags, const t_conf *conf)
 		{
 //			print_directory_v2(files->files_inside, flags, conf);
 			print_directory(files->files_inside, flags, conf);
-			ft_putchar('\n');///delete me
-
 		}
 		else
 		{
 			print_file(files, flags, true, conf);
-			ft_putchar('\n');//delete me
 		}
+		if (files->next)
+			printf("\n");
 		print_one(files->next, flags, conf); //zalupa here
 	}
 }
