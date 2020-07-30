@@ -107,6 +107,6 @@ void		sort(const t_flags *flags, t_file **files)
 		if (!flags->f)
 			merge_sort(true, false, files);
 		if (flags->little_r)
-			reverse(files);
+			*files = reverse(files);
 	}
 }
