@@ -14,7 +14,8 @@ void	reverse(t_file **files)
 	prev = NULL;
 	while (current)
 	{
-		reverse(&(*files)->files_inside);
+		if ((*files)->files_inside)
+			reverse(&(*files)->files_inside);
 		next = current->next;
 		current->next = prev;
 		prev = current;
