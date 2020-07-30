@@ -5,14 +5,14 @@ set(CMAKE_C_STANDARD 11)
 #add_compile_options(-g -Wall -Wextra -Werror)
 
 include_directories(includes)
-include_directories(includes/output)
+include_directories(includes/print)
 include_directories(includes/parser)
 include_directories(includes/utils)
 include_directories(includes/sort)
 include_directories(libft)
 
 add_executable(ft_ls
-        includes/output/output.h
+        includes/print/print.h
         includes/parser/parser.h
         includes/utils/utils.h
         includes/types.h
@@ -85,14 +85,14 @@ add_executable(ft_ls
         libft/get_next_line.h
         libft/libft.h
 
-        sources/output/output.c
-        sources/output/print_file.c
-        sources/output/print_directory.c
-        sources/output/print_all_things.c
-        sources/output/print_all_info.c
-        sources/output/print_column.c
-        sources/output/color.c
-        sources/output/usages.c
+        sources/print/print.c
+        sources/print/print_file.c
+        sources/print/print_directory.c
+        sources/print/print_all_things.c
+        sources/print/print_all_info.c
+        sources/print/print_column.c
+        sources/print/color.c
+        sources/print/usages.c
 
         sources/parser/parser.c
         sources/parser/read_flags.c

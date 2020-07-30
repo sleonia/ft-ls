@@ -12,7 +12,7 @@
 **	
 */
 
-void		sort(const t_flags *flags, t_file *files);
+void		sort(const t_flags *flags, t_file **files);
 void		reverse(t_file **files);
 
 #endif

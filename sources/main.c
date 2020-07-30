@@ -1,7 +1,7 @@
 #include "types.h"
 #include "utils/utils.h"
 #include "parser/parser.h"
-#include "output/output.h"
+#include "print/print.h"
 #include "sort/sort.h"
 
 /*!
@@ -28,7 +28,11 @@ int		main(int ac, char **av)
 		return (1);
 	if (!(conf = parser((const char **)av, files, flags, ac)))
 		return (1);
-	sort((const t_flags*)flags, files);
+	sort((const t_flags*)flags, &files);
+	printf("_____\n");
+	//printf("%s\n", files->name);
+	//printf("%s\n", files->next->name);
+	//printf("%p\n", files);
 	print((const t_flags*)flags, (const t_file*)files, (const t_conf*)conf);
 	return (0);
 }

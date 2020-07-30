@@ -7,7 +7,7 @@
 ** \brief
 */
 
-/*
+///*
 static void	front_back_split(t_file *head, t_file **left, t_file **right)
 {
 	t_file *slow;
@@ -38,6 +38,7 @@ static t_file	*sorted_merge_by_time(t_file *left, t_file *right)
 		return (right);
 	if (!right)
 		return (left);
+	
 	if (left->time > right->time)
 	{
 		res = left;
@@ -85,8 +86,6 @@ void	merge_sort(bool is_ascii, bool is_time, t_file **head)
 	t_file *right;
 
 	tmp = *head;
-	left = NULL;
-	right = NULL;
 	if (!tmp || !tmp->next)
 		return ;
 	front_back_split(tmp, &left, &right);
@@ -98,7 +97,7 @@ void	merge_sort(bool is_ascii, bool is_time, t_file **head)
 		*head = sorted_merge_by_time(left, right);
 }
 
-*/
+//*/
 
 /* TEST */
 
@@ -135,9 +134,10 @@ void sortedInsert(t_file** head_ref, t_file* new_node)
         new_node->next = *head_ref;
         *head_ref = new_node;
     }
-    //else if (*head_ref == NULL || (*head_ref)->time == new_node->time && ft_strcmp(new_node->name, (*head_ref)->name) > 0) {
-
-	//}
+    else if (*head_ref == NULL || ((*head_ref)->time == new_node->time && strcmp(new_node->name, (*head_ref)->name) > 0)) {
+        new_node->next = *head_ref;
+        *head_ref = new_node;
+	}
 	else
     {
         current = *head_ref; 
@@ -151,37 +151,48 @@ void sortedInsert(t_file** head_ref, t_file* new_node)
     } 
 } 
 
-void		sort(const t_flags *flags, t_file *files)
+void		sort(const t_flags *flags, t_file **files)
 {
-		/*
+	//printf("%p\n", files);
 	if (flags->t)
 	{
-		merge_sort(false, flags->t, &(files));
-		merge_sort(false, flags->t, &(files->files_inside));
+		merge_sort(false, true, files);
+		merge_sort(false, true, &(*files)->files_inside);
 	}
-
 	else
 	{
 		if (!flags->f)
 		{
-			merge_sort(true, false, &(files));
-			merge_sort(true, false, &(files->files_inside));
+			merge_sort(true, false, files);
+			merge_sort(true, false, &(*files)->files_inside);
 		}
 
 		if (flags->little_r)
-			reverse(&files);
+			reverse(files);
 	}
-	*/
-	//bubble_sort(false, true, &files);
-	//bubble_sort(false, true, &(files->files_inside));
-	insertionSort(&files);
-	{
-		t_file *tmp = files;
-		while (tmp)
-		{
-			printf("%s ", tmp->name);
-			tmp = tmp->next;
-		}
-			printf("\n");
-	}
+	//printf("%p\n", files);
+	////////
+	//{
+	//	t_file *tmp = *files;
+	//	while (tmp)
+	//	{
+	//		//printf("%s ", tmp->name);
+	//		tmp = tmp->next;
+	//	}
+	//		//printf("\n");
+	//}
+
+	//{
+	//	t_file *tmp = (*files)->files_inside;
+	//	while (tmp)
+	//	{
+	//		//printf("%s ", tmp->name);
+	//		printf("%s | %ld\n", tmp->name, tmp->time);
+	//		tmp = tmp->next;
+	//	}
+	//		//printf("\n");
+	//}
+	//printf("%p\n", *files);
+	//printf("%s ", (*files)->name);
+	//printf("}\n");
 }
