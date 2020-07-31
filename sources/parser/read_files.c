@@ -92,8 +92,8 @@ void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 	ft_memset(&stat_, 0, sizeof(struct stat));
 	if (stat(file->full_path, &stat_) < 0)
 	{
-		//printf ("%s\n", file->name);
-		errno_exit();
+		printf("ft_ls: %s: %s\n", file->name, strerror(errno)); //./ft_ls /dev/null/
+		return ;
 	}
 	file->stat = stat_;
 	if (flags->t || flags->little_r)
@@ -104,18 +104,6 @@ void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 	else
 		fill_non_directory(file, name);
 }
-
-/*
- * PARSE THIS LOL
- */
-static bool has_args(char **args, int ac/*or whatever else is needed maybe flags i don't know*/)
-{
-	////this checks if we have specified files given as args
-	////return true if we do
-	////return false if we should read from "./"
-	return (true);
-}
-
 
 t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
 {

@@ -13,8 +13,7 @@ static bool		several_args(const t_file *files) //zalupa
 
 static void 	print_one(t_file *files, const t_flags *flags, const t_conf *conf)
 {
-	if (files && files->files_inside) {
-
+	if (files) {
 		if (S_ISDIR(files->stat.st_mode))
 		{
 //			print_directory_v2(files->files_inside, flags, conf);
@@ -26,7 +25,7 @@ static void 	print_one(t_file *files, const t_flags *flags, const t_conf *conf)
 		}
 		if (files->next)
 			printf("\n");
-		print_one(files->next, flags, conf); //zalupa here
+		print_one(files->next, flags, conf);
 	}
 }
 
@@ -64,10 +63,7 @@ static void 	print_things(const t_flags *flags, const t_file *files, const t_con
 	if (several_args(files))
 		print_many(files, flags, conf);
 	else {
-		//printf("A\n");
-		//printf("%s\n", files->name);
-		//printf("%s\n", files->next->name);
-		print_one((t_file *)files, flags, conf); //zalupa here
+		print_one((t_file *)files, flags, conf);
 	}
 }
 
