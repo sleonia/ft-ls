@@ -17,9 +17,10 @@ static bool should_print(t_flags *flags, t_file *file)
 				if (!flags->a && !file->no_ignore)
 					return (false);
 			}
+			return (true);
 		}
 	}
-	return (true);
+	return (false);
 }
 
 void 		errno_exit(void)
