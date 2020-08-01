@@ -35,15 +35,12 @@ void 		print_all_things(const t_file *file, const t_flags *flags, const t_conf *
 	t_file *counter;
 
 	counter = file->files_inside;
-	if (file->is_directory)
-		print_directory(counter, flags, conf);
-	else
-		print_file(file, flags, false, conf);
+	print_directory(counter, flags, conf);
 	while (counter)
 	{
 		if (should_print(flags, counter) && counter->is_directory)
 		{
-			printf("%s:\n", counter->full_path);///////плюс двоеточие
+			printf("%s:\n", counter->full_path);
 			print_all_things(counter, flags, conf);
 		}
 

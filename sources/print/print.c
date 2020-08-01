@@ -70,15 +70,24 @@ static void 	print_things(const t_flags *flags, const t_file *files, const t_con
 void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
 {
 	t_file* tmp = (t_file *)files;
+	bool	many_args;
 
+	many_args = tmp->next ? true : false;
 	if (flags->big_r)
 	{
 		while (tmp)
 		{
 			if (tmp->is_directory)
+			{
+				if (many_args)
+					printf("%s:\n", tmp->name);
 				print_all_things(tmp, flags, conf);
+			}
 			else
+			{
 				print_file(tmp, flags, tmp->next ? true : false, conf);
+				printf("\n");
+			}
 			tmp = tmp->next;
 		}
 
