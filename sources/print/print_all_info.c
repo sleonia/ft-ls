@@ -38,7 +38,7 @@ static void		print_time(const time_t *time)
 	i = 6;
 	while (++i < 12)
 		buffer[i] = line_time[i];
-	printf("%s ", buffer);
+	ft_printf("%s ", buffer);
 }
 
 static void		print_rights(const mode_t mode)
@@ -56,7 +56,7 @@ static void		print_rights(const mode_t mode)
 	rights[8] = (mode & S_IWOTH) ? 'w' : '-';
 	rights[9] = (mode & S_IXOTH) ? 'x' : '-';
 	rights[10] = 0;
-	ft_printf("%s ", rights);//printf
+	ft_printf("%s ", rights);
 }
 
 void			print_all_info(const struct stat *stat_, const t_conf *conf,
@@ -66,9 +66,9 @@ void			print_all_info(const struct stat *stat_, const t_conf *conf,
 	ft_printf("%*d ", conf->links_len + 1, stat_->st_nlink);
 	if (!is_flag_g)
 		ft_printf("%-*s ", conf->creator_len + 1, (getpwuid(stat_->st_uid))->pw_name);
-	printf("%-*s ", conf->group_len, getgrgid(stat_->st_gid)->gr_name);//printf
-	printf("%*lld ", conf->size_len + 1, stat_->st_size);//printf
+	ft_printf("%-*s ", conf->group_len, getgrgid(stat_->st_gid)->gr_name);
+	ft_printf("%*lld ", conf->size_len + 1, stat_->st_size);
 	print_time(&stat_->st_mtime);
 	print_with_color(stat_, name);
-	printf("\n");
+	ft_printf("\n");
 }

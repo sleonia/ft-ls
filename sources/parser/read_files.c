@@ -91,7 +91,7 @@ void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 	ft_memset(&stat_, 0, sizeof(struct stat));
 	if (stat(file->full_path, &stat_) < 0)
 	{
-		printf("ft_ls: %s: %s\n", file->name, strerror(errno));
+		ft_printf("ft_ls: %s: %s\n", file->name, strerror(errno));
 		file->is_error = true;
 		return ;
 	}

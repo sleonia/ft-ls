@@ -42,7 +42,7 @@ void 		print_all_things(const t_file *file, const t_flags *flags, const t_conf *
 	{
 		if (should_print(flags, counter) && counter->is_directory)
 		{
-			printf("%s:\n", counter->full_path);
+			ft_printf("%s:\n", counter->full_path);
 			print_all_things(counter, flags, conf);
 		}
 

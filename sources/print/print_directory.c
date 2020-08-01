@@ -91,13 +91,13 @@ void print_directory_v2(t_file *file, t_flags *flags, t_conf *conf)
 			if (should_print(counter, flags))
 			{
 				print_file((const t_file*)counter, flags, true, conf);
-				printf("\t");
+				ft_printf("\t");
 				counter_4_curr_file++;
 				files_printed++;
 				if (counter_4_curr_file == files_per_line)
 				{
 					counter_4_curr_file = 0;
-					printf("\n");////ft_printf!!!
+					ft_printf("\n");////ft_printf!!!
 				}
 			}
 		}
@@ -112,7 +112,7 @@ void 		print_directory(const t_file *file,
 
 	tmp = (t_file *)file;
 	if (flags->l || flags->g)
-		printf("total: %d\n", conf->total);////printf
+		ft_printf("total: %d\n", conf->total);////ft_printf
 	while(tmp)
 	{
 		if (should_print(tmp, flags))
@@ -126,5 +126,5 @@ void 		print_directory(const t_file *file,
 		tmp = tmp->next;
 	}
 	if (!flags->l && !flags->g)
-		printf("\n");
+		ft_printf("\n");
 }
