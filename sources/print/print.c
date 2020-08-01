@@ -72,7 +72,18 @@ void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
 	t_file* tmp = (t_file *)files;
 
 	if (flags->big_r)
-		print_all_things(files, flags, conf);
+	{
+		while (tmp)
+		{
+			if (tmp->is_directory)
+				print_all_things(tmp, flags, conf);
+			else
+				print_file(tmp, flags, tmp->next ? true : false, conf);
+			tmp = tmp->next;
+		}
+
+	}
+
 	else
 		print_things(flags, files, conf);
 	print_column(NULL, NULL, NULL, conf);
