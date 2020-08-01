@@ -36,7 +36,7 @@ static void 	print_many(const t_file *files, const t_flags *flags, const t_conf 
 	counter = (t_file *)files;
 	while (counter)
 	{
-		if (!(S_ISDIR(counter->stat.st_mode)))
+		if (!(S_ISDIR(counter->stat.st_mode)) && !counter->is_error)
 			print_file(counter, flags, true, conf);
 		counter = counter->next;
 	}
@@ -44,7 +44,7 @@ static void 	print_many(const t_file *files, const t_flags *flags, const t_conf 
 	counter = (t_file *)files;
 	while (counter)
 	{
-		if (counter->files_inside)
+		if (counter->files_inside && !counter->is_error)
 		{
 			printf("%s:\n", counter->name);
 			print_directory(counter->files_inside, flags, conf);
@@ -62,9 +62,11 @@ static void 	print_things(const t_flags *flags, const t_file *files, const t_con
 
 	if (several_args(files))
 		print_many(files, flags, conf);
-	else {
-		print_one((t_file *)files, flags, conf);
-	}
+	else
+		{
+			if (!files->is_error)
+				print_one((t_file *)files, flags, conf);
+		}
 }
 
 void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
@@ -77,13 +79,13 @@ void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
 	{
 		while (tmp)
 		{
-			if (tmp->is_directory)
+			if (tmp->is_directory && !tmp->is_error)
 			{
 				if (many_args)
 					printf("%s:\n", tmp->name);
 				print_all_things(tmp, flags, conf);
 			}
-			else
+			else if (!tmp->is_directory && !tmp->is_error)
 			{
 				print_file(tmp, flags, tmp->next ? true : false, conf);
 				printf("\n");

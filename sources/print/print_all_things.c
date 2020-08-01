@@ -10,14 +10,17 @@ static bool should_print(t_flags *flags, t_file *file)
 {
 	if (file)
 	{
-		if (file->name)
+		if (!file->is_error)
 		{
-			if (file->name[0] == '.')
+			if (file->name)
 			{
-				if (!flags->a && !file->no_ignore)
-					return (false);
+				if (file->name[0] == '.')
+				{
+					if (!flags->a && !file->no_ignore)
+						return (false);
+				}
+				return (true);
 			}
-			return (true);
 		}
 	}
 	return (false);
