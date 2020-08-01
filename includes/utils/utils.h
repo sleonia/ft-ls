@@ -2,6 +2,7 @@
 # define UTILS_H
 
 #include "types.h"
+#include "ft_printf.h"
 
 /*!
 ** \file

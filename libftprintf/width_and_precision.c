@@ -17,6 +17,7 @@ void		determine_width(const char *str, t_struct *f)
 	int i;
 
 	i = 0;
+
 	while (*str >= '0' && *str <= '9')
 	{
 		i++;

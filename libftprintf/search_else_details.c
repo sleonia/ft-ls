@@ -52,6 +52,8 @@ void			expanded_specifier(char c, t_struct *f)
 
 void			search_else_details(const char *s, t_struct *f, va_list ap)
 {
+	if (f->start && ft_strchr(s, '*') && !f->width)
+		f->width = va_arg(ap, int);
 	if (f->start && ft_strchr("+- 0#", s[f->i]))
 		flags(f, s[f->i]);
 	else if (f->start && ft_strchr("123456789", s[f->i]))
@@ -62,6 +64,7 @@ void			search_else_details(const char *s, t_struct *f, va_list ap)
 		expanded_specifier(s[f->i], f);
 	else if (f->start && ft_strchr("cspfdiouxXCbrfDOU", s[f->i]))
 		specifier(s[f->i], f, ap);
-	else if (s[f->i] != '%')
+	else if (s[f->i] != '%' && s[f->i] != '*')
 		f->len += write(f->fd, &(s[f->i]), 1);
+
 }

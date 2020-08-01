@@ -29,6 +29,7 @@ t_struct		*zeroing(t_struct *f)
 	f->init_h = 0;
 	f->int_bl = 0;
 	f->no_presicion = 0;
+	f->star = 0;
 	return (f);
 }
 

@@ -14,7 +14,7 @@
 
 void	ft_print_s(t_struct *f, va_list ap)
 {
-	const char	*s;
+	char	*s;
 	int			len_s;
 
 	s = va_arg(ap, char*);

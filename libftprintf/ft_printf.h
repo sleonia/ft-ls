@@ -50,6 +50,7 @@ typedef struct	s_struct
 	int			no_presicion;
 	int			int_bl;
 	int			was_presicion;
+	int 		star;
 }				t_struct;
 
 int				ft_printf(const char *str, ...);
