@@ -6,6 +6,22 @@
 ** \brief
 */
 
+static bool should_print(t_flags *flags, t_file *file)
+{
+	if (file)
+	{
+		if (file->name)
+		{
+			if (file->name[0] == '.')
+			{
+				if (!flags->a && !file->no_ignore)
+					return (false);
+			}
+		}
+	}
+	return (true);
+}
+
 void 		errno_exit(void)
 {
 	perror(strerror(errno));
@@ -21,7 +37,7 @@ void 		print_all_things(const t_file *file, const t_flags *flags, const t_conf *
 	print_directory(counter, flags, conf);
 	while (counter)
 	{
-		if (!ft_strequ(counter->name, ".") && !ft_strequ(counter->name, "..") && counter->is_directory)
+		if (should_print(flags, counter) && counter->is_directory)
 		{
 			printf("%s\n", counter->full_path);///////плюс двоеточие
 			print_all_things(counter, flags, conf);
