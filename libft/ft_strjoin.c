@@ -28,9 +28,7 @@ char			*ft_strjoin(char const *s1, char const *s2)
 	if (!s1 || !s2)
 		return (NULL);
 	len = slen(s1, s2) + 1;
-	result = (char*)malloc((len) * sizeof(char));
-	if (result == NULL)
-		return (NULL);
+	result = (char*)ft_memalloc((len) * sizeof(char));
 	while (*s1)
 	{
 		*result = *s1;

@@ -6,7 +6,7 @@
 ** \brief
 */
 
-static bool should_print(t_flags *flags, t_file *file)
+static bool should_print(const t_flags *flags, t_file *file)
 {
 	if (file)
 	{

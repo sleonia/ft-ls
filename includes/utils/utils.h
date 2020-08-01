@@ -16,6 +16,7 @@ t_flags		*init_flags(void);
 t_file 		*init_file(void);
 t_file		*new_file(t_file *prev);
 t_conf		*new_conf(void);
+
 char 		*build_path(t_file *file);
 char 		*build_path_for_arg(const char *name);
 

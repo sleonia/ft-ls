@@ -24,7 +24,10 @@ char	*ft_strdup(const char *src)
 	}
 	res = (char*)malloc(sizeof(char) * i + 1);
 	if (res == NULL)
-		return (NULL);
+	{
+		ft_putendl(strerror(errno));
+		exit(0);
+	}
 	i = 0;
 	while (src[i] != '\0')
 	{

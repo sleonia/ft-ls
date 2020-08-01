@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
+#include <errno.h>
 # include "get_next_line.h"
 
 typedef	struct		s_list
