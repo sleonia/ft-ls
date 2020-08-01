@@ -2,109 +2,130 @@ cmake_minimum_required(VERSION 3.16)
 project(ft_ls C)
 
 set(CMAKE_C_STANDARD 11)
-#add_compile_options(-g -Wall -Wextra -Werror)
 
 include_directories(includes)
-include_directories(includes/print)
 include_directories(includes/parser)
-include_directories(includes/utils)
+include_directories(includes/print)
 include_directories(includes/sort)
-include_directories(libft)
+include_directories(includes/utils)
+include_directories(libftprintf)
+include_directories(libftprintf/libft)
 
 add_executable(ft_ls
-        includes/print/print.h
         includes/parser/parser.h
+        includes/print/print.h
+        includes/sort/sort.h
         includes/utils/utils.h
         includes/types.h
-        libft/ft_atoi.c
-        libft/ft_bzero.c
-        libft/ft_delarr.c
-        libft/ft_isalnum.c
-        libft/ft_isalpha.c
-        libft/ft_isascii.c
-        libft/ft_isdigit.c
-        libft/ft_isprint.c
-        libft/ft_itoa.c
-        libft/ft_listlast.c
-        libft/ft_lstadd.c
-        libft/ft_lstcount.c
-        libft/ft_lstdel.c
-        libft/ft_lstdelcont.c
-        libft/ft_lstdelone.c
-        libft/ft_lstfind.c
-        libft/ft_lstiter.c
-        libft/ft_lstmap.c
-        libft/ft_lstnew.c
-        libft/ft_memalloc.c
-        libft/ft_memccpy.c
-        libft/ft_memchr.c
-        libft/ft_memcmp.c
-        libft/ft_memcpy.c
-        libft/ft_memdel.c
-        libft/ft_memmove.c
-        libft/ft_memset.c
-        libft/ft_power.c
-        libft/ft_putchar.c
-        libft/ft_putchar_fd.c
-        libft/ft_putendl.c
-        libft/ft_putendl_fd.c
-        libft/ft_putnbr.c
-        libft/ft_putnbr_fd.c
-        libft/ft_putstr.c
-        libft/ft_putstr_fd.c
-        libft/ft_strcat.c
-        libft/ft_strchr.c
-        libft/ft_strclr.c
-        libft/ft_strcmp.c
-        libft/ft_strcpy.c
-        libft/ft_strdel.c
-        libft/ft_strdup.c
-        libft/ft_strequ.c
-        libft/ft_striter.c
-        libft/ft_striteri.c
-        libft/ft_strjoin.c
-        libft/ft_strlcat.c
-        libft/ft_strlen.c
-        libft/ft_strmap.c
-        libft/ft_strmapi.c
-        libft/ft_strncat.c
-        libft/ft_strncmp.c
-        libft/ft_strncpy.c
-        libft/ft_strnequ.c
-        libft/ft_strnew.c
-        libft/ft_strnstr.c
-        libft/ft_strrchr.c
-        libft/ft_strsplit.c
-        libft/ft_strstr.c
-        libft/ft_strsub.c
-        libft/ft_strtrim.c
-        libft/ft_swap.c
-        libft/ft_tolower.c
-        libft/ft_toupper.c
-        libft/get_next_line.c
-        libft/get_next_line.h
-        libft/libft.h
-
-        sources/print/print.c
-        sources/print/print_file.c
-        sources/print/print_directory.c
-        sources/print/print_all_things.c
-        sources/print/print_all_info.c
-        sources/print/print_column.c
-        sources/print/color.c
-        sources/print/usages.c
-
+        libftprintf/libft/ft_atoi.c
+        libftprintf/libft/ft_bzero.c
+        libftprintf/libft/ft_delarr.c
+        libftprintf/libft/ft_isalnum.c
+        libftprintf/libft/ft_isalpha.c
+        libftprintf/libft/ft_isascii.c
+        libftprintf/libft/ft_isdigit.c
+        libftprintf/libft/ft_isprint.c
+        libftprintf/libft/ft_itoa.c
+        libftprintf/libft/ft_listlast.c
+        libftprintf/libft/ft_lstadd.c
+        libftprintf/libft/ft_lstcount.c
+        libftprintf/libft/ft_lstdel.c
+        libftprintf/libft/ft_lstdelcont.c
+        libftprintf/libft/ft_lstdelone.c
+        libftprintf/libft/ft_lstfind.c
+        libftprintf/libft/ft_lstiter.c
+        libftprintf/libft/ft_lstmap.c
+        libftprintf/libft/ft_lstnew.c
+        libftprintf/libft/ft_memalloc.c
+        libftprintf/libft/ft_memccpy.c
+        libftprintf/libft/ft_memchr.c
+        libftprintf/libft/ft_memcmp.c
+        libftprintf/libft/ft_memcpy.c
+        libftprintf/libft/ft_memdel.c
+        libftprintf/libft/ft_memmove.c
+        libftprintf/libft/ft_memset.c
+        libftprintf/libft/ft_power.c
+        libftprintf/libft/ft_putchar.c
+        libftprintf/libft/ft_putchar_fd.c
+        libftprintf/libft/ft_putendl.c
+        libftprintf/libft/ft_putendl_fd.c
+        libftprintf/libft/ft_putnbr.c
+        libftprintf/libft/ft_putnbr_fd.c
+        libftprintf/libft/ft_putstr.c
+        libftprintf/libft/ft_putstr_fd.c
+        libftprintf/libft/ft_strcat.c
+        libftprintf/libft/ft_strchr.c
+        libftprintf/libft/ft_strclr.c
+        libftprintf/libft/ft_strcmp.c
+        libftprintf/libft/ft_strcpy.c
+        libftprintf/libft/ft_strdel.c
+        libftprintf/libft/ft_strdup.c
+        libftprintf/libft/ft_strequ.c
+        libftprintf/libft/ft_striter.c
+        libftprintf/libft/ft_striteri.c
+        libftprintf/libft/ft_strjoin.c
+        libftprintf/libft/ft_strlcat.c
+        libftprintf/libft/ft_strlen.c
+        libftprintf/libft/ft_strmap.c
+        libftprintf/libft/ft_strmapi.c
+        libftprintf/libft/ft_strncat.c
+        libftprintf/libft/ft_strncmp.c
+        libftprintf/libft/ft_strncpy.c
+        libftprintf/libft/ft_strnequ.c
+        libftprintf/libft/ft_strnew.c
+        libftprintf/libft/ft_strnstr.c
+        libftprintf/libft/ft_strrchr.c
+        libftprintf/libft/ft_strsplit.c
+        libftprintf/libft/ft_strstr.c
+        libftprintf/libft/ft_strsub.c
+        libftprintf/libft/ft_strtrim.c
+        libftprintf/libft/ft_swap.c
+        libftprintf/libft/ft_tolower.c
+        libftprintf/libft/ft_toupper.c
+        libftprintf/libft/get_next_line.c
+        libftprintf/libft/get_next_line.h
+        libftprintf/libft/libft.h
+        libftprintf/additional.c
+        libftprintf/expanded_allocation.c
+        libftprintf/ft_itoa_base.c
+        libftprintf/ft_print_bf.c
+        libftprintf/ft_print_f.c
+        libftprintf/ft_printf.c
+        libftprintf/ft_printf.h
+        libftprintf/itoa_2.c
+        libftprintf/print_address.c
+        libftprintf/print_binary.c
+        libftprintf/print_colour.c
+        libftprintf/print_decimal_width.c
+        libftprintf/print_long.c
+        libftprintf/print_long_long.c
+        libftprintf/print_nondecimal_width.c
+        libftprintf/print_nums.c
+        libftprintf/print_oct_hex.c
+        libftprintf/print_r.c
+        libftprintf/print_short.c
+        libftprintf/print_short_short.c
+        libftprintf/print_text.c
+        libftprintf/print_unsigned_width.c
+        libftprintf/search_details.c
+        libftprintf/search_else_details.c
+        libftprintf/width_and_precision.c
         sources/parser/parser.c
-        sources/parser/read_flags.c
         sources/parser/read_files.c
+        sources/parser/read_flags.c
         sources/parser/validate_flags.c
-
-        sources/utils/utils.c
-        sources/utils/build_path.c
-        sources/utils/free.c
-        sources/utils/config.c
-
-        sources/sort/sort.c
+        sources/print/color.c
+        sources/print/print.c
+        sources/print/print_all_info.c
+        sources/print/print_all_things.c
+        sources/print/print_column.c
+        sources/print/print_directory.c
+        sources/print/print_file.c
+        sources/print/usages.c
         sources/sort/reverse.c
-
+        sources/sort/sort.c
+        sources/utils/build_path.c
+        sources/utils/config.c
+        sources/utils/free.c
+        sources/utils/utils.c
         sources/main.c)

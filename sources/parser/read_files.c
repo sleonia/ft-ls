@@ -13,8 +13,7 @@ static bool	directory_to_ignore(t_file *file, t_flags *flags)
 	t_file *depth_counter;
 
 	depth = 0;
-	//if ((ft_strequ(file->name, ".") || ft_strequ(file->name, ".."))
-	if (file->name[0] == '.' && !file->no_ignore)//////maybe something else will be added
+	if (file->name[0] == '.' && !file->no_ignore)
 		return (!(file->no_ignore = false));
 	if (!flags->big_r)
 	{
@@ -38,7 +37,7 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 
 	file_counter = NULL;
 	done = false;
-	file_counter = new_file(file_counter);///protect
+	file_counter = new_file(file_counter);
 	file->files_inside = file_counter;
 	file_counter->origin = file;
 	while(!done)
@@ -46,7 +45,7 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 		if (!(file_counter->dirent = readdir(file->fd)))
 		{
 			done = true;
-			break;////check leak, empty entry created?
+			break;
 		}
 		fill_file(file_counter->dirent->d_name, file_counter, flags, conf);
 		sleonia_i_tut_slomal = file_counter;
@@ -57,7 +56,7 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 	{
 		sleonia_i_tut_slomal->next = NULL;
 		free(file_counter);
-		file_counter = NULL;///this is nice but not NECESSARY
+		file_counter = NULL;
 	}
 }
 
@@ -65,7 +64,7 @@ static void fill_directory(t_file *file, const char *name, t_flags *flags, t_con
 {
 	t_file 			*file_counter;
 
-	file_counter = file;///might be useless but let it stay for now for segv-safety reasons
+	file_counter = file;
 	file_counter->is_directory = true;
 	file_counter->fd = opendir(name);
 	if (!directory_to_ignore(file_counter, flags))
@@ -86,7 +85,7 @@ void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 	struct stat	stat_;
 
 	if (!file->name)
-		file->name = ft_strdup(name);////protect me and do a ft_strdup unless you make sure you don't lose the pointer, caught a segv here with previous version
+		file->name = ft_strdup(name);
 	if (!file->full_path)
 		file->full_path = build_path(file);
 	ft_memset(&stat_, 0, sizeof(struct stat));
@@ -122,7 +121,7 @@ t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
 	}
 	else
 	{
-		if (flags->no_flags) //maybe del this
+		if (flags->no_flags)
 			index = 0;
 		while (args[++index])
 		{
@@ -130,9 +129,7 @@ t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
 			tmp->full_path = build_path_for_arg(args[index]);
 			fill_file(args[index], tmp, flags, conf);
 			sleonia_vse_polomal = tmp;
-			tmp = new_file(tmp);//////don't forget to clean this shit in case we have one arg, unix-trigger boyz won't get us this easy!
-//			tmp = tmp->next;
-//			index++;
+			tmp = new_file(tmp);
 		}
 		if (!tmp->name)
 		{

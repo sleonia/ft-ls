@@ -25,10 +25,11 @@ int		main(int ac, char **av)
 	if (!(flags = init_flags()))
 		return (1);
 	if (!(files = init_file()))
-		return (1);
+		return (free_all(NULL, NULL, flags));
 	if (!(conf = parser((const char **)av, files, flags, ac)))
-		return (1);
+		return (free_all(files, NULL, flags));
 	sort((const t_flags*)flags, &files);
 	print((const t_flags*)flags, (const t_file*)files, (const t_conf*)conf);
+	free_all(files, conf, flags);
 	return (0);
 }

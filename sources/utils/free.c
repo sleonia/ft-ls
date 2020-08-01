@@ -18,7 +18,7 @@ static void free_file(t_file *file)
 	file = NULL;
 }
 
-void free_all(t_file *files, t_conf *conf, t_flags *flags)
+int free_all(t_file *files, t_conf *conf, t_flags *flags)
 {
 
 	if (conf)
@@ -26,5 +26,6 @@ void free_all(t_file *files, t_conf *conf, t_flags *flags)
 	if (flags)
 		free(flags);
 	free_file(files);
-	exit(0);
+//	exit(0);
+	return (0);
 }

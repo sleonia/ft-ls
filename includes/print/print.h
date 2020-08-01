@@ -1,7 +1,7 @@
 #ifndef OUTPUT_H
 # define OUTPUT_H
 
-#include "libft.h"
+#include "ft_printf.h"
 #include "types.h"
 #include <errno.h>
 

@@ -34,7 +34,6 @@ void 		errno_exit(void)
 
 void 		print_all_things(const t_file *file, const t_flags *flags, const t_conf *conf)
 {
-	//int 	num_dirs; //for what?
 	t_file *counter;
 
 	counter = file->files_inside;
