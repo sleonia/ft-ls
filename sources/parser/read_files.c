@@ -87,15 +87,17 @@ void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 	if (!file->full_path)
 		file->full_path = build_path(file);
 	ft_memset(&stat_, 0, sizeof(struct stat));
-	if (stat(file->full_path, &stat_) < 0)//////////////links????
+	if (stat(file->full_path, &stat_) < 0)
 	{
-		ft_printf("ft_ls: %s: %s\n", file->name, strerror(errno));
-		file->is_error = true;
-		return ;
+		if (lstat(file->full_path, &stat_) < 0)
+		{
+			ft_printf("ft_ls: %s: %s\n", file->name, strerror(errno));
+			file->is_error = true;
+			return ;
+		}
 	}
 	file->stat = stat_;
-	if (flags->t || flags->little_r)
-		file->time = stat_.st_mtime;
+	file->time = stat_.st_mtime;
 	take_config(name, &file->stat, conf);
 	file->type = get_type(stat_.st_mode);
 	if (file->type == Directory)
