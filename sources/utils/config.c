@@ -3,7 +3,7 @@
 #include <pwd.h>
 #include <grp.h>
 
-static int	nbrlen(long long nbr)
+int	nbrlen(long long nbr)
 {
 	int		i;
 

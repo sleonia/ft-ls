@@ -23,6 +23,7 @@ t_conf		*new_conf(void);
 char 		*build_path(t_file *file);
 char 		*build_path_for_arg(const char *name);
 
+int			nbrlen(long long nbr);
 void		take_config(const char *name, const struct stat *stat, t_conf *conf);
 
 int 		free_all(t_file *files, t_conf *conf, t_flags *flags);

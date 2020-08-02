@@ -121,6 +121,7 @@ add_executable(ft_ls
         sources/print/print_column.c
         sources/print/print_directory.c
         sources/print/print_link_value.c
+        sources/print/print_size.c
         sources/print/print_file.c
         sources/print/usages.c
         sources/sort/reverse.c
