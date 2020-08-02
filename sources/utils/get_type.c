@@ -3,8 +3,8 @@
 
 /*!
 ** \file
-** \brief Return type:
-**			- d c b s l ?
+** \brief Get type of file
+** \return	one of "-dcbsl?"
 */
 
 int			get_type(mode_t mode)

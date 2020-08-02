@@ -6,8 +6,8 @@
 
 /*!
 ** \file
-** \brief Main file
-**	How if works:
+** \brief Main file.
+** \details How if works:
 **		1. Init structs
 **		2. Parsing input agruments by flags
 **		3. Parsing input agruments by folders
