@@ -12,6 +12,20 @@
 #include <time.h>
 
 /*!
+*/
+
+typedef enum			e_types
+{
+	Regular,
+	Directory,
+	Character_device,
+	Block_device,
+	Socket,
+	Link,
+	Unknown
+}						t_types;
+
+/*!
 ** file:
 **     - file name
 **     - file descriptor
@@ -22,18 +36,18 @@
 **     - creation time
 */
 
-typedef struct			s_file////////maybe i should make it more readable, this shit has become too big to debug. lol kek some of my old projects are fucking crazy
+typedef struct			s_file
 {
 	char				*name;
 	char 				*full_path;
 	DIR					*fd;
-	bool				is_directory;
 	struct s_file		*files_inside;
 	struct s_file		*origin;////the directory containing this file, may be useful, will delete if not
 	struct s_file		*next;
 	time_t				time;
 	struct stat			stat;
 	struct dirent		*dirent;
+	t_types				type;
 	bool				no_ignore;
 	bool				is_error;
 	bool				done;

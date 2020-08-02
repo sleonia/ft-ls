@@ -1,4 +1,5 @@
 #include "print/print.h"
+#include "utils.h"
 #include "types.h"
 #include <pwd.h>
 #include <grp.h>
@@ -69,7 +70,7 @@ static void		print_rights(const mode_t mode, const char *name)
 	char		rights[12];
 
 	ft_memset(rights, 0, 12);
-	rights[0] = (S_ISDIR(mode)) ? 'd' : '-';
+	rights[0] = "-dcbspl?"[get_type(mode)];
 	rights[1] = (mode & S_IRUSR) ? 'r' : '-';
 	rights[2] = (mode & S_IWUSR) ? 'w' : '-';
 	rights[3] = (mode & S_IXUSR) ? 'x' : '-';

@@ -79,13 +79,13 @@ void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
 	{
 		while (tmp)
 		{
-			if (tmp->is_directory && !tmp->is_error)
+			if (tmp->type == Directory && !tmp->is_error)
 			{
 				if (many_args)
 					ft_printf("%s:\n", tmp->name);
 				print_all_things(tmp, flags, conf);
 			}
-			else if (!tmp->is_directory && !tmp->is_error)
+			else if (tmp->type != Directory && !tmp->is_error)
 			{
 				print_file(tmp, flags, tmp->next ? true : false, conf);
 				ft_printf("\n");

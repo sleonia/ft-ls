@@ -128,4 +128,5 @@ add_executable(ft_ls
         sources/utils/config.c
         sources/utils/free.c
         sources/utils/utils.c
+        sources/utils/get_type.c
         sources/main.c)

@@ -40,7 +40,7 @@ void 		print_all_things(const t_file *file, const t_flags *flags, const t_conf *
 	print_directory(counter, flags, conf);
 	while (counter)
 	{
-		if (should_print(flags, counter) && counter->is_directory)
+		if (should_print(flags, counter) && counter->type == Directory)
 		{
 			ft_printf("%s:\n", counter->full_path);
 			print_all_things(counter, flags, conf);

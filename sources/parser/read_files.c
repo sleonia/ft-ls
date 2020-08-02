@@ -4,7 +4,7 @@
 
 /*!
 ** \file
-** \brief //?
+** \brief
 */
 
 static bool	directory_to_ignore(t_file *file, t_flags *flags)
@@ -65,7 +65,6 @@ static void fill_directory(t_file *file, const char *name, t_flags *flags, t_con
 	t_file 			*file_counter;
 
 	file_counter = file;
-	file_counter->is_directory = true;
 	file_counter->fd = opendir(name);
 	if (!directory_to_ignore(file_counter, flags))
 		fill_files_inside_dir(file_counter, flags, conf);
@@ -77,7 +76,6 @@ static void fill_non_directory(t_file *file, const char *name)
 	t_file 	*file_counter;
 
 	file_counter = file;
-	file_counter->is_directory = false;
 }
 
 void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
@@ -89,7 +87,7 @@ void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 	if (!file->full_path)
 		file->full_path = build_path(file);
 	ft_memset(&stat_, 0, sizeof(struct stat));
-	if (stat(file->full_path, &stat_) < 0)
+	if (stat(file->full_path, &stat_) < 0)//////////////links????
 	{
 		ft_printf("ft_ls: %s: %s\n", file->name, strerror(errno));
 		file->is_error = true;
@@ -99,7 +97,8 @@ void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 	if (flags->t || flags->little_r)
 		file->time = stat_.st_mtime;
 	take_config(name, &file->stat, conf);
-	if (S_ISDIR(stat_.st_mode))
+	file->type = get_type(stat_.st_mode);
+	if (file->type == Directory)
 		fill_directory(file, file->full_path, flags, conf);
 	else
 		fill_non_directory(file, name);
