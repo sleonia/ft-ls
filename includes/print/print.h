@@ -21,8 +21,10 @@ void			print(const t_flags *flags, const t_file *files, const t_conf *conf);
 
 void			print_link_value(const char *name);
 
+void			print_size(const struct stat *stat_, unsigned size);
+
 /*test me*/
-void 	print_directory_v2(t_file *file, t_flags *flags, t_conf *conf);
+void 	print_directory_v2(t_file *file, t_flags *flags, t_conf *conf); ///////////////?
 
 /*!
 **	Colors

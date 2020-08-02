@@ -68,7 +68,7 @@ void			print_all_info(const struct stat *stat_, const t_conf *conf,
 	if (!is_flag_g)
 		ft_printf("%-*s ", conf->creator_len + 1, (getpwuid(stat_->st_uid))->pw_name);
 	ft_printf("%-*s ", conf->group_len, getgrgid(stat_->st_gid)->gr_name);
-	ft_printf("%*lld ", conf->size_len + 1, stat_->st_size);
+	print_size(stat_, conf->size_len + 1);
 	print_time(&stat_->st_mtime);
 	print_with_color(stat_, name);
 	if ((stat_->st_mode & S_IFMT) == S_IFLNK)
