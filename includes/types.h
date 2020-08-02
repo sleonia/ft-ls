@@ -12,6 +12,7 @@
 #include <time.h>
 
 /*!
+**	Types of files in unix
 */
 
 typedef enum			e_types
@@ -28,12 +29,16 @@ typedef enum			e_types
 /*!
 ** file:
 **     - file name
-**     - file descriptor
-**     - file type flag
-**     - folder inside is not NULL if is_folder == TRUE
-**     - pointer to next element
-**     - pointer to prev element
+**     - full path
+**     - files in dir
+**     - ?
+**     - pointer to next
 **     - creation time
+**     - readdir info
+**     - type of file
+**     - is ignor
+**     - is error
+**     - is done
 */
 
 typedef struct			s_file
@@ -89,6 +94,11 @@ typedef	struct			s_flags
 **		- total size
 **		- count of files
 **		- rights len
+**		- name of creator len
+**		- name of group len
+**		- len of size
+**		- name len
+**		- file serial number (inode number)
 */
 
 typedef	struct			s_conf

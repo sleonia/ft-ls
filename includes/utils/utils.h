@@ -8,7 +8,8 @@
 
 /*!
 ** \file
-** \brief Some utils:
+** \brief Some utils for project
+** \details utils:
 **	- create structs
 **	- build full path to a file
 **	- calculate length of nbr
