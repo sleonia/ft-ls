@@ -1,8 +1,6 @@
 #include "print/print.h"
 #include "utils.h"
 #include "types.h"
-#include <pwd.h>
-#include <grp.h>
 
 /*!
 **	What is info about file/link/folder?
