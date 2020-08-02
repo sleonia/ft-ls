@@ -1,5 +1,4 @@
 #include "utils/utils.h"
-#include "libft.h"
 
 /*!
 ** \file
@@ -21,7 +20,7 @@ char	*build_path(t_file *file)
 		{
 			buf = ft_strjoin("/", result);
 			ft_strdel(&result);
-			result = ft_strjoin(file_counter->origin->name, buf);
+			result = ft_strjoin(file_counter->origin->full_path, buf);///?
 			ft_strdel(&buf);
 			file_counter = file_counter->origin;
 		}
@@ -32,7 +31,15 @@ char	*build_path(t_file *file)
 char	*build_path_for_arg(const char *name)
 {
 	char *result;
+	char *strstr;
+	char *slash;
 
-	result = ft_strjoin("./", name);
+	if (name[0] == '/')
+		return (ft_strdup(name));
+	strstr = ft_strstr(name, "User");
+	if (!strstr)
+		result = ft_strjoin("./", name);
+	else
+		result = ft_strdup(name);
 	return (result);
 }
