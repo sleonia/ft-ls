@@ -114,7 +114,7 @@ add_executable(ft_ls
         sources/parser/read_files.c
         sources/parser/read_flags.c
         sources/parser/validate_flags.c
-        sources/print/color.c
+        sources/print/print_with_color.c
         sources/print/print.c
         sources/print/print_all_info.c
         sources/print/print_all_things.c

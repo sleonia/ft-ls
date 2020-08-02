@@ -97,5 +97,5 @@ void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
 
 	else
 		print_things(flags, files, conf);
-	print_column(NULL, NULL, NULL, conf);
+	print_column(files, flags, conf);
 }
