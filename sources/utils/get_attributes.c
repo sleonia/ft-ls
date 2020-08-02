@@ -2,6 +2,15 @@
 #include <sys/xattr.h>
 #include <sys/acl.h>
 
+/*!
+** \file
+** \brief Return attributes:
+**			@ or +
+**
+**	- drwxrwxr-x+
+**	- lrwxr-xr-x@
+*/
+
 char		get_attributes(const char *name)
 {
 	char		symb;

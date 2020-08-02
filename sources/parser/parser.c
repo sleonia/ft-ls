@@ -3,8 +3,8 @@
 
 /*!
 ** \file
-** \brief Main func of parser. Call parsing flags and files
-** \return t_conf* struct with config for output or NULL
+** \brief	Main func of parser. Call parsing flags and files.
+** \return	t_conf* struct with config for output or NULL
 */
 
 t_conf			*parser(const char **av, t_file *files, t_flags *flags, int ac)

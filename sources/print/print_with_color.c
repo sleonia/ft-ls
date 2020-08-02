@@ -3,7 +3,7 @@
 
 /*!
 ** \file
-** \brief Print name with color
+** \brief
 */
 
 void			print_with_color(const struct stat *stat_, const char *name)

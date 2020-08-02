@@ -2,7 +2,11 @@
 
 /*!
 ** \file
-** \brief
+** \brief Create full path
+**		Example of path:
+**			-	"~"
+**			-	"/"
+**			-	"/Users/sleonia/Desktop"
 */
 
 char	*build_path(t_file *file)

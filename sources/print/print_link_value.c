@@ -1,5 +1,12 @@
 #include "utils.h"
 
+/*!
+** \file
+** Example of link:
+**		Network -> /System/Volumes/Data/Network
+*/
+
+
 void	print_link_value(const char *name)
 {
 	int		size;

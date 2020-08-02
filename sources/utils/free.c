@@ -2,6 +2,11 @@
 #include "utils.h"
 #include "libft.h"
 
+/*!
+** \file
+** \brief
+*/
+
 static void free_file(t_file *file)
 {
 	if (!file)
@@ -20,7 +25,6 @@ static void free_file(t_file *file)
 
 int free_all(t_file *files, t_conf *conf, t_flags *flags)
 {
-
 	if (conf)
 		free(conf);
 	if (flags)

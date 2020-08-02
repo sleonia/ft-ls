@@ -4,7 +4,9 @@
 
 /*!
 ** \file
-** \brief
+** \brief Merge sort by:
+**			-	ascii
+**			-	time
 */
 
 static void	front_back_split(t_file *head, t_file **left, t_file **right)

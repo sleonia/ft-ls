@@ -51,7 +51,7 @@ static int count_files_per_col(t_file *files, t_conf *conf)
 	int amount_of_files;
 
 
-	cols = count_cols(files);
+	cols = count_cols(files); ///////////?????????
 	amount_of_files = count_files(files);
 	return (amount_of_files / cols);
 }
@@ -63,47 +63,6 @@ static bool should_print(t_file *file, const t_flags *flags)
 	return (true);
 }
 
-/*
- *
- * ATTENTION TEST BULLSHIT
- * PROCEED WITH CAUTION
- */
-
-void print_directory_v2(t_file *file, t_flags *flags, t_conf *conf)
-{
-	int counter_4_curr_file;
-	int files_per_column;
-	int files_amount;
-	int files_printed;
-	int files_per_line;
-	t_file *counter;
-
-	counter_4_curr_file = 0;
-	files_printed = 0;
-	files_amount = count_files(file);
-//	files_per_column = count_files_per_col(file, conf);
-	files_per_line = count_cols(file);
-	while (files_printed < files_amount)
-	{
-		counter = file;
-		if (!counter->done)
-		{
-			if (should_print(counter, flags))
-			{
-				print_file((const t_file*)counter, flags, true, conf);
-				ft_printf("\t");
-				counter_4_curr_file++;
-				files_printed++;
-				if (counter_4_curr_file == files_per_line)
-				{
-					counter_4_curr_file = 0;
-					ft_printf("\n");////ft_printf!!!
-				}
-			}
-		}
-	}
-}
-
 void 		print_directory(const t_file *file,
 				const t_flags *flags, const t_conf *conf)
 {
@@ -112,7 +71,7 @@ void 		print_directory(const t_file *file,
 
 	tmp = (t_file *)file;
 	if (flags->l || flags->g)
-		ft_printf("total: %d\n", conf->total);////ft_printf
+		ft_printf("total: %d\n", conf->total);
 	while(tmp)
 	{
 		if (should_print(tmp, flags))

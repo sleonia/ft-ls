@@ -34,7 +34,7 @@ static void collect_flags(t_flags *flags, const char arg)
 }
 
 /*!
-**	\return index in user input that equals folder or error flag
+**	\return Index in user input that equals folder or error flag
 */
 
 int		validate_flags(t_flags *flags, const char *arg)

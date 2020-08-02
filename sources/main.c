@@ -22,7 +22,7 @@ int		main(int ac, char **av)
 	t_file		*files;
 	t_conf		*conf;
 
-	if (!(flags = init_flags()))
+	if (!(flags = init_flags()));
 		return (1);
 	if (!(files = init_file()))
 		return (free_all(NULL, NULL, flags));

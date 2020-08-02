@@ -26,8 +26,8 @@ int	nbrlen(long long nbr)
 **		- conf->group_len
 **		- conf->size_len
 **		- conf->name_len
+**		- conf->inode_nbr_len
 */
-
 
 void		take_config(const char *name, const struct stat *stat_, t_conf *conf)
 {

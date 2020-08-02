@@ -2,7 +2,7 @@
 
 /*!
 ** \file
-** \brief
+** \brief Some funcs for memory management
 */
 
 t_flags		*init_flags(void)
@@ -21,7 +21,7 @@ t_file 		*init_file(void)
 	return (files);
 }
 
-t_file			*new_file(t_file *prev)
+t_file		*new_file(t_file *prev)
 {
 	t_file 	*file;
 
@@ -31,9 +31,9 @@ t_file			*new_file(t_file *prev)
 	return (file);
 }
 
-t_conf			*new_conf(void)
+t_conf		*new_conf(void)
 {
-	t_conf		*conf;
+	t_conf	*conf;
 
 	conf = (t_conf*)ft_memalloc(sizeof(t_conf));
 	return (conf);

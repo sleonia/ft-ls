@@ -6,23 +6,14 @@
 ** \brief
 */
 
-static bool		several_args(const t_file *files) //zalupa
-{
-	return (files->next? true : false);
-}
-
 static void 	print_one(t_file *files, const t_flags *flags, const t_conf *conf)
 {
-	if (files) {
+	if (files)
+	{
 		if (S_ISDIR(files->stat.st_mode))
-		{
-//			print_directory_v2(files->files_inside, flags, conf);
 			print_directory(files->files_inside, flags, conf);
-		}
 		else
-		{
 			print_file(files, flags, true, conf);
-		}
 		if (files->next)
 			ft_printf("\n");
 		print_one(files->next, flags, conf);
@@ -40,7 +31,7 @@ static void 	print_many(const t_file *files, const t_flags *flags, const t_conf 
 			print_file(counter, flags, true, conf);
 		counter = counter->next;
 	}
-	ft_printf("\n");/////fix dis
+	ft_printf("\n");
 	counter = (t_file *)files;
 	while (counter)
 	{
@@ -48,7 +39,6 @@ static void 	print_many(const t_file *files, const t_flags *flags, const t_conf 
 		{
 			ft_printf("%s:\n", counter->name);
 			print_directory(counter->files_inside, flags, conf);
-	//		print_directory_v2(counter->files_inside, flags, conf);
 		}
 		counter = counter->next;
 	}
@@ -59,21 +49,21 @@ static void 	print_things(const t_flags *flags, const t_file *files, const t_con
 	t_file *counter;
 
 	counter = (t_file *)files;
-
-	if (several_args(files))
+	if (files->next)
 		print_many(files, flags, conf);
 	else
-		{
-			if (!files->is_error)
-				print_one((t_file *)files, flags, conf);
-		}
+	{
+		if (!files->is_error)
+			print_one((t_file *)files, flags, conf);
+	}
 }
 
 void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
 {
-	t_file* tmp = (t_file *)files;
-	bool	many_args;
+	t_file		*tmp;
+	bool		many_args;
 
+	tmp = (t_file *)files;
 	many_args = tmp->next ? true : false;
 	if (flags->big_r)
 	{
@@ -92,10 +82,8 @@ void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
 			}
 			tmp = tmp->next;
 		}
-
 	}
-
 	else
 		print_things(flags, files, conf);
-	print_column(files, flags, conf);
+	//print_column(files, flags, conf);
 }

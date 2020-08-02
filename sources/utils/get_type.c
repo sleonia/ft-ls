@@ -1,6 +1,12 @@
 #include "types.h"
 #include "utils.h"
 
+/*!
+** \file
+** \brief Return type:
+**			- d c b s l ?
+*/
+
 int			get_type(mode_t mode)
 {
 	mode &= S_IFMT;

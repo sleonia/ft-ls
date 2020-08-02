@@ -2,7 +2,6 @@
 #include "types.h"
 #include <sys/ioctl.h>
 
-
 void	print_column(const t_file *files, const t_flags *flags, const t_conf *conf)
 {
 	int				term_width;
@@ -44,7 +43,7 @@ void	print_column(const t_file *files, const t_flags *flags, const t_conf *conf)
 		{
 			index = row + (col - 1)  * max_files_per_col;
 
-			printf("%-*s ", conf->name_len, matrix[index]);
+			printf("%-*s ", conf->name_len + 1, matrix[index]);
 			col++;
 			files_done++;
 		}
