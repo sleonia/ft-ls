@@ -3,6 +3,8 @@
 #include <pwd.h>
 #include <grp.h>
 #include <sys/types.h>
+#include <sys/xattr.h>
+#include <sys/acl.h>
 
 /*!
 **	What is info about file/link/folder?
@@ -41,10 +43,32 @@ static void		print_time(const time_t *time)
 	ft_printf("%s ", buffer);
 }
 
-static void		print_rights(const mode_t mode)
+static char		get_attributes(const char *name)
 {
-	char		rights[11];
+	char		symb;
+	acl_t		acl;
+	acl_entry_t dummy;
+	ssize_t		xattr;
 
+	symb = ' ';
+	acl = acl_get_link_np(name, ACL_TYPE_EXTENDED);
+	if (acl && acl_get_entry(acl, ACL_FIRST_ENTRY, &dummy) == -1) {
+		acl_free(acl);
+		acl = NULL;
+	}
+	xattr = listxattr(name, NULL, 0, XATTR_NOFOLLOW);
+	if (xattr > 0)
+		symb = '@';
+	else if (acl != NULL)
+		symb = '+';
+	return (symb);
+}
+
+static void		print_rights(const mode_t mode, const char *name)
+{
+	char		rights[12];
+
+	ft_memset(rights, 0, 12);
 	rights[0] = (S_ISDIR(mode)) ? 'd' : '-';
 	rights[1] = (mode & S_IRUSR) ? 'r' : '-';
 	rights[2] = (mode & S_IWUSR) ? 'w' : '-';
@@ -55,14 +79,14 @@ static void		print_rights(const mode_t mode)
 	rights[7] = (mode & S_IROTH) ? 'r' : '-';
 	rights[8] = (mode & S_IWOTH) ? 'w' : '-';
 	rights[9] = (mode & S_IXOTH) ? 'x' : '-';
-	rights[10] = 0;
-	ft_printf("%s ", rights);
+	rights[10] = get_attributes(name);
+	ft_printf("%s", rights);
 }
 
 void			print_all_info(const struct stat *stat_, const t_conf *conf,
 					bool is_flag_g, const char *name)
 {
-	print_rights(stat_->st_mode);
+	print_rights(stat_->st_mode, name);
 	ft_printf("%*d ", conf->links_len + 1, stat_->st_nlink);
 	if (!is_flag_g)
 		ft_printf("%-*s ", conf->creator_len + 1, (getpwuid(stat_->st_uid))->pw_name);
