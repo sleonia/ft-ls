@@ -3,9 +3,6 @@
 #include "types.h"
 #include <pwd.h>
 #include <grp.h>
-#include <sys/types.h>
-#include <sys/xattr.h>
-#include <sys/acl.h>
 
 /*!
 **	What is info about file/link/folder?
@@ -44,27 +41,6 @@ static void		print_time(const time_t *time)
 	ft_printf("%s ", buffer);
 }
 
-static char		get_attributes(const char *name)
-{
-	char		symb;
-	acl_t		acl;
-	acl_entry_t dummy;
-	ssize_t		xattr;
-
-	symb = ' ';
-	acl = acl_get_link_np(name, ACL_TYPE_EXTENDED);
-	if (acl && acl_get_entry(acl, ACL_FIRST_ENTRY, &dummy) == -1) {
-		acl_free(acl);
-		acl = NULL;
-	}
-	xattr = listxattr(name, NULL, 0, XATTR_NOFOLLOW);
-	if (xattr > 0)
-		symb = '@';
-	else if (acl != NULL)
-		symb = '+';
-	return (symb);
-}
-
 static void		print_rights(const mode_t mode, const char *name)
 {
 	char		rights[12];
@@ -95,5 +71,7 @@ void			print_all_info(const struct stat *stat_, const t_conf *conf,
 	ft_printf("%*lld ", conf->size_len + 1, stat_->st_size);
 	print_time(&stat_->st_mtime);
 	print_with_color(stat_, name);
+	if ((stat_->st_mode & S_IFMT) == S_IFLNK)
+		print_link_value(name);
 	ft_printf("\n");
 }

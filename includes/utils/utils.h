@@ -27,4 +27,6 @@ int 		free_all(t_file *files, t_conf *conf, t_flags *flags);
 
 int			get_type(mode_t mode);
 
+char		get_attributes(const char *name);
+
 #endif
