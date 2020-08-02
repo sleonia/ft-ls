@@ -3,6 +3,8 @@
 
 #include "types.h"
 #include "ft_printf.h"
+#include <pwd.h>
+#include <grp.h>
 
 /*!
 ** \file
