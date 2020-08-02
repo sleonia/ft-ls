@@ -61,17 +61,15 @@ static void 	print_things(const t_flags *flags, const t_file *files, const t_con
 void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
 {
 	t_file		*tmp;
-	bool		many_args;
 
 	tmp = (t_file *)files;
-	many_args = tmp->next ? true : false;
 	if (flags->big_r)
 	{
 		while (tmp)
 		{
 			if (tmp->type == Directory && !tmp->is_error)
 			{
-				if (many_args)
+				if (tmp->next ? true : false)
 					ft_printf("%s:\n", tmp->name);
 				print_all_things(tmp, flags, conf);
 			}

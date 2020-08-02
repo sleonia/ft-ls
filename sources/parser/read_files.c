@@ -32,7 +32,7 @@ static bool	directory_to_ignore(t_file *file, t_flags *flags)
 static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 {
 	t_file *file_counter;
-	t_file *sleonia_i_tut_slomal;
+	t_file *prev;
 	bool	done;
 
 	file_counter = NULL;
@@ -48,13 +48,13 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 			break;
 		}
 		fill_file(file_counter->dirent->d_name, file_counter, flags, conf);
-		sleonia_i_tut_slomal = file_counter;
+		prev = file_counter;
 		file_counter = new_file(file_counter);
 		file_counter->origin = file;
 	}
 	if (!file_counter->name)
 	{
-		sleonia_i_tut_slomal->next = NULL;
+		prev->next = NULL;
 		free(file_counter);
 		file_counter = NULL;
 	}
@@ -70,8 +70,7 @@ static void fill_directory(t_file *file, const char *name, t_flags *flags, t_con
 		fill_files_inside_dir(file_counter, flags, conf);
 }
 
-
-static void fill_non_directory(t_file *file, const char *name)
+static void fill_non_directory(t_file *file) ////////////////useful
 {
 	t_file 	*file_counter;
 
@@ -103,7 +102,7 @@ void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 	if (file->type == Directory)
 		fill_directory(file, file->full_path, flags, conf);
 	else
-		fill_non_directory(file, name);
+		fill_non_directory(file);
 }
 
 t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
