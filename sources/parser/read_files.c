@@ -86,7 +86,7 @@ void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 	if (!file->full_path)
 		file->full_path = build_path(file);
 	ft_memset(&stat_, 0, sizeof(struct stat));
-	if (stat(file->full_path, &stat_) < 0)
+	if (stat(file->name, &stat_) < 0)
 	{
 		if (lstat(file->full_path, &stat_) < 0)
 		{
@@ -99,6 +99,7 @@ void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 	file->time = stat_.st_mtime;
 	take_config(name, &file->stat, conf);
 	file->type = get_type(stat_.st_mode);
+	//printf("type: %d\n", file->type);
 	if (file->type == Directory)
 		fill_directory(file, file->full_path, flags, conf);
 	else

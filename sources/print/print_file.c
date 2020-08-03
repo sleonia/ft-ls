@@ -13,7 +13,7 @@ void 		print_file(const t_file *file, const t_flags *flags,
 	if (flags->i)
 		ft_printf("%*llu ", conf->inode_nbr_len + 1, file->stat.st_ino);
 	if (flags->l || flags->g)
-		print_all_info(&file->stat, conf, flags->g, (const char *)file->name);
+		print_all_info(&file->stat, conf, flags->g, (const char *)file->name, file->full_path);
 	else
 	{
 		print_with_color((const struct stat*)&file->stat, (const char*)file->name);

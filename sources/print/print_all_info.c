@@ -59,7 +59,7 @@ static void		print_rights(const mode_t mode, const char *name)
 }
 
 void			print_all_info(const struct stat *stat_, const t_conf *conf,
-					bool is_flag_g, const char *name)
+					bool is_flag_g, const char *name, char* tmp)
 {
 	print_rights(stat_->st_mode, name);
 	ft_printf("%*d ", conf->links_len + 1, stat_->st_nlink);
@@ -70,6 +70,6 @@ void			print_all_info(const struct stat *stat_, const t_conf *conf,
 	print_time(&stat_->st_mtime);
 	print_with_color(stat_, name);
 	if ((stat_->st_mode & S_IFMT) == S_IFLNK)
-		print_link_value(name);
+		print_link_value(tmp);
 	ft_printf("\n");
 }

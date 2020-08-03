@@ -13,13 +13,13 @@
 void    	    print_illegal_opt(const char);
 void 			print_directory(const t_file *files, const t_flags *flags, const t_conf *conf);
 void 			print_all_things(const t_file *files, const t_flags *flags, const t_conf *conf);
-void			print_all_info(const struct stat *stat_, const t_conf *conf, bool is_flag_g, const char *name);
+void			print_all_info(const struct stat *stat_, const t_conf *conf, bool is_flag_g, const char *name, char *tmp);
 void 			print_file(const t_file *files, const t_flags *flags, bool is_next, const t_conf *conf);
 void			print_with_color(const struct stat *stat_, const char *name);
 void			print_column(const t_file *files, const t_flags *flags, const t_conf *conf);
 void			print(const t_flags *flags, const t_file *files, const t_conf *conf);
 
-void			print_link_value(const char *name);
+void			print_link_value(const char *full_path);
 
 void			print_size(const struct stat *stat_, unsigned size);
 
