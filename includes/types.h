@@ -27,6 +27,32 @@ typedef enum			e_types
 }						t_types;
 
 /*!
+**	Struct for correct output of ls
+**	  filed:
+**		- total size
+**		- count of files
+**		- rights len
+**		- name of creator len
+**		- name of group len
+**		- len of size
+**		- name len
+**		- file serial number (inode number)
+*/
+
+typedef	struct			s_conf
+{
+	unsigned			total;
+	unsigned			count;
+	unsigned			rights_len;
+	unsigned			links_len;
+	unsigned			creator_len;
+	unsigned			group_len;
+	unsigned			size_len;
+	unsigned			name_len;
+	unsigned			inode_nbr_len;
+}						t_conf;
+
+/*!
 ** file:
 **     - file name
 **     - full path
@@ -51,6 +77,7 @@ typedef struct			s_file
 	struct s_file		*next;
 	time_t				time;
 	struct stat			stat;
+	t_conf*				conf;
 	struct dirent		*dirent;
 	t_types				type;
 	bool				no_ignore;
@@ -87,31 +114,5 @@ typedef	struct			s_flags
 	bool				i;
 	bool				no_flags;
 }						t_flags;
-
-/*!
-**	Struct for correct output of ls
-**	  filed:
-**		- total size
-**		- count of files
-**		- rights len
-**		- name of creator len
-**		- name of group len
-**		- len of size
-**		- name len
-**		- file serial number (inode number)
-*/
-
-typedef	struct			s_conf
-{
-	unsigned			total;
-	unsigned			count;
-	unsigned			rights_len;
-	unsigned			links_len;
-	unsigned			creator_len;
-	unsigned			group_len;
-	unsigned			size_len;
-	unsigned			name_len;
-	unsigned			inode_nbr_len;
-}						t_conf;
 
 #endif

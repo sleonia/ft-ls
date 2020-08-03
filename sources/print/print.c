@@ -58,7 +58,7 @@ static void 	print_things(const t_flags *flags, const t_file *files, const t_con
 	}
 }
 
-void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
+void			print(const t_flags *flags, const t_file *files)
 {
 	t_file		*tmp;
 
@@ -71,17 +71,19 @@ void			print(const t_flags *flags, const t_file *files, const t_conf *conf)
 			{
 				if (tmp->next ? true : false)
 					ft_printf("%s:\n", tmp->name);
-				print_all_things(tmp, flags, conf);
+				print_all_things(tmp, flags, files->conf);
 			}
 			else if (tmp->type != Directory && !tmp->is_error)
 			{
-				print_file(tmp, flags, tmp->next ? true : false, conf);
+				print_file(tmp, flags, tmp->next ? true : false, files->conf);
 				ft_printf("\n");
 			}
 			tmp = tmp->next;
 		}
 	}
 	else
-		print_things(flags, files, conf);
-	//print_column(files, flags, conf);
+		print_things(flags, files, files->conf);
+	////del this fun printf below
+	printf("\n ----------------------------------------------------- cols\n");
+//	print_column(files, flags, files->conf);
 }

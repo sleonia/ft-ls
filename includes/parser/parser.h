@@ -16,12 +16,12 @@
 ** \brief Functions for parse input by flags and folders
 */
 
-t_conf	*parser(const char **av, t_file *files, t_flags *flags, int ac);
+bool	parser(const char **av, t_file *files, t_flags *flags, int ac);
 
 int		read_flags(t_flags *flags, const char **av, int ac);
 int		validate_flags(t_flags *, const char *);
 
-t_conf	*read_files(int index, t_file *files, const char **args, t_flags *flags);
-void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf);
+void	read_files(int index, t_file *files, const char **args, t_flags *flags);
+void	fill_file(const char *name, t_file *file, t_flags *flags);
 
 #endif

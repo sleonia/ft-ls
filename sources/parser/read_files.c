@@ -35,11 +35,6 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 	t_file *prev;
 	bool	done;
 
-	int del_me_im_a_test = 1;
-
-	if ((ft_strequ(file->name, "blinnea")))
-		del_me_im_a_test = 0;
-
 	file_counter = NULL;
 	done = false;
 	file_counter = new_file(file_counter);
@@ -52,7 +47,8 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 			done = true;
 			break;
 		}
-		fill_file(file_counter->dirent->d_name, file_counter, flags, conf);
+		fill_file(file_counter->dirent->d_name, file_counter, flags);
+		take_config(file_counter->name, &file_counter->stat, conf);///full path
 		prev = file_counter;
 		file_counter = new_file(file_counter);
 		file_counter->origin = file;
@@ -65,7 +61,7 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 	}
 }
 
-static void fill_directory(t_file *file, const char *name, t_flags *flags, t_conf *conf)
+static void fill_directory(t_file *file, const char *name, t_flags *flags)
 {
 	t_file 			*file_counter;
 
@@ -74,47 +70,52 @@ static void fill_directory(t_file *file, const char *name, t_flags *flags, t_con
 	if (!file_counter->fd)
 		return ;
 	if (!directory_to_ignore(file_counter, flags))
-		fill_files_inside_dir(file_counter, flags, conf);
+	{
+		if (!file->conf)
+			file->conf = new_conf();
+
+		take_config(name, &file->stat, file->conf);///full path
+		fill_files_inside_dir(file_counter, flags, file->conf);
+	}
+
 	if (file_counter->fd)
 		closedir(file_counter->fd);
 	file_counter->fd = NULL;
 }
 
 
-void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
+void	fill_file(const char *name, t_file *file, t_flags *flags)
 {
 	if (!file->name)
 		file->name = ft_strdup(name);
 	if (!file->full_path)
 		file->full_path = build_path(file);
-	ft_memset(&file->stat, 0, sizeof(struct stat));
-	if (lstat(file->full_path, &file->stat) < 0)
+	//if (lstat(file->full_path, &file->stat) < 0)
+	if (stat(file->full_path, &file->stat) < 0)
 	{
 		ft_printf("ft_ls: %s: %s\n", file->name, strerror(errno));
 		file->is_error = true;
 		return ;
 	}
-	file->stat = file->stat;
 	file->time = file->stat.st_mtime;
-	take_config(name, &file->stat, conf);
 	file->type = get_type(file->stat.st_mode);
 	if (file->type == Directory)
-		fill_directory(file, file->full_path, flags, conf);
+		fill_directory(file, file->full_path, flags);
 }
 
-t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
+void		read_files(int index, t_file *files, const char **args, t_flags *flags)
 {
-	t_conf	*conf;
+//	t_conf	*conf;
 	t_file	*tmp;
 	t_file 	*sleonia_vse_polomal;
 
 	tmp = files;
-	if (!(conf = new_conf()))
-		return (NULL);
+//	if (!(conf = new_conf()))
+//		return ;
 	if (!args[index])
 	{
 		files->no_ignore = true;
-		fill_file("./", files, flags, conf);
+		fill_file("./", files, flags);
 	}
 	else
 	{
@@ -124,16 +125,14 @@ t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
 		{
 			tmp->no_ignore = true;
 			tmp->full_path = build_path_for_arg(args[index]);
-			fill_file(args[index], tmp, flags, conf);
+			fill_file(args[index], tmp, flags);
 			sleonia_vse_polomal = tmp;
 			tmp = new_file(tmp);
 		}
 		if (!tmp->name)
 		{
 			sleonia_vse_polomal->next = NULL;
-			ft_memdel((void **)&tmp);
+			ft_memdel((void **) &tmp);
 		}
-
 	}
-	return (conf);
 }

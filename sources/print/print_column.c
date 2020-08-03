@@ -12,8 +12,8 @@ void	print_column(const t_file *files, const t_flags *flags, const t_conf *conf)
 
 	ft_memset(matrix, '\0', sizeof(matrix));
 	ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
-//	term_width = ts.ts_cols;
-	term_width = 80;////in dev
+	term_width = ts.ts_cols;
+//	term_width = 80;////in dev
 	//printf("Terminal is %d\nCount %d\n", term_width, conf->count);
 	cols = term_width / (conf->name_len + 4); ////amount of columns
 

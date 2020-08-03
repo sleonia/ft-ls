@@ -20,16 +20,17 @@ int		main(int ac, char **av)
 {
 	t_flags		*flags;
 	t_file		*files;
-	t_conf		*conf;
 
 	if (!(flags = init_flags()))
 		return (1);
 	if (!(files = init_file()))
-		return (free_all(NULL, NULL, flags));
-	if (!(conf = parser((const char **)av, files, flags, ac)))
-		return (free_all(files, NULL, flags));
+		return 1;
+//		return (free_all(NULL, NULL, flags));
+	if (!parser((const char **)av, files, flags, ac))///do it properly unless you want a segv
+		return 1;
+//		return (free_all(files, NULL, flags));
 	sort((const t_flags*)flags, &files);
-	print((const t_flags*)flags, (const t_file*)files, (const t_conf*)conf);
-	free_all(files, conf, flags);
+	print((const t_flags*)flags, (const t_file*)files);
+//	free_all(files, conf, flags);
 	return (0);
 }

@@ -33,7 +33,7 @@ void		take_config(const char *name, const struct stat *stat_, t_conf *conf)
 {
 	int		len;
 
-	++conf->count;
+	++conf->count;//////. .. .git
 	conf->total += stat_->st_blocks;
 	len = nbrlen(stat_->st_nlink);
 	conf->links_len < len ? conf->links_len = len : 0;
