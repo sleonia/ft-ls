@@ -29,11 +29,14 @@ int	nbrlen(long long nbr)
 **		- conf->inode_nbr_len
 */
 
-void		take_config(const char *name, const struct stat *stat_, t_conf *conf)
+void		take_config(const char *name, const struct stat *stat_, const t_flags *flags, t_conf *conf)
 {
 	int		len;
 
-	++conf->count;//////. .. .git
+	if (flags->a)
+		++conf->count;
+	else if (name[0] != '.')
+		++conf->count;
 	conf->total += stat_->st_blocks;
 	len = nbrlen(stat_->st_nlink);
 	conf->links_len < len ? conf->links_len = len : 0;
@@ -44,7 +47,10 @@ void		take_config(const char *name, const struct stat *stat_, t_conf *conf)
 	len = nbrlen(stat_->st_size);
 	conf->size_len < len ? conf->size_len = len : 0;
 	len = ft_strlen(name);
-	conf->name_len < len ? conf->name_len = len : 0;
+	if (flags->a)
+		conf->name_len < len ? conf->name_len = len : 0;
+	else if (name[0] != '.')
+		conf->name_len < len ? conf->name_len = len : 0;
 	len = nbrlen(stat_->st_ino);
 	conf->inode_nbr_len < len ? conf->inode_nbr_len = len : 0;
 }

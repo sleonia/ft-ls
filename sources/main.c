@@ -24,13 +24,11 @@ int		main(int ac, char **av)
 	if (!(flags = init_flags()))
 		return (1);
 	if (!(files = init_file()))
-		return 1;
-//		return (free_all(NULL, NULL, flags));
+		return (free_all(NULL, flags));
 	if (!parser((const char **)av, files, flags, ac))///do it properly unless you want a segv
-		return 1;
-//		return (free_all(files, NULL, flags));
+		return (free_all(files, flags));
 	sort((const t_flags*)flags, &files);
 	print((const t_flags*)flags, (const t_file*)files);
-//	free_all(files, conf, flags);
+	free_all(files, flags);
 	return (0);
 }

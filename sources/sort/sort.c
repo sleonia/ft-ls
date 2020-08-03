@@ -37,13 +37,12 @@ static t_file	*sorted_merge_by_time(t_file *left, t_file *right)
 		return (right);
 	if (!right)
 		return (left);
-	
-	if (left->time > right->time)
+	if (left->stat.st_mtime > right->stat.st_mtime)
 	{
 		res = left;
 		res->next = sorted_merge_by_time(left->next, right);
 	}
-	else if (left->time == right->time && ft_strcmp(right->name, left->name) > 0)
+	else if (left->stat.st_mtime == right->stat.st_mtime && ft_strcmp(right->name, left->name) > 0)
 	{
 		res = left;
 		res->next = sorted_merge_by_time(left->next, right);

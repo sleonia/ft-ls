@@ -11,20 +11,17 @@
 */
 
 void    	    print_illegal_opt(const char);
-void 			print_directory(const t_file *files, const t_flags *flags, const t_conf *conf);
-void 			print_all_things(const t_file *files, const t_flags *flags, const t_conf *conf);
-void			print_all_info(const t_file *files, const t_conf *conf, const t_flags *flags);
-void 			print_file(const t_file *files, const t_flags *flags, bool is_next, const t_conf *conf);
+void 			print_directory(const t_file *files, const t_flags *flags);
+void 			print_all_things(const t_file *files, const t_flags *flags);
+void			print_all_info(const t_file *files, const t_flags *flags);
+void 			print_file(const t_file *files, const t_flags *flags, bool is_next);
 void			print_with_color(const struct stat *stat_, const char *name);
-void			print_column(const t_file *files, const t_flags *flags, const t_conf *conf);
+void			print_column(const t_file *files, const t_flags *flags);
 void			print(const t_flags *flags, const t_file *files);
 
 void			print_link_value(const char *full_path);
 
 void			print_size(const struct stat *stat_, unsigned size);
-
-/*test me*/
-void 	print_directory_v2(t_file *files, t_flags *flags, t_conf *conf); ///////////////?
 
 /*!
 **	Colors

@@ -19,14 +19,12 @@ static void free_file(t_file *file)
 	ft_strdel(&file->full_path);
 	if (file->fd)
 		closedir(file->fd);
-	free(file);
-	file = NULL;
+	ft_memdel((void **)&file->conf);
+	ft_memdel((void **)&file);
 }
 
-int free_all(t_file *files, t_conf *conf, t_flags *flags)
+int free_all(t_file *files, t_flags *flags)
 {
-	if (conf)
-		free(conf);
 	if (flags)
 		free(flags);
 	free_file(files);

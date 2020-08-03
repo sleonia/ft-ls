@@ -58,14 +58,14 @@ static void		print_rights(const mode_t mode, const char *name)
 	ft_printf("%s", rights);
 }
 
-void			print_all_info(const t_file *files, const t_conf *conf, const t_flags *flags)
+void			print_all_info(const t_file *files, const t_flags *flags)
 {
 	print_rights(files->stat.st_mode, files->full_path);
-	ft_printf("%*d ", conf->links_len + 1, files->stat.st_nlink);
+	ft_printf("%*d ", files->origin->conf->links_len + 1, files->stat.st_nlink);
 	if (!flags->g)
-		ft_printf("%-*s ", conf->creator_len + 1, (getpwuid(files->stat.st_uid))->pw_name);
-	ft_printf("%-*s ", conf->group_len, getgrgid(files->stat.st_gid)->gr_name);
-	print_size(&files->stat, conf->size_len + 1);
+		ft_printf("%-*s ", files->origin->conf->creator_len + 1, (getpwuid(files->stat.st_uid))->pw_name);
+	ft_printf("%-*s ", files->origin->conf->group_len, getgrgid(files->stat.st_gid)->gr_name);
+	print_size(&files->stat, files->origin->conf->size_len + 1);
 	print_time(&files->stat.st_mtime);
 	print_with_color(&files->stat, files->name);
 	if ((files->stat.st_mode & S_IFMT) == S_IFLNK)

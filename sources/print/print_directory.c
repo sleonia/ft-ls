@@ -63,15 +63,14 @@ static bool should_print(t_file *file, const t_flags *flags)
 	return (true);
 }
 
-void 		print_directory(const t_file *file,
-				const t_flags *flags, const t_conf *conf)
+void 		print_directory(const t_file *file, const t_flags *flags)
 {
 	t_file	*tmp;
 	bool	is_last;
 
 	tmp = (t_file *)file;
 	if (flags->l || flags->g)
-		ft_printf("total: %d\n", conf->total);
+		ft_printf("total: %d\n", file->origin->conf->total);
 	while(tmp)
 	{
 		if (should_print(tmp, flags))
@@ -79,7 +78,7 @@ void 		print_directory(const t_file *file,
 			if (tmp->name)
 			{
 				is_last = tmp->next ? true : false;
-				print_file((const t_file*)tmp, flags, is_last, conf);
+				print_file((const t_file*)tmp, flags, is_last);
 			}
 		}
 		tmp = tmp->next;

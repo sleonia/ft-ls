@@ -29,7 +29,7 @@ static bool	directory_to_ignore(t_file *file, t_flags *flags)
 	return (false);
 }
 
-static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
+static void fill_files_inside_dir(t_file *file, t_flags *flags)
 {
 	t_file *file_counter;
 	t_file *prev;
@@ -48,7 +48,7 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 			break;
 		}
 		fill_file(file_counter->dirent->d_name, file_counter, flags);
-		take_config(file_counter->name, &file_counter->stat, conf);///full path
+		take_config(file_counter->name, &file_counter->stat, flags, file_counter->origin->conf);
 		prev = file_counter;
 		file_counter = new_file(file_counter);
 		file_counter->origin = file;
@@ -74,8 +74,9 @@ static void fill_directory(t_file *file, const char *name, t_flags *flags)
 		if (!file->conf)
 			file->conf = new_conf();
 
-		take_config(name, &file->stat, file->conf);///full path
-		fill_files_inside_dir(file_counter, flags, file->conf);
+		//take_config(name, &file->stat, file->conf);///full path				///////maybe del
+		//take_config(file->full_path, &file->stat, file->conf);///full path	///////maybe del
+		fill_files_inside_dir(file_counter, flags);
 	}
 
 	if (file_counter->fd)
@@ -83,21 +84,18 @@ static void fill_directory(t_file *file, const char *name, t_flags *flags)
 	file_counter->fd = NULL;
 }
 
-
 void	fill_file(const char *name, t_file *file, t_flags *flags)
 {
 	if (!file->name)
 		file->name = ft_strdup(name);
 	if (!file->full_path)
 		file->full_path = build_path(file);
-	//if (lstat(file->full_path, &file->stat) < 0)
-	if (stat(file->full_path, &file->stat) < 0)
+	if (lstat(file->full_path, &file->stat) < 0)
 	{
 		ft_printf("ft_ls: %s: %s\n", file->name, strerror(errno));
 		file->is_error = true;
 		return ;
 	}
-	file->time = file->stat.st_mtime;
 	file->type = get_type(file->stat.st_mode);
 	if (file->type == Directory)
 		fill_directory(file, file->full_path, flags);
@@ -105,13 +103,10 @@ void	fill_file(const char *name, t_file *file, t_flags *flags)
 
 void		read_files(int index, t_file *files, const char **args, t_flags *flags)
 {
-//	t_conf	*conf;
 	t_file	*tmp;
-	t_file 	*sleonia_vse_polomal;
+	t_file 	*prev;
 
 	tmp = files;
-//	if (!(conf = new_conf()))
-//		return ;
 	if (!args[index])
 	{
 		files->no_ignore = true;
@@ -126,12 +121,12 @@ void		read_files(int index, t_file *files, const char **args, t_flags *flags)
 			tmp->no_ignore = true;
 			tmp->full_path = build_path_for_arg(args[index]);
 			fill_file(args[index], tmp, flags);
-			sleonia_vse_polomal = tmp;
+			prev = tmp;
 			tmp = new_file(tmp);
 		}
 		if (!tmp->name)
 		{
-			sleonia_vse_polomal->next = NULL;
+			prev->next = NULL;
 			ft_memdel((void **) &tmp);
 		}
 	}

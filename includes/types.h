@@ -59,7 +59,6 @@ typedef	struct			s_conf
 **     - files in dir
 **     - ?
 **     - pointer to next
-**     - creation time
 **     - readdir info
 **     - type of file
 **     - is ignor
@@ -75,7 +74,6 @@ typedef struct			s_file
 	struct s_file		*files_inside;
 	struct s_file		*origin;////the directory containing this file, may be useful, will delete if not
 	struct s_file		*next;
-	time_t				time;
 	struct stat			stat;
 	t_conf*				conf;
 	struct dirent		*dirent;
