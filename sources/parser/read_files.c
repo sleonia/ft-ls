@@ -85,11 +85,6 @@ void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 {
 	struct stat	stat_;
 
-	int del_me_im_a_test = 1;///del me
-
-	if (ft_strequ(name, "test2.txt"))
-		del_me_im_a_test = 0;
-
 	if (!file->name)
 		file->name = ft_strdup(name);
 	if (!file->full_path)
