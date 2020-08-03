@@ -106,8 +106,6 @@ void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 	//printf("type: %d\n", file->type);
 	if (file->type == Directory)
 		fill_directory(file, file->full_path, flags, conf);
-	else
-		fill_non_directory(file);
 }
 
 t_conf		*read_files(int index, t_file *files, const char **args, t_flags *flags)
