@@ -35,6 +35,11 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags, t_conf *conf)
 	t_file *prev;
 	bool	done;
 
+	int del_me_im_a_test = 1;
+
+	if ((ft_strequ(file->name, "blinnea")))
+		del_me_im_a_test = 0;
+
 	file_counter = NULL;
 	done = false;
 	file_counter = new_file(file_counter);
@@ -66,16 +71,15 @@ static void fill_directory(t_file *file, const char *name, t_flags *flags, t_con
 
 	file_counter = file;
 	file_counter->fd = opendir(name);
+	if (!file_counter->fd)
+		return ;
 	if (!directory_to_ignore(file_counter, flags))
 		fill_files_inside_dir(file_counter, flags, conf);
+	if (file_counter->fd)
+		closedir(file_counter->fd);
+	file_counter->fd = NULL;
 }
 
-static void fill_non_directory(t_file *file) ////////////////useful
-{
-	t_file 	*file_counter;
-
-	file_counter = file;
-}
 
 void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 {
