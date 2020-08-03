@@ -83,27 +83,21 @@ static void fill_directory(t_file *file, const char *name, t_flags *flags, t_con
 
 void	fill_file(const char *name, t_file *file, t_flags *flags, t_conf *conf)
 {
-	struct stat	stat_;
-
 	if (!file->name)
 		file->name = ft_strdup(name);
 	if (!file->full_path)
 		file->full_path = build_path(file);
-	ft_memset(&stat_, 0, sizeof(struct stat));
-	if (stat(file->name, &stat_) < 0)
+	ft_memset(&file->stat, 0, sizeof(struct stat));
+	if (lstat(file->full_path, &file->stat) < 0)
 	{
-		if (lstat(file->full_path, &stat_) < 0)
-		{
-			ft_printf("ft_ls: %s: %s\n", file->name, strerror(errno));
-			file->is_error = true;
-			return ;
-		}
+		ft_printf("ft_ls: %s: %s\n", file->name, strerror(errno));
+		file->is_error = true;
+		return ;
 	}
-	file->stat = stat_;
-	file->time = stat_.st_mtime;
+	file->stat = file->stat;
+	file->time = file->stat.st_mtime;
 	take_config(name, &file->stat, conf);
-	file->type = get_type(stat_.st_mode);
-	//printf("type: %d\n", file->type);
+	file->type = get_type(file->stat.st_mode);
 	if (file->type == Directory)
 		fill_directory(file, file->full_path, flags, conf);
 }
