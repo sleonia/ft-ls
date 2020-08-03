@@ -16,18 +16,20 @@ char	*build_path(t_file *file)
 	t_file *file_counter;
 
 
+	result = NULL;
 	result = ft_strdup(file->name);
 	file_counter = file;
+	buf = NULL;
 	if (file->origin)
 	{
-		while (file_counter->origin)
-		{
+//		while (file_counter->origin)
+//		{
 			buf = ft_strjoin("/", result);
 			ft_strdel(&result);
 			result = ft_strjoin(file_counter->origin->full_path, buf);///?
 			ft_strdel(&buf);
 			file_counter = file_counter->origin;
-		}
+//		}
 	}
 	return (result);
 }
