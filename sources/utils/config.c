@@ -33,11 +33,13 @@ void		take_config(const char *name, const struct stat *stat_, const t_flags *fla
 {
 	int		len;
 
-	if (flags->a)
+	len = name != NULL ? ft_strlen(name) : 0;
+	if (flags->a || (!flags->a && name[0] != '.'))
+	{
 		++conf->count;
-	else if (name[0] != '.')
-		++conf->count;
-	conf->total += stat_->st_blocks;
+		conf->total += stat_->st_blocks;
+		conf->name_len < len ? conf->name_len = len : 0;
+	}
 	len = nbrlen(stat_->st_nlink);
 	conf->links_len < len ? conf->links_len = len : 0;
 	len = ft_strlen((getpwuid(stat_->st_uid))->pw_name);
@@ -46,11 +48,6 @@ void		take_config(const char *name, const struct stat *stat_, const t_flags *fla
 	conf->group_len < len ? conf->group_len = len : 0;
 	len = nbrlen(stat_->st_size);
 	conf->size_len < len ? conf->size_len = len : 0;
-	len = ft_strlen(name);
-	if (flags->a)
-		conf->name_len < len ? conf->name_len = len : 0;
-	else if (name[0] != '.')
-		conf->name_len < len ? conf->name_len = len : 0;
 	len = nbrlen(stat_->st_ino);
 	conf->inode_nbr_len < len ? conf->inode_nbr_len = len : 0;
 }
