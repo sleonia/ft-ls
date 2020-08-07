@@ -42,8 +42,11 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags)
 	file_counter->origin = file;
 	while(!done)
 	{
+		errno = NULL;
 		if (!(file_counter->dirent = readdir(file->fd)))
 		{
+			if (errno)
+				ft_printf("ft_ls: %s\n",strerror(errno));
 			done = true;
 			break;
 		}
@@ -68,7 +71,7 @@ static void fill_directory(t_file *file, const char *name, t_flags *flags)
 	file_counter = file;
 	file_counter->fd = opendir(name);
 	if (!file_counter->fd)
-		return ;
+		return ;////check if we should print error here or not
 	if (!directory_to_ignore(file_counter, flags))
 	{
 		if (!file->conf)

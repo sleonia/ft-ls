@@ -13,12 +13,12 @@ void	print_column(const t_file *files, const t_flags *flags)
 	ft_memset(matrix, '\0', sizeof(matrix));
 	ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
 	term_width = ts.ts_cols;
-//	term_width = 80;////in dev
-	//printf("Terminal is %d\nCount %d\n", term_width, files->origin->conf->count);
+
 	cols = term_width / (files->origin->conf->name_len + 4); ////amount of columns
 
 	t_file *tmp = (t_file *)files->files_inside;
-	for (int i = 0; i < files->origin->conf->count && tmp; i++) {
+	for (int i = 0; i < files->origin->conf->count && tmp; i++)
+	{
 		ft_strcpy(matrix[i], tmp->name);
 		tmp = tmp->next;
 	}
