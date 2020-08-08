@@ -31,7 +31,7 @@ int	nbrlen(long long nbr)
 
 void		take_config(const char *name, const struct stat *stat_, const t_flags *flags, t_conf *conf)
 {
-	int		len;
+	unsigned	len;
 
 	len = name != NULL ? ft_strlen(name) : 0;
 	if (flags->a || (!flags->a && name[0] != '.'))
