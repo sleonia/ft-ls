@@ -7,7 +7,7 @@
 ** \brief
 */
 
-static void		del_last(t_file *prev, t_file *curr)
+void			del_last(t_file *prev, t_file *curr)
 {
 	prev->next = NULL;
 	ft_memdel((void **)&curr);

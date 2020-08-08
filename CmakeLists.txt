@@ -133,4 +133,5 @@ add_executable(ft_ls
         sources/utils/utils.c
         sources/utils/get_type.c
         sources/utils/get_attributes.c
-        sources/main.c)
+        sources/main.c
+        sources/parser/fill_file.c)
