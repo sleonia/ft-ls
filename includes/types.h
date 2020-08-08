@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:21:50 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 14:35:27 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/08 16:36:59 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ typedef enum			e_types
 typedef	struct			s_conf
 {
 	unsigned			total;
-	unsigned			count;
+	unsigned			count_actual;
+	unsigned			count_total;
 	unsigned			rights_len;
 	unsigned			links_len;
 	unsigned			creator_len;
