@@ -63,7 +63,7 @@ void			print(const t_flags *flags, const t_file *files)
 	t_file		*tmp;
 
 	tmp = (t_file *)files;
-	if (flags->big_r)
+/*	if (flags->big_r)
 	{
 		while (tmp)
 		{
@@ -82,8 +82,8 @@ void			print(const t_flags *flags, const t_file *files)
 		}
 	}
 	else
-		print_things(flags, files);
+		print_things(flags, files);*/
 	////del this fun printf below
-	printf("\n ----------------------------------------------------- cols\n");
+//	printf("\n ----------------------------------------------------- cols\n");
 	print_column(files, flags);
 }

@@ -42,7 +42,8 @@ typedef enum			e_types
 typedef	struct			s_conf
 {
 	unsigned			total;
-	unsigned			count;
+	unsigned			count_actual;
+	unsigned 			count_total;
 	unsigned			rights_len;
 	unsigned			links_len;
 	unsigned			creator_len;
