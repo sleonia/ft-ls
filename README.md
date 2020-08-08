@@ -24,3 +24,6 @@ The behavior of the program is almost identical to `ls`, only without some flags
 ```
 man ls
 ```
+> Authors  
+[me](https://github.com/sleonia)  
+[Mcluckinson](https://github.com/Mcluckinson/)
