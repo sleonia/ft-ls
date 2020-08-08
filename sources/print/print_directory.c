@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:46:13 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 19:06:29 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/08 20:19:05 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static bool		should_print(t_file *file, const t_flags *flags)
 void			print_directory(const t_file *file, const t_flags *flags)
 {
 	t_file	*tmp;
-	bool	is_last;
 
 	tmp = (t_file *)file;
 	if (flags->l || flags->g)
@@ -38,10 +37,7 @@ void			print_directory(const t_file *file, const t_flags *flags)
 		if (should_print(tmp, flags))
 		{
 			if (tmp->name)
-			{
-				is_last = tmp->next ? true : false;
-				print_file((const t_file*)tmp, flags, is_last);
-			}
+				print_file((const t_file*)tmp, flags, tmp->next);
 		}
 		tmp = tmp->next;
 	}
