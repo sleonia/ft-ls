@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:34:21 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 15:00:10 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/08 17:35:03 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,19 @@ char	*build_path(t_file *file)
 
 char	*build_path_for_arg(const char *name)
 {
-	char *result;
-	char *strstr;
+	char *buf;
 
 	if (name[0] == '/')
 		return (ft_strdup(name));
-	strstr = ft_strstr(name, "User");
-	if (!strstr)
-		result = ft_strjoin("./", name);
+	if (ft_strcmp("./", name) != 0)
+		buf = ft_strdup(name);
 	else
-		result = ft_strdup(name);
-	return (result);
+	{
+		buf = ft_strstr(name, "User");
+		if (!buf)
+			buf = ft_strjoin("./", name);
+		else
+			buf = ft_strdup(name);
+	}
+	return (buf);
 }
