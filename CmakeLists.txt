@@ -111,26 +111,40 @@ add_executable(ft_ls
         libftprintf/search_details.c
         libftprintf/search_else_details.c
         libftprintf/width_and_precision.c
-        sources/parser/parser.c
-        sources/parser/read_files.c
-        sources/parser/read_flags.c
-        sources/parser/validate_flags.c
-        sources/print/print_with_color.c
-        sources/print/print.c
-        sources/print/print_all_info.c
-        sources/print/print_all_things.c
-        #sources/print/print_column.c
-        sources/print/print_directory.c
-        sources/print/print_link_value.c
-        sources/print/print_size.c
-        sources/print/print_file.c
-        sources/print/print_illegal_opt.c
-        sources/sort/reverse.c
-        sources/sort/sort.c
-        sources/utils/build_path.c
-        sources/utils/config.c
-        sources/utils/free.c
-        sources/utils/utils.c
-        sources/utils/get_type.c
-        sources/utils/get_attributes.c
-        sources/main.c)
+
+        #sources
+
+                sources/main.c
+                
+                #utils
+                sources/utils/build_path.c
+                sources/utils/config.c
+                sources/utils/del_last.c
+                sources/utils/free.c
+                sources/utils/get_attributes.c
+                sources/utils/get_type.c
+                sources/utils/utils.c
+
+                #sort
+                sources/sort/reverse.c
+                sources/sort/sort.c
+
+                #print
+                sources/print/print.c
+                sources/print/print_all_info.c
+                sources/print/print_all_things.c
+                #sources/print/print_column.c
+                sources/print/print_directory.c
+                sources/print/print_file.c
+                sources/print/print_illegal_opt.c
+                sources/print/print_link_value.c
+                sources/print/print_size.c
+                sources/print/print_with_color.c
+
+                #parser
+                sources/parser/fill_file.c
+                sources/parser/parser.c
+                sources/parser/read_files.c
+                sources/parser/read_flags.c
+                sources/parser/validate_flags.c
+)

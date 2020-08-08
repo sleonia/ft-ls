@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:27:40 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 15:59:49 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/08 19:05:43 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ int			free_all(t_file *files, t_flags *flags);
 int			get_type(mode_t mode);
 
 char		get_attributes(const char *name);
+
+void		del_last(t_file *prev, t_file *curr);
 
 #endif

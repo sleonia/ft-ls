@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:43:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 14:44:48 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/08 19:06:44 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,5 @@ void			print(const t_flags *flags, const t_file *files)
 	}
 	else
 		print_things(flags, files);
-	////del this fun printf below
-	////////printf("\n ----------------------------------------------------- cols\n");
-	////////print_column(files, flags);
+	//print_column(files, flags);
 }
