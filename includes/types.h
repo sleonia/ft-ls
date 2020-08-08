@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   types.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/08 14:21:50 by sleonia           #+#    #+#             */
+/*   Updated: 2020/08/08 14:35:27 by sleonia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TYPES_H
 # define TYPES_H
 
-/*!
+/*
 ** \file
 ** \brief Types of structs in program
 */
 
-#include <dirent.h>
-#include <stdbool.h>
-#include <sys/stat.h>
-#include <time.h>
+# include <dirent.h>
+# include <stdbool.h>
+# include <sys/stat.h>
+# include <time.h>
 
-/*!
+/*
 **	Types of files in unix
 */
 
@@ -26,7 +38,7 @@ typedef enum			e_types
 	Unknown
 }						t_types;
 
-/*!
+/*
 **	Struct for correct output of ls
 **	  filed:
 **		- total size
@@ -52,7 +64,7 @@ typedef	struct			s_conf
 	unsigned			inode_nbr_len;
 }						t_conf;
 
-/*!
+/*
 ** file:
 **     - file name
 **     - full path
@@ -66,16 +78,16 @@ typedef	struct			s_conf
 **     - is done
 */
 
-typedef struct			s_file
+typedef	struct			s_file
 {
 	char				*name;
-	char 				*full_path;
+	char				*full_path;
 	DIR					*fd;
 	struct s_file		*files_inside;
-	struct s_file		*origin;////the directory containing this file, may be useful, will delete if not
+	struct s_file		*origin;
 	struct s_file		*next;
 	struct stat			stat;
-	t_conf*				conf;
+	t_conf				*conf;
 	struct dirent		*dirent;
 	t_types				type;
 	bool				no_ignore;
@@ -83,7 +95,7 @@ typedef struct			s_file
 	bool				done;
 }						t_file;
 
-/*!
+/*
 ** Parsing ls arguments - directories and flags
 ** struct for program flags contain:
 **   - R

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_attributes.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/08 14:32:03 by sleonia           #+#    #+#             */
+/*   Updated: 2020/08/08 14:32:53 by sleonia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "utils.h"
 #include <sys/xattr.h>
 #include <sys/acl.h>
 
-/*!
+/*
 ** \file
 ** \brief Return attributes:
 **			@ or +
@@ -20,7 +32,8 @@ char		get_attributes(const char *name)
 
 	symb = ' ';
 	acl = acl_get_link_np(name, ACL_TYPE_EXTENDED);
-	if (acl && acl_get_entry(acl, ACL_FIRST_ENTRY, &dummy) == -1) {
+	if (acl && acl_get_entry(acl, ACL_FIRST_ENTRY, &dummy) == -1)
+	{
 		acl_free(acl);
 		acl = NULL;
 	}

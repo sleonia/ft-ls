@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_all_things.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/08 14:45:27 by sleonia           #+#    #+#             */
+/*   Updated: 2020/08/08 14:45:45 by sleonia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "print/print.h"
 #include "types.h"
 
-/*!
+/*
 ** \file
 ** \brief
 */
 
-static bool should_print(const t_flags *flags, t_file *file)
+static bool	should_print(const t_flags *flags, t_file *file)
 {
 	if (file)
 	{
@@ -26,7 +38,7 @@ static bool should_print(const t_flags *flags, t_file *file)
 	return (false);
 }
 
-void 		print_all_things(const t_file *file, const t_flags *flags)
+void		print_all_things(const t_file *file, const t_flags *flags)
 {
 	t_file *counter;
 
@@ -39,7 +51,6 @@ void 		print_all_things(const t_file *file, const t_flags *flags)
 			ft_printf("%s:\n", counter->full_path);
 			print_all_things(counter, flags);
 		}
-
 		counter = counter->next;
 	}
 }

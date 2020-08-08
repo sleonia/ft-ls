@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/08 14:41:44 by sleonia           #+#    #+#             */
+/*   Updated: 2020/08/08 14:42:22 by sleonia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "sort/sort.h"
 #include "libft.h"
 #include <stdio.h>
 
-/*!
+/*
 ** \file
 ** \brief Merge sort by: ascii, time
 */
 
-static void	front_back_split(t_file *head, t_file **left, t_file **right)
+static void		front_back_split(t_file *head, t_file **left, t_file **right)
 {
 	t_file *slow;
 	t_file *fast;
@@ -42,7 +54,8 @@ static t_file	*sorted_merge_by_time(t_file *left, t_file *right)
 		res = left;
 		res->next = sorted_merge_by_time(left->next, right);
 	}
-	else if (left->stat.st_mtime == right->stat.st_mtime && ft_strcmp(right->name, left->name) > 0)
+	else if (left->stat.st_mtime == right->stat.st_mtime
+			&& ft_strcmp(right->name, left->name) > 0)
 	{
 		res = left;
 		res->next = sorted_merge_by_time(left->next, right);
@@ -77,7 +90,7 @@ static t_file	*sorted_merge_by_ascii(t_file *left, t_file *right)
 	return (res);
 }
 
-void	merge_sort(bool is_ascii, bool is_time, t_file **head)
+void			merge_sort(bool is_ascii, bool is_time, t_file **head)
 {
 	t_file *tmp;
 	t_file *left;
@@ -97,7 +110,7 @@ void	merge_sort(bool is_ascii, bool is_time, t_file **head)
 		*head = sorted_merge_by_time(left, right);
 }
 
-void		sort(const t_flags *flags, t_file **files)
+void			sort(const t_flags *flags, t_file **files)
 {
 	if (flags->t)
 		merge_sort(false, true, files);

@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/08 14:27:40 by sleonia           #+#    #+#             */
+/*   Updated: 2020/08/08 14:30:04 by sleonia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef UTILS_H
 # define UTILS_H
 
-#include "types.h"
-#include "ft_printf.h"
-#include <pwd.h>
-#include <grp.h>
+# include "types.h"
+# include "ft_printf.h"
+# include <pwd.h>
+# include <grp.h>
 
-/*!
+/*
 ** \file
 ** \brief Some utils for project
 ** \details utils:
@@ -17,17 +29,18 @@
 */
 
 t_flags		*init_flags(void);
-t_file 		*init_file(void);
+t_file		*init_file(void);
 t_file		*new_file(t_file *prev);
 t_conf		*new_conf(void);
 
-char 		*build_path(t_file *file);
-char 		*build_path_for_arg(const char *name);
+char		*build_path(t_file *file);
+char		*build_path_for_arg(const char *name);
 
 int			nbrlen(long long nbr);
-void		take_config(const char *name, const struct stat *stat, const t_flags *flags, t_conf *conf);
+void		take_config(const char *name, const struct stat *stat,
+						const t_flags *flags, t_conf *conf);
 
-int 		free_all(t_file *files, t_flags *flags);
+int			free_all(t_file *files, t_flags *flags);
 
 int			get_type(mode_t mode);
 

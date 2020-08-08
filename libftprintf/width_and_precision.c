@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   width_and_precision.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samymone <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 15:54:37 by samymone          #+#    #+#             */
-/*   Updated: 2019/08/03 15:54:39 by samymone         ###   ########.fr       */
+/*   Updated: 2020/08/08 14:25:41 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void		determine_width(const char *str, t_struct *f)
 	int i;
 
 	i = 0;
-
 	while (*str >= '0' && *str <= '9')
 	{
 		i++;

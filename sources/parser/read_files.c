@@ -2,7 +2,7 @@
 #include "utils/utils.h"
 #include "print/print.h"
 
-/*!
+/*
 ** \file
 ** \brief
 */
@@ -42,7 +42,7 @@ static void fill_files_inside_dir(t_file *file, t_flags *flags)
 	file_counter->origin = file;
 	while(!done)
 	{
-		errno = NULL;
+		errno = 0;
 		if (!(file_counter->dirent = readdir(file->fd)))
 		{
 			if (errno)

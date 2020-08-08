@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cyuriko <cyuriko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 14:34:05 by cyuriko           #+#    #+#             */
-/*   Updated: 2019/09/10 14:34:08 by cyuriko          ###   ########.fr       */
+/*   Updated: 2020/08/08 14:26:27 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct	s_struct
 	int			no_presicion;
 	int			int_bl;
 	int			was_presicion;
-	int 		star;
+	int			star;
 }				t_struct;
 
 int				ft_printf(const char *str, ...);

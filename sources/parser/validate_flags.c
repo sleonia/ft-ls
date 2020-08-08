@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_flags.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/08 14:52:21 by sleonia           #+#    #+#             */
+/*   Updated: 2020/08/08 14:54:32 by sleonia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser/parser.h"
 #include "print/print.h"
 
-/*!
+/*
 ** \file
 ** \brief Validate and collect all flags to t_flags struct
 */
 
-static void collect_flags(t_flags *flags, const char arg)
+static void		collect_flags(t_flags *flags, const char arg)
 {
 	if (arg == 'R')
 		flags->big_r = true;
@@ -33,11 +45,11 @@ static void collect_flags(t_flags *flags, const char arg)
 		flags->i = true;
 }
 
-/*!
+/*
 **	\return Index in user input that equals folder or error flag
 */
 
-int		validate_flags(t_flags *flags, const char *arg)
+int				validate_flags(t_flags *flags, const char *arg)
 {
 	int	i;
 

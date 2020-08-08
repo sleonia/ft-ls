@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   config.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/08 14:34:10 by sleonia           #+#    #+#             */
+/*   Updated: 2020/08/08 15:00:39 by sleonia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "utils/utils.h"
 #include "libft.h"
 #include <pwd.h>
 #include <grp.h>
 
-int	nbrlen(long long nbr)
+int			nbrlen(long long nbr)
 {
 	int		i;
 
@@ -18,7 +30,7 @@ int	nbrlen(long long nbr)
 	return (i);
 }
 
-/*!
+/*
 **	\brief Take config (size) for output:
 **		- conf->total
 **		- conf->links_len
@@ -29,9 +41,10 @@ int	nbrlen(long long nbr)
 **		- conf->inode_nbr_len
 */
 
-void		take_config(const char *name, const struct stat *stat_, const t_flags *flags, t_conf *conf)
+void		take_config(const char *name, const struct stat *stat_,
+					const t_flags *flags, t_conf *conf)
 {
-	int		len;
+	unsigned	len;
 
 	len = name != NULL ? ft_strlen(name) : 0;
 	if (flags->a || (!flags->a && name[0] != '.'))

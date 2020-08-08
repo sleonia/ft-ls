@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_text.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samymone <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 19:45:21 by samymone          #+#    #+#             */
-/*   Updated: 2019/07/20 19:45:24 by samymone         ###   ########.fr       */
+/*   Updated: 2020/08/08 14:27:15 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_print_s(t_struct *f, va_list ap)
 {
 	char	*s;
-	int			len_s;
+	int		len_s;
 
 	s = va_arg(ap, char*);
 	if (f->width && f->no_presicion == 1)

@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/08 14:43:49 by sleonia           #+#    #+#             */
+/*   Updated: 2020/08/08 14:44:48 by sleonia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "print/print.h"
 #include "types.h"
 
-/*!
+/*
 ** \file
 ** \brief
 */
 
-static void 	print_one(t_file *files, const t_flags *flags)
+static void		print_one(t_file *files, const t_flags *flags)
 {
 	if (files)
 	{
@@ -20,7 +32,7 @@ static void 	print_one(t_file *files, const t_flags *flags)
 	}
 }
 
-static void 	print_many(const t_file *files, const t_flags *flags)
+static void		print_many(const t_file *files, const t_flags *flags)
 {
 	t_file *counter;
 
@@ -44,7 +56,7 @@ static void 	print_many(const t_file *files, const t_flags *flags)
 	}
 }
 
-static void 	print_things(const t_flags *flags, const t_file *files)
+static void		print_things(const t_flags *flags, const t_file *files)
 {
 	t_file *counter;
 
@@ -84,6 +96,6 @@ void			print(const t_flags *flags, const t_file *files)
 	else
 		print_things(flags, files);
 	////del this fun printf below
-	printf("\n ----------------------------------------------------- cols\n");
-	print_column(files, flags);
+	////////printf("\n ----------------------------------------------------- cols\n");
+	////////print_column(files, flags);
 }

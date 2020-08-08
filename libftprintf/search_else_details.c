@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_else_details.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samymone <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 22:49:14 by samymone          #+#    #+#             */
-/*   Updated: 2019/09/09 22:49:16 by samymone         ###   ########.fr       */
+/*   Updated: 2020/08/08 14:26:59 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,4 @@ void			search_else_details(const char *s, t_struct *f, va_list ap)
 		specifier(s[f->i], f, ap);
 	else if (s[f->i] != '%' && s[f->i] != '*')
 		f->len += write(f->fd, &(s[f->i]), 1);
-
 }

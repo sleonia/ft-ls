@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_all_info.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/08 14:44:58 by sleonia           #+#    #+#             */
+/*   Updated: 2020/08/08 14:45:16 by sleonia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "print/print.h"
 #include "utils.h"
 #include "types.h"
 
-/*!
+/*
 **	What is info about file/link/folder?
 **		-rwxr-xr-x   1 a18573961  staff  38528 14 Jul 21:16 ft_ls
 **	Transcript:
@@ -63,8 +75,10 @@ void			print_all_info(const t_file *files, const t_flags *flags)
 	print_rights(files->stat.st_mode, files->full_path);
 	ft_printf("%*d ", files->origin->conf->links_len + 1, files->stat.st_nlink);
 	if (!flags->g)
-		ft_printf("%-*s ", files->origin->conf->creator_len + 1, (getpwuid(files->stat.st_uid))->pw_name);
-	ft_printf("%-*s ", files->origin->conf->group_len, getgrgid(files->stat.st_gid)->gr_name);
+		ft_printf("%-*s ", files->origin->conf->creator_len + 1,
+				(getpwuid(files->stat.st_uid))->pw_name);
+	ft_printf("%-*s ", files->origin->conf->group_len,
+			getgrgid(files->stat.st_gid)->gr_name);
 	print_size(&files->stat, files->origin->conf->size_len + 1);
 	print_time(&files->stat.st_mtime);
 	print_with_color(&files->stat, files->name);

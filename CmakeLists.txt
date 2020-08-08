@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(ft_ls C)
 
 set(CMAKE_C_STANDARD 11)
-#set(CMAKE_C_FLAGS "-Wall -Werror -Wextra")
+set(CMAKE_C_FLAGS "-Wall -Werror -Wextra")
 
 include_directories(includes)
 include_directories(includes/parser)
@@ -119,7 +119,7 @@ add_executable(ft_ls
         sources/print/print.c
         sources/print/print_all_info.c
         sources/print/print_all_things.c
-        sources/print/print_column.c
+        #sources/print/print_column.c
         sources/print/print_directory.c
         sources/print/print_link_value.c
         sources/print/print_size.c
