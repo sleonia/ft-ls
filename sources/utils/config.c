@@ -6,12 +6,12 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:34:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 15:00:39 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/08 15:42:28 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils/utils.h"
-#include "libft.h"
+#include "libft/libft.h"
 #include <pwd.h>
 #include <grp.h>
 

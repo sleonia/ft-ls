@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:28:35 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 14:29:22 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/08 15:59:42 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PARSER_H
 
 # include "types.h"
-# include "ft_printf.h"
+# include "libft/libft.h"
 # include <stdio.h>
 # include <dirent.h>
 # include <stdbool.h>

@@ -6,11 +6,11 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:43:16 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 14:43:39 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/08 15:40:55 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "utils/utils.h"
 
 /*
 ** \file

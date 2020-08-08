@@ -6,12 +6,12 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:41:44 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 14:42:22 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/08 15:41:46 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort/sort.h"
-#include "libft.h"
+#include "libft/libft.h"
 #include <stdio.h>
 
 /*

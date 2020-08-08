@@ -6,12 +6,12 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:44:58 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 14:45:16 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/08 15:40:15 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print/print.h"
-#include "utils.h"
+#include "utils/utils.h"
 #include "types.h"
 
 /*

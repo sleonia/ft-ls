@@ -17,3 +17,6 @@ ft-ls
 ft_ls
 build
 .vscode
+*.a
+/objects
+*.o

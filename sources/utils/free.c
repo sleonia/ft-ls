@@ -6,13 +6,13 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:31:53 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 14:33:13 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/08 15:42:29 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types.h"
-#include "utils.h"
-#include "libft.h"
+#include "utils/utils.h"
+#include "libft/libft.h"
 
 /*
 ** \file
