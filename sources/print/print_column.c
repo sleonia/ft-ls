@@ -65,12 +65,17 @@ static void print_block(t_cols *cols_info, char **matrix, int rows)
 			if (index >= cols_info->files_count_actual)
 			{
 		//		index -= cols_info->cols;
-				index -= cols_info->normal_files_per_col;
-				index += refuse;
+	//			index -= cols_info->normal_files_per_col;
+	//			index += refuse;
+				col = 1;
+				row++;
+				file_in_row_counter = 0;
+				ft_printf("\n");
+				continue;
 			}
 
 			////test index
-//			ft_printf("index is : |%d| ", index);
+	//		ft_printf("index is : |%d| ", index);
 			///end of test index
 			ft_printf("%-*s ", cols_info->max_file_len + 1, matrix[index]);
 			file_in_row_counter++;
@@ -107,6 +112,6 @@ void		print_column(t_file *files, const t_flags *flags)
 	refuse_files_per_col = cols_info->files_count_actual % cols_info->cols;
 	rows = refuse_files_per_col ? rows + 1 : rows;
 	///del funct below
-	test_matrix_delete_me(matrix, cols_info->files_count_actual);
+//	test_matrix_delete_me(matrix, cols_info->files_count_actual);
 	print_block(cols_info, matrix, rows);
 }
