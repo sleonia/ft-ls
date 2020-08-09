@@ -38,6 +38,7 @@ typedef struct			s_cols
 	int					term_width;
 	int					files_per_col;
 	int					files_done;
+	int 				row;
 }						t_cols;
 
 void					print_illegal_opt(const char symb);

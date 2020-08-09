@@ -52,7 +52,8 @@ static t_cols	*init_cols_info(t_file *file)
 	cols_info->term_width = cols_info->ts.ts_cols;
 	if (!cols_info->term_width)
 		cols_info->term_width = 80;
-	cols_info->cols = cols_info->term_width / (cols_info->max_file_len + 4);//do smth
+	cols_info->cols = cols_info->term_width
+			/ (cols_info->max_file_len + 4);
 	if (!cols_info->cols)
 		cols_info->cols = 1;
 	cols_info->files_per_col = cols_info->files_actual / cols_info->cols;
@@ -61,7 +62,7 @@ static t_cols	*init_cols_info(t_file *file)
 	return (cols_info);
 }
 
-static int		print_row(t_cols *cols, t_matrix **matrix, int row)
+static void		print_row(t_cols *cols, t_matrix **matrix)
 {
 	int col;
 	int file_in_row_counter;
@@ -71,34 +72,31 @@ static int		print_row(t_cols *cols, t_matrix **matrix, int row)
 	file_in_row_counter = 0;
 	while (file_in_row_counter < cols->cols)
 	{
-		i = row + (col - 1) * (cols->files_per_col);
+		i = cols->row + (col - 1) * (cols->files_per_col);
 		if (i >= cols->files_actual)
 		{
 			col = 1;
-			row++;
+			cols->row++;
 			file_in_row_counter = 0;
 			ft_printf("\n");
 			continue;
 		}
-		print_with_color(matrix[i]->st_mode, matrix[i]->name,cols->max_file_len + 1);
+		print_with_color(matrix[i]->st_mode, matrix[i]->name,
+				cols->max_file_len + 1);
 		file_in_row_counter++;
 		cols->files_done++;
 		col++;
 		if (cols->files_done == cols->files_actual)
 			break ;
 	}
-	return (row);
 }
 
 static void		print_block(t_cols *cols_info, t_matrix **matrix)
 {
-	int row;
-
-	row = 0;
 	while (cols_info->files_done < cols_info->files_actual)
 	{
-		row = print_row(cols_info, matrix, row);
-		row++;
+		print_row(cols_info, matrix);
+		cols_info->row++;
 		ft_printf("\n");
 	}
 }
@@ -107,14 +105,9 @@ void			print_column(t_file *files, const t_flags *flags)
 {
 	t_cols			*cols_info;
 	t_matrix		**matrix;
-	int				refuse_files_per_col;
-	int				rows;
 
 	cols_info = init_cols_info(files);
 	matrix = make_matrix(cols_info->files_actual, files, flags);
-	rows = cols_info->files_actual / cols_info->cols;
-	refuse_files_per_col = cols_info->files_actual % cols_info->cols;
-	rows = refuse_files_per_col ? rows + 1 : rows;
 	print_block(cols_info, matrix);
 	free_matrix(cols_info, matrix);
 }
