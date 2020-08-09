@@ -29,7 +29,7 @@ void			print_all_info(const t_file *files, const t_flags *flags);
 void			print_file(const t_file *files,
 							const t_flags *flags, bool is_next);
 void			print_with_color(const struct stat *stat_, const char *name);
-void			print_column(const t_file *files, const t_flags *flags);
+void			print_column(t_file *files, const t_flags *flags);
 void			print(const t_flags *flags, const t_file *files);
 
 void			print_link_value(const char *full_path);

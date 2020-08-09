@@ -31,16 +31,21 @@ void			print_directory(const t_file *file, const t_flags *flags)
 
 	tmp = (t_file *)file;
 	if (flags->l || flags->g)
-		ft_printf("total: %d\n", file->origin->conf->total);
-	while (tmp)
 	{
-		if (should_print(tmp, flags))
+		ft_printf("total: %d\n", file->origin->conf->total);
+		while (tmp)
 		{
-			if (tmp->name)
-				print_file((const t_file*)tmp, flags, tmp->next);
+			if (should_print(tmp, flags))
+			{
+				if (tmp->name)
+					print_file((const t_file*)tmp, flags, tmp->next);
+			}
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
 	}
-	if (!flags->l && !flags->g)
-		ft_printf("\n");
+	else
+		print_column(file->origin, flags);
+
+//	if (!flags->l && !flags->g)
+//		ft_printf("\n");
 }

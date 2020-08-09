@@ -84,6 +84,16 @@ static void print_block(t_cols *cols_info, char **matrix, int rows)
 	}
 }
 
+static void test_matrix_delete_me(char **matrix, int filenum)
+{
+	int i = 0;
+	while (i < filenum)
+	{
+		ft_printf("index = |%d| matrix = |%s|\n", i, matrix[i]);
+		i++;
+	}
+}
+
 void		print_column(t_file *files, const t_flags *flags)
 {
 	t_cols 			*cols_info;
@@ -96,5 +106,7 @@ void		print_column(t_file *files, const t_flags *flags)
 	rows = cols_info->files_count_actual / cols_info->cols;
 	refuse_files_per_col = cols_info->files_count_actual % cols_info->cols;
 	rows = refuse_files_per_col ? rows + 1 : rows;
+	///del funct below
+	test_matrix_delete_me(matrix, cols_info->files_count_actual);
 	print_block(cols_info, matrix, rows);
 }

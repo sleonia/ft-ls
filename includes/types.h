@@ -22,6 +22,7 @@
 # include <stdbool.h>
 # include <sys/stat.h>
 # include <time.h>
+# include <sys/ioctl.h>
 
 /*
 **	Types of files in unix
