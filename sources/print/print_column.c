@@ -53,7 +53,7 @@ static t_cols	*init_cols_info(t_file *file)
 	if (!cols_info->term_width)
 		cols_info->term_width = 80;
 	cols_info->cols = cols_info->term_width
-			/ (cols_info->max_file_len + 4);
+			/ (cols_info->max_file_len + 8);
 	if (!cols_info->cols)
 		cols_info->cols = 1;
 	cols_info->files_per_col = cols_info->files_actual / cols_info->cols;
@@ -82,7 +82,7 @@ static void		print_row(t_cols *cols, t_matrix **matrix)
 			continue;
 		}
 		print_with_color(matrix[i]->st_mode, matrix[i]->name,
-				cols->max_file_len + 1);
+				cols->max_file_len + 7);
 		file_in_row_counter++;
 		cols->files_done++;
 		col++;
