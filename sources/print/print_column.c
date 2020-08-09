@@ -106,6 +106,8 @@ void			print_column(t_file *files, const t_flags *flags)
 	t_cols			*cols_info;
 	t_matrix		**matrix;
 
+	if (!files)
+		return ;
 	cols_info = init_cols_info(files);
 	matrix = make_matrix(cols_info->files_actual, files, flags);
 	print_block(cols_info, matrix);
