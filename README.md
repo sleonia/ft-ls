@@ -2,7 +2,7 @@ ft_ls
 > What it is?
 
 A recoding of the **Unix** command `ls`.  
-This project is about discovering a sub-system of functions of the system's **API**, the associated **data structures**, **sort algorithm**, as well as **memory allocation** and **data management**.
+This project is about discovering a sub-system of functions of the system's **Unix API**, the associated **data structures**, **sort algorithm**, as well as **memory allocation** and **data management**.
 
 > How to build?
 ```
@@ -25,5 +25,5 @@ The behavior of the program is almost identical to `ls`, only without some flags
 man ls
 ```
 > Authors  
-[me](https://github.com/sleonia)  
+[Sleonia](https://github.com/sleonia)  
 [Mcluckinson](https://github.com/Mcluckinson/)
