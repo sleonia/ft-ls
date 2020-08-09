@@ -43,6 +43,6 @@ void			print_directory(const t_file *file, const t_flags *flags)
 			tmp = tmp->next;
 		}
 	}
-	else
+	else if (file)
 		print_column(file->origin, flags);
 }
