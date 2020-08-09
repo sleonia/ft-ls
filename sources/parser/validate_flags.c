@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:52:21 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 14:54:32 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 19:49:05 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ static void		collect_flags(t_flags *flags, const char arg)
 		flags->f = true;
 		flags->a = true;
 	}
-	if (arg == 'i')
-		flags->i = true;
 }
 
 /*

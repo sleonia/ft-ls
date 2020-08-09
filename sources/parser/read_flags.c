@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:51:03 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 14:52:16 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 19:48:55 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 static bool	has_no_flags(t_flags *flags)
 {
 	if (flags->a || flags->l || flags->big_r || flags->little_r ||
-		flags->g || flags->one || flags->t || flags->m || flags->f || flags->i)
+		flags->g || flags->one || flags->t || flags->m || flags->f)
 		return (false);
 	return (flags->no_flags = true);
 }

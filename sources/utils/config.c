@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:34:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 16:30:32 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 19:49:50 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,4 @@ void		take_config(const char *name, const struct stat *stat_,
 	conf->group_len < len ? conf->group_len = len : 0;
 	len = nbrlen(stat_->st_size);
 	conf->size_len < len ? conf->size_len = len : 0;
-	len = nbrlen(stat_->st_ino);
-	conf->inode_nbr_len < len ? conf->inode_nbr_len = len : 0;
 }
