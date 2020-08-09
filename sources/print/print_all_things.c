@@ -44,6 +44,7 @@ void		print_all_things(const t_file *file, const t_flags *flags)
 
 	counter = file->files_inside;
 	print_directory(counter, flags);
+	ft_printf("\n");
 	while (counter)
 	{
 		if (should_print(flags, counter) && counter->type == Directory)
