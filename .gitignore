@@ -19,3 +19,4 @@ build
 *.a
 /objects
 *.o
+*.dSYM

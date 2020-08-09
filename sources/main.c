@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:42:36 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 17:48:00 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 18:36:56 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 **			calculate sizes for output
 **		4. Sort
 **		5. Print result
+**		6. Free conf and files
 */
 
 int		main(int ac, char **av)

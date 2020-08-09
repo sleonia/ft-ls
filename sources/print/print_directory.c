@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:46:13 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/09 17:43:54 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 19:29:26 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ void			print_directory(const t_file *file, const t_flags *flags)
 
 	tmp = (t_file *)file;
 	if (flags->l || flags->g)
-	{
 		ft_printf("total: %d\n", file->origin->conf->total);
+	if (flags->m || flags->l || flags->g)
+	{
 		while (tmp)
 		{
 			if (should_print(tmp, flags))
@@ -42,6 +43,8 @@ void			print_directory(const t_file *file, const t_flags *flags)
 			}
 			tmp = tmp->next;
 		}
+		if (flags->m)
+			ft_printf("\n");
 	}
 	else
 		print_column(file->origin, flags);

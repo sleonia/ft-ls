@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:19:41 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/09 17:57:22 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 18:35:40 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,19 @@
 ** \brief Functions for print output
 */
 
+/*
+**	Matrix filed for print with color
+*/
+
 typedef struct			s_matrix
 {
 	char				*name;
 	mode_t				st_mode;
 }						t_matrix;
+
+/*
+**	Stuct for save data for print with column
+*/
 
 typedef struct			s_cols
 {
@@ -38,7 +46,7 @@ typedef struct			s_cols
 	int					term_width;
 	int					files_per_col;
 	int					files_done;
-	int 				row;
+	int					row;
 }						t_cols;
 
 void					print_illegal_opt(const char symb);
