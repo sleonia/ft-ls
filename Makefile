@@ -29,7 +29,7 @@ PRINT_FILES =							\
 			print_link_value.c			\
 			print_size.c				\
 			print_with_color.c			\
-			#print_column.c				\
+			print_column.c				\
 
 PRINT_DIR = ./sources/print/
 

@@ -28,7 +28,7 @@ void			print_all_things(const t_file *files, const t_flags *flags);
 void			print_all_info(const t_file *files, const t_flags *flags);
 void			print_file(const t_file *files,
 							const t_flags *flags, bool is_next);
-void			print_with_color(const struct stat *stat_,
+void			print_with_color(const mode_t st_mode,
 							const char *name, int width);
 void			print_column(t_file *files, const t_flags *flags);
 void			print(const t_flags *flags, const t_file *files);

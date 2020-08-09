@@ -4,10 +4,10 @@
 typedef  struct s_matrix
 {
 	char 		*name;
-	struct stat *stat_;
+	mode_t		st_mode;
 }				t_matrix;
 
-static char **make_matrix(int files_count, t_file *files, t_flags *flags)
+static t_matrix **make_matrix(int files_count, t_file *files, const t_flags *flags)
 {
 	t_matrix 	**matrix;
 	int 		i;
@@ -22,7 +22,7 @@ static char **make_matrix(int files_count, t_file *files, t_flags *flags)
 		{
 			matrix[i] = (t_matrix*)ft_memalloc(sizeof(t_matrix));
 			matrix[i]->name = ft_strdup(tmp->name);
-			matrix[i]->stat_ = &tmp->stat;
+			matrix[i]->st_mode = tmp->stat.st_mode;
 			i++;
 		}
 		tmp = tmp->next;
@@ -41,7 +41,6 @@ static t_cols  *init_cols_info(t_file *file)
 	cols_info->term_width = cols_info->ts.ts_cols;
 	if (!cols_info->term_width)
 		cols_info->term_width = 80;
-//	cols_info->term_width = 104;//del_me;
 	cols_info->cols = cols_info->term_width / (cols_info->max_file_len + 4);//do smth
 	if (!cols_info->cols)
 		cols_info->cols = 1;
@@ -52,7 +51,7 @@ static t_cols  *init_cols_info(t_file *file)
 	return (cols_info);
 }
 
-static void print_block(t_cols *cols_info, t_matrix **matrix, int rows)
+static void print_block(t_cols *cols_info, t_matrix **matrix)
 {
 	int col;
 	int file_in_row_counter;
@@ -77,11 +76,7 @@ static void print_block(t_cols *cols_info, t_matrix **matrix, int rows)
 				ft_printf("\n");
 				continue;
 			}
-	//		ft_printf("%-*s ", cols_info->max_file_len + 1, matrix[index]);
-			print_with_color(matrix[index]->stat_, matrix[index]->name, cols_info->max_file_len + 1);
-//			ft_printf("%s", ANSI_COLOR_BOLD_CYAN);
-//			ft_printf("%-*s", cols_info->max_file_len + 1, matrix[index]);
-//			ft_printf("%s", ANSI_COLOR_RESET);
+			print_with_color(matrix[index]->st_mode, matrix[index]->name, cols_info->max_file_len + 1);
 			file_in_row_counter++;
 			cols_info->files_done++;
 			col++;
@@ -93,14 +88,15 @@ static void print_block(t_cols *cols_info, t_matrix **matrix, int rows)
 	}
 }
 
-static void free_matrix(t_cols *cols, char **matrix)
+static void free_matrix(t_cols *cols, t_matrix **matrix)
 {
 	int i;
 
 	i = 0;
 	while (matrix[i])
 	{
-		ft_strdel(&matrix[i]);
+		ft_strdel(&matrix[i]->name);
+		free(matrix[i]);
 		i++;
 	}
 	free(matrix);
@@ -119,6 +115,6 @@ void		print_column(t_file *files, const t_flags *flags)
 	rows = cols_info->files_count_actual / cols_info->cols;
 	refuse_files_per_col = cols_info->files_count_actual % cols_info->cols;
 	rows = refuse_files_per_col ? rows + 1 : rows;
-	print_block(cols_info, matrix, rows);
+	print_block(cols_info, matrix);
 	free_matrix(cols_info, matrix);
 }

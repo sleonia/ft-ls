@@ -28,7 +28,7 @@ void		print_file(const t_file *file, const t_flags *flags, bool is_next)
 		print_all_info(file, flags);
 	else
 	{
-		print_with_color((const struct stat*)&file->stat,
+		print_with_color(file->stat.st_mode,
 						(const char*)file->name, 0);
 		if (flags->one)
 			ft_printf("\n");

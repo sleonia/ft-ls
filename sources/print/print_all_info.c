@@ -87,7 +87,7 @@ void			print_all_info(const t_file *files, const t_flags *flags)
 			getgrgid(files->stat.st_gid)->gr_name);
 	print_size(&files->stat, conf.size_len + 1);
 	print_time(&files->stat.st_mtime);
-	print_with_color(&files->stat, files->name, 0);
+	print_with_color(files->stat.st_mode, files->name, 0);
 	if (files->type == Link)
 		print_link_value(files->full_path);
 	ft_printf("\n");
