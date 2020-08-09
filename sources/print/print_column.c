@@ -1,17 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_column.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/09 17:39:16 by sleonia           #+#    #+#             */
+/*   Updated: 2020/08/09 18:01:06 by sleonia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "print/print.h"
+#include "utils/utils.h"
 #include "types.h"
 
-typedef  struct s_matrix
+static t_matrix	**make_matrix(int files_count, t_file *files,
+							const t_flags *flags)
 {
-	char 		*name;
-	mode_t		st_mode;
-}				t_matrix;
-
-static t_matrix **make_matrix(int files_count, t_file *files, const t_flags *flags)
-{
-	t_matrix 	**matrix;
-	int 		i;
-	t_file 		*tmp;
+	t_matrix	**matrix;
+	int			i;
+	t_file		*tmp;
 
 	matrix = (t_matrix**)ft_memalloc(sizeof(t_matrix*) * (files_count + 1));
 	i = 0;
@@ -30,13 +38,16 @@ static t_matrix **make_matrix(int files_count, t_file *files, const t_flags *fla
 	return (matrix);
 }
 
-static t_cols  *init_cols_info(t_file *file)
+static t_cols	*init_cols_info(t_file *file)
 {
-	t_cols *cols_info;
+	t_cols	*cols_info;
+	t_conf	*conf;
+
+	conf = file->conf ? file->conf : file->origin->conf;
 	cols_info = (t_cols*)ft_memalloc(sizeof(t_cols));
-	cols_info->max_file_len = file->conf ? file->conf->name_len : file->origin->conf->name_len;
-	cols_info->files_count_actual = file->conf ? file->conf->count_actual : file->origin->conf->count_actual;
-	cols_info->files_count_total = file->conf ? file->conf->count_total : file->origin->conf->count_total;
+	cols_info->max_file_len = conf->name_len;
+	cols_info->files_actual = conf->count_actual;
+	cols_info->files_count_total = conf->count_total;
 	ioctl(STDIN_FILENO, TIOCGSIZE, &cols_info->ts);
 	cols_info->term_width = cols_info->ts.ts_cols;
 	if (!cols_info->term_width)
@@ -44,31 +55,28 @@ static t_cols  *init_cols_info(t_file *file)
 	cols_info->cols = cols_info->term_width / (cols_info->max_file_len + 4);//do smth
 	if (!cols_info->cols)
 		cols_info->cols = 1;
-	cols_info->normal_files_per_col = cols_info->files_count_actual / cols_info->cols;
-	if (cols_info->normal_files_per_col * cols_info->cols < cols_info->files_count_actual)
-		cols_info->normal_files_per_col++;
-
+	cols_info->files_per_col = cols_info->files_actual / cols_info->cols;
+	if (cols_info->files_per_col * cols_info->cols < cols_info->files_actual)
+		cols_info->files_per_col++;
 	return (cols_info);
 }
 
-static void print_block(t_cols *cols_info, t_matrix **matrix)
+static void		print_block(t_cols *cols_info, t_matrix **matrix)
 {
 	int col;
 	int file_in_row_counter;
-	int index;
+	int i;
 	int row;
-	int refuse;
 
 	row = 0;
-	while (cols_info->files_done < cols_info->files_count_actual)
+	while (cols_info->files_done < cols_info->files_actual)
 	{
 		col = 1;
 		file_in_row_counter = 0;
 		while (file_in_row_counter < cols_info->cols)
 		{
-			refuse = (cols_info->files_count_actual - cols_info->files_done) < cols_info->cols ? 1 : 0;
-			index = row + (col - 1)  * (cols_info->normal_files_per_col);
-			if (index >= cols_info->files_count_actual)
+			i = row + (col - 1) * (cols_info->files_per_col);
+			if (i >= cols_info->files_actual)
 			{
 				col = 1;
 				row++;
@@ -76,44 +84,30 @@ static void print_block(t_cols *cols_info, t_matrix **matrix)
 				ft_printf("\n");
 				continue;
 			}
-			print_with_color(matrix[index]->st_mode, matrix[index]->name, cols_info->max_file_len + 1);
+			print_with_color(matrix[i]->st_mode, matrix[i]->name,
+							cols_info->max_file_len + 1);
 			file_in_row_counter++;
 			cols_info->files_done++;
 			col++;
-			if (cols_info->files_done == cols_info->files_count_actual)
-				break;
+			if (cols_info->files_done == cols_info->files_actual)
+				break ;
 		}
 		row++;
 		ft_printf("\n");
 	}
 }
 
-static void free_matrix(t_cols *cols, t_matrix **matrix)
+void			print_column(t_file *files, const t_flags *flags)
 {
-	int i;
-
-	i = 0;
-	while (matrix[i])
-	{
-		ft_strdel(&matrix[i]->name);
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);
-	ft_memdel((void**)&cols);
-}
-
-void		print_column(t_file *files, const t_flags *flags)
-{
-	t_cols 			*cols_info;
+	t_cols			*cols_info;
 	t_matrix		**matrix;
-	int 			refuse_files_per_col;
-	int 			rows;
+	int				refuse_files_per_col;
+	int				rows;
 
 	cols_info = init_cols_info(files);
-	matrix = make_matrix(cols_info->files_count_actual, files, flags);
-	rows = cols_info->files_count_actual / cols_info->cols;
-	refuse_files_per_col = cols_info->files_count_actual % cols_info->cols;
+	matrix = make_matrix(cols_info->files_actual, files, flags);
+	rows = cols_info->files_actual / cols_info->cols;
+	refuse_files_per_col = cols_info->files_actual % cols_info->cols;
 	rows = refuse_files_per_col ? rows + 1 : rows;
 	print_block(cols_info, matrix);
 	free_matrix(cols_info, matrix);

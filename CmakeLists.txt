@@ -134,4 +134,5 @@ add_executable(ft_ls_final
         sources/utils/get_attributes.c
         sources/utils/get_type.c
         sources/utils/utils.c
+        sources/utils/free_matrix.c
         sources/main.c)

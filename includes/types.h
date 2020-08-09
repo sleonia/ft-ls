@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:21:50 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 18:57:42 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 17:40:06 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,18 +126,5 @@ typedef	struct			s_flags
 	bool				i;
 	bool				no_flags;
 }						t_flags;
-
-typedef struct 			s_cols
-{
-	int 				cols;
-	struct ttysize		ts;
-	int					max_file_len;
-	int					files_count_actual;
-	int					files_count_total;
-	int					term_width;
-	int					normal_files_per_col;
-	int 				files_done;
-
-}						t_cols;
 
 #endif

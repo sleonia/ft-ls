@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:19:41 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 15:59:55 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 17:57:22 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,41 @@
 ** \brief Functions for print output
 */
 
-void			print_illegal_opt(const char symb);
-void			print_directory(const t_file *files, const t_flags *flags);
-void			print_all_things(const t_file *files, const t_flags *flags);
-void			print_all_info(const t_file *files, const t_flags *flags);
-void			print_file(const t_file *files,
-							const t_flags *flags, bool is_next);
-void			print_with_color(const mode_t st_mode,
-							const char *name, int width);
-void			print_column(t_file *files, const t_flags *flags);
-void			print(const t_flags *flags, const t_file *files);
+typedef struct			s_matrix
+{
+	char				*name;
+	mode_t				st_mode;
+}						t_matrix;
 
-void			print_link_value(const char *full_path);
+typedef struct			s_cols
+{
+	int					cols;
+	struct ttysize		ts;
+	int					max_file_len;
+	int					files_actual;
+	int					files_count_total;
+	int					term_width;
+	int					files_per_col;
+	int					files_done;
+}						t_cols;
 
-void			print_size(const struct stat *stat_, unsigned size);
+void					print_illegal_opt(const char symb);
+void					print_directory(const t_file *files,
+										const t_flags *flags);
+void					print_all_things(const t_file *files,
+										const t_flags *flags);
+void					print_all_info(const t_file *files,
+									const t_flags *flags);
+void					print_file(const t_file *files,
+									const t_flags *flags, bool is_next);
+void					print_with_color(const mode_t st_mode,
+								const char *name, int width);
+void					print_column(t_file *files, const t_flags *flags);
+void					print(const t_flags *flags, const t_file *files);
+
+void					print_link_value(const char *full_path);
+
+void					print_size(const struct stat *stat_, unsigned size);
 
 /*
 **	Colors

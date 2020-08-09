@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:27:40 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 19:05:43 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 18:00:46 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "types.h"
 # include "ft_printf.h"
+# include "print/print.h"
 # include <pwd.h>
 # include <grp.h>
 
@@ -47,5 +48,7 @@ int			get_type(mode_t mode);
 char		get_attributes(const char *name);
 
 void		del_last(t_file *prev, t_file *curr);
+
+void		free_matrix(t_cols *cols, t_matrix **matrix);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:43:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 21:22:39 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 17:48:30 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static void		print_one(const t_file *files, const t_flags *flags)
 		if (files->type == Directory)
 			print_directory(files->files_inside, flags);
 		else
+		{
 			print_file(files, flags, files->next);
+			ft_printf("\n");
+		}
 		print_one(files->next, flags);
 	}
 }
@@ -64,10 +67,7 @@ static void		print_things(const t_flags *flags, const t_file *files)
 	else
 	{
 		if (!files->is_error)
-		{
 			print_one(files, flags);
-			printf("\n");
-		}
 	}
 }
 

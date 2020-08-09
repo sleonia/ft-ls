@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:46:13 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/09 16:15:52 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 17:43:54 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,4 @@ void			print_directory(const t_file *file, const t_flags *flags)
 	}
 	else
 		print_column(file->origin, flags);
-
-//	if (!flags->l && !flags->g)
-//		ft_printf("\n");
 }
-///usr/standalone/i386/SecureBoot.bundle/Contents:
-///usr/standalone/i386/SecureBoot.bundle/Contents/Resources:
-///usr/standalone/i386/SecureBoot.bundle/Contents/_CodeSignature:
