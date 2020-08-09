@@ -61,37 +61,43 @@ static t_cols	*init_cols_info(t_file *file)
 	return (cols_info);
 }
 
-static void		print_block(t_cols *cols_info, t_matrix **matrix)
+static int		print_row(t_cols *cols, t_matrix **matrix, int row)
 {
 	int col;
 	int file_in_row_counter;
 	int i;
+
+	col = 1;
+	file_in_row_counter = 0;
+	while (file_in_row_counter < cols->cols)
+	{
+		i = row + (col - 1) * (cols->files_per_col);
+		if (i >= cols->files_actual)
+		{
+			col = 1;
+			row++;
+			file_in_row_counter = 0;
+			ft_printf("\n");
+			continue;
+		}
+		print_with_color(matrix[i]->st_mode, matrix[i]->name,cols->max_file_len + 1);
+		file_in_row_counter++;
+		cols->files_done++;
+		col++;
+		if (cols->files_done == cols->files_actual)
+			break ;
+	}
+	return (row);
+}
+
+static void		print_block(t_cols *cols_info, t_matrix **matrix)
+{
 	int row;
 
 	row = 0;
 	while (cols_info->files_done < cols_info->files_actual)
 	{
-		col = 1;
-		file_in_row_counter = 0;
-		while (file_in_row_counter < cols_info->cols)
-		{
-			i = row + (col - 1) * (cols_info->files_per_col);
-			if (i >= cols_info->files_actual)
-			{
-				col = 1;
-				row++;
-				file_in_row_counter = 0;
-				ft_printf("\n");
-				continue;
-			}
-			print_with_color(matrix[i]->st_mode, matrix[i]->name,
-							cols_info->max_file_len + 1);
-			file_in_row_counter++;
-			cols_info->files_done++;
-			col++;
-			if (cols_info->files_done == cols_info->files_actual)
-				break ;
-		}
+		row = print_row(cols_info, matrix, row);
 		row++;
 		ft_printf("\n");
 	}
