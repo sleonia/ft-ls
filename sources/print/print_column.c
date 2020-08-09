@@ -1,130 +1,100 @@
 #include "print/print.h"
 #include "types.h"
-#include <sys/ioctl.h>
 
-void	print_column(const t_file *files, const t_flags *flags)
+
+static char **make_matrix(int files_count, t_file *files, t_flags *flags)
 {
-	int				term_width;
-	int				cols;
-	struct ttysize	ts;
-	int bad_cols = 0;
-	//char			matrix[files->origin->conf->count][files->origin->conf->name_len];
-	int max_file_len = files->origin ? files->origin->conf->name_len : files->conf->name_len;
-	int files_count_actual = files->origin ? files->origin->conf->count_actual : files->conf->count_actual;///////I NEED THIS AS IF -a WAS TRUE EVEN IF ITS NOT
-	int files_count_total = files->origin ? files->origin->conf->count_total : files->conf->count_total;
-	char			matrix[files_count_actual][max_file_len];////norm error here
+	char 	**matrix;
+	int 	i;
+	t_file 	*tmp;
 
-	ft_memset(matrix, '\0', sizeof(matrix));
-	ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
-	term_width = ts.ts_cols;
-
-	///test
-//	term_width = 80;//SET WIDTH HERE FOR DEBUGGER
-	///end of test
-	cols = term_width / (max_file_len + 4); ////amount of columns
-
-	t_file *tmp = (t_file *)files->files_inside;
-	for (int i = 0; i < files_count_actual && tmp; i++)
+	matrix = (char**)ft_memalloc(sizeof(char*) * files_count);
+	i = 0;
+	tmp = files->files_inside;
+	while (i < files_count && tmp)
 	{
 		if (flags->a || (!flags->a && tmp->name[0] != '.'))
-			ft_strcpy(matrix[i], tmp->name);
-		else (i--);
+		{
+			matrix[i] = ft_strdup(tmp->name);
+			i++;
+		}
 		tmp = tmp->next;
 	}
+	return (matrix);
+}
 
+static t_cols  *init_cols_info(t_file *file)
+{
+	t_cols *cols_info;
+	cols_info = (t_cols*)ft_memalloc(sizeof(t_cols));
+	cols_info->max_file_len = file->origin ? file->origin->conf->name_len : file->conf->name_len;
+	cols_info-> files_count_actual = file->origin ? file->origin->conf->count_actual : file->conf->count_actual;
+	cols_info->files_count_total = file->origin ? file->origin->conf->count_total : file->conf->count_total;
+	ioctl(STDIN_FILENO, TIOCGSIZE, &cols_info->ts);
+	cols_info->term_width = cols_info->ts.ts_cols;
+	if (!cols_info->term_width)
+		cols_info->term_width = 80;
+//	cols_info->term_width = 104;//del_me;
+	cols_info->cols = cols_info->term_width / (cols_info->max_file_len + 4);//do smth
+	if (!cols_info->cols)
+		cols_info->cols = 1;
+	cols_info->normal_files_per_col = cols_info->files_count_actual / cols_info->cols;
+	if (cols_info->normal_files_per_col * cols_info->cols < cols_info->files_count_actual)
+		cols_info->normal_files_per_col++;
 
-	int index = 0;////index for printing
-	int 			file_in_row_counter = 0;///files num in curr row
-	int 			files_done = 0;////files already printed
-	int 			row = 0;///curr row
-	int 			col = 0;////curr col
-	files_done = 0;
+	return (cols_info);
+}
+
+static void print_block(t_cols *cols_info, char **matrix, int rows)
+{
+	int col;
+	int file_in_row_counter;
+	int index;
+	int row;
+	int refuse;
+
 	row = 0;
-	file_in_row_counter = 0;
-	int normal_files_per_col = files_count_total / cols;
-	int good_rows = 0;
-	int bad_rows = 0;///this will be the amount of rows with not max amount of files
-	/*here i will find amount of good rows that i need to print
-	 *
-	 */
-	int refuse_files_per_col = files_count_actual % cols;
-	if (refuse_files_per_col)
+	while (cols_info->files_done < cols_info->files_count_actual)
 	{
-		while (refuse_files_per_col)
+		col = 1;
+		file_in_row_counter = 0;
+		while (file_in_row_counter < cols_info->cols)
 		{
-			bad_rows++;
-			refuse_files_per_col = files_count_actual & cols - bad_rows;
-		}
-	}
-	good_rows = files_count_total / cols;
-	refuse_files_per_col = files_count_actual % cols;
-
-	if (refuse_files_per_col)
-	{
-		good_rows = good_rows - bad_rows;
-		bad_cols = (files_count_actual - cols * good_rows) / bad_rows;
-		int bad_files_per_col = bad_cols;
-	}
-	int normal_rows_done = 0;//////////checks wether we are doing an incomplete row
-
-
-	int index_file_counter = flags->a ? files_count_total : files_count_actual;
-
-	while (files_done < files_count_actual)
-	{
-
-		///first we print good rows
-
-		while (good_rows)
-		{
-			col = 1;
-			file_in_row_counter = 0;
-			while (/*col < (cols + 1)*/file_in_row_counter < cols)
+			refuse = (cols_info->files_count_actual - cols_info->files_done) < cols_info->cols ? 1 : 0;
+			index = row + (col - 1)  * (cols_info->normal_files_per_col);
+			if (index >= cols_info->files_count_actual)
 			{
-//				normal_rows_done = (index_file_counter - files_done) < refuse_files_per_col ? refuse_files_per_col : 0;
-				index = row + (col - 1)  * (normal_files_per_col);
-
-				if (flags->a || (!flags->a && matrix[index][0] != '.'))
-				{
-					ft_printf("%-*s ", max_file_len + 1, matrix[index]);////wrong width?
-					file_in_row_counter++;
-
-				}
-				files_done++;
-				col++;
+		//		index -= cols_info->cols;
+				index -= cols_info->normal_files_per_col;
+				index += refuse;
 			}
-			row++;
-			ft_printf("\n");
-			good_rows--;
+
+			////test index
+//			ft_printf("index is : |%d| ", index);
+			///end of test index
+			ft_printf("%-*s ", cols_info->max_file_len + 1, matrix[index]);
+			file_in_row_counter++;
+			cols_info->files_done++;
+			col++;
+			if (cols_info->files_done == cols_info->files_count_actual)
+				break;
 		}
-
-		/////now we print other rows
-		while (bad_rows)
-		{
-			col = 1;
-			file_in_row_counter = 0;
-			while (file_in_row_counter < bad_cols)
-			{
-				index = row + (col - 1)  * (normal_files_per_col/* - normal_rows_done*/);
-				if (flags->a || (!flags->a && matrix[index][0] != '.'))
-				{
-					ft_printf("%-*s ", max_file_len + 1, matrix[index]);////wrong width?
-					file_in_row_counter++;
-
-				}
-				files_done++;
-				col++;
-			}
-			row++;
-			ft_printf("\n");
-			bad_rows--;
-
-		}
-
-
+		row++;
+		ft_printf("\n");
 	}
+}
 
-/*	for (int i = 0; i < files->origin->conf->count; i++) {
-		printf("%s\n", matrix[i]);
-	}*/
+void		print_column(t_file *files, const t_flags *flags)
+{
+	t_cols 			*cols_info;
+	char			**matrix;
+	int 			refuse_files_per_col;
+	int 			rows;
+
+	cols_info = init_cols_info(files);
+	matrix = make_matrix(cols_info->files_count_actual, files, flags);
+	rows = cols_info->files_count_actual / cols_info->cols;
+	refuse_files_per_col = cols_info->files_count_actual % cols_info->cols;
+	rows = refuse_files_per_col ? rows + 1 : rows;
+	print_block(cols_info, matrix, rows);
 }

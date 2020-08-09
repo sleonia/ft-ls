@@ -126,4 +126,17 @@ typedef	struct			s_flags
 	bool				no_flags;
 }						t_flags;
 
+typedef struct 			s_cols
+{
+	int 				cols;
+	struct ttysize		ts;
+	int					max_file_len;
+	int					files_count_actual;
+	int					files_count_total;
+	int					term_width;
+	int					normal_files_per_col;
+	int 				files_done;
+
+}						t_cols;
+
 #endif
