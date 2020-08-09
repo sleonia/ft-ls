@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 19:05:02 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 19:05:03 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 16:35:36 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 static bool		directory_to_ignore(t_file *file, t_flags *flags)
 {
-	int		depth;
-	t_file	*depth_counter;
+	int			depth;
+	t_file		*depth_counter;
 
 	depth = 0;
 	if (file->name[0] == '.' && !file->no_ignore)
@@ -38,34 +38,35 @@ static bool		directory_to_ignore(t_file *file, t_flags *flags)
 
 static void		fill_files_inside_dir(t_file *file, t_flags *flags)
 {
-	t_file	*tmp;
+	t_file	*file_counter;
 	t_file	*prev;
 
-	tmp = NULL;
-	tmp = new_file(tmp);
-	file->files_inside = tmp;
-	tmp->origin = file;
-	while (tmp)
+	file_counter = new_file(NULL);
+	file->files_inside = file_counter;
+	file_counter->origin = file;
+	while (true)
 	{
-		if (!(tmp->dirent = readdir(file->fd)))
+		errno = 0;
+		if (!(file_counter->dirent = readdir(file->fd)))
 		{
 			if (errno)
 				ft_printf("ft_ls: %s\n", strerror(errno));
 			break ;
 		}
-		fill_file(tmp->dirent->d_name, tmp, flags);
-		take_config(tmp->name, &tmp->stat, flags, tmp->origin->conf);
-		prev = tmp;
-		tmp = new_file(tmp);
-		tmp->origin = file;
+		fill_file(file_counter->dirent->d_name, file_counter, flags);
+		take_config(file_counter->name, &file_counter->stat,
+			flags, file_counter->origin->conf);
+		prev = file_counter;
+		file_counter = new_file(file_counter);
+		file_counter->origin = file;
 	}
-	if (!tmp->name)
-		del_last(prev, tmp);
+	if (!file_counter->name)
+		del_last(prev, file_counter);
 }
 
 static void		fill_directory(t_file *file, const char *name, t_flags *flags)
 {
-	t_file	*file_counter;
+	t_file		*file_counter;
 
 	file_counter = file;
 	file_counter->fd = opendir(name);
@@ -75,7 +76,6 @@ static void		fill_directory(t_file *file, const char *name, t_flags *flags)
 	{
 		if (!file->conf)
 			file->conf = new_conf();
-		errno = 0;
 		fill_files_inside_dir(file_counter, flags);
 	}
 	if (file_counter->fd)

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 19:05:20 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 19:05:21 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 16:35:23 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 ** \brief
 */
 
-void			read_files(int index, t_file *files, const char **args,
-		t_flags *flags)
+void			read_files(int index, t_file *files,
+						const char **args, t_flags *flags)
 {
-	t_file	*tmp;
-	t_file	*prev;
+	t_file		*tmp;
+	t_file		*prev;
 
 	tmp = files;
 	if (!args[index])
