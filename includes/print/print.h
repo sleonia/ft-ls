@@ -26,6 +26,8 @@ typedef struct			s_matrix
 {
 	char				*name;
 	mode_t				st_mode;
+	unsigned			ino;
+	unsigned 			ino_nbr_len;
 }						t_matrix;
 
 typedef struct			s_cols
