@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 17:39:16 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/09 18:01:06 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 19:55:07 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ static t_matrix	**make_matrix(int files_count, t_file *files,
 			matrix[i] = (t_matrix*)ft_memalloc(sizeof(t_matrix));
 			matrix[i]->name = ft_strdup(tmp->name);
 			matrix[i]->st_mode = tmp->stat.st_mode;
-			matrix[i]->ino = tmp->stat.st_ino;
-			matrix[i]->ino_nbr_len = files->conf->inode_nbr_len;
 			i++;
 		}
 		tmp = tmp->next;
@@ -40,7 +38,7 @@ static t_matrix	**make_matrix(int files_count, t_file *files,
 	return (matrix);
 }
 
-static t_cols	*init_cols_info(t_file *file, t_flags *flags)
+static t_cols	*init_cols_info(t_file *file)
 {
 	t_cols	*cols_info;
 	t_conf	*conf;
@@ -48,7 +46,6 @@ static t_cols	*init_cols_info(t_file *file, t_flags *flags)
 	conf = file->conf ? file->conf : file->origin->conf;
 	cols_info = (t_cols*)ft_memalloc(sizeof(t_cols));
 	cols_info->max_file_len = conf->name_len;
-	cols_info += flags->i ? conf->inode_nbr_len : 0;
 	cols_info->files_actual = conf->count_actual;
 	cols_info->files_count_total = conf->count_total;
 	ioctl(STDIN_FILENO, TIOCGSIZE, &cols_info->ts);
@@ -65,7 +62,7 @@ static t_cols	*init_cols_info(t_file *file, t_flags *flags)
 	return (cols_info);
 }
 
-static void		print_row(t_cols *cols, t_matrix **matrix, t_flags *flags)
+static void		print_row(t_cols *cols, t_matrix **matrix)
 {
 	int col;
 	int file_in_row_counter;
@@ -84,9 +81,6 @@ static void		print_row(t_cols *cols, t_matrix **matrix, t_flags *flags)
 			ft_printf("\n");
 			continue;
 		}
-		if (flags->m)
-			ft_printf("%*llu ", matrix[i]->ino_nbr_len + 1,
-					  matrix[i]->ino);
 		print_with_color(matrix[i]->st_mode, matrix[i]->name,
 				cols->max_file_len + 7);
 		file_in_row_counter++;
@@ -101,7 +95,7 @@ static void		print_block(t_cols *cols_info, t_matrix **matrix)
 {
 	while (cols_info->files_done < cols_info->files_actual)
 	{
-		print_row(cols_info, matrix, flags);
+		print_row(cols_info, matrix);
 		cols_info->row++;
 		ft_printf("\n");
 	}
@@ -114,7 +108,7 @@ void			print_column(t_file *files, const t_flags *flags)
 
 	if (!files)
 		return ;
-	cols_info = init_cols_info(files, flags);
+	cols_info = init_cols_info(files);
 	matrix = make_matrix(cols_info->files_actual, files, flags);
 	print_block(cols_info, matrix);
 	free_matrix(cols_info, matrix);

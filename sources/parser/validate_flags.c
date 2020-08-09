@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:52:21 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/09 19:49:05 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/08/09 19:55:54 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int				validate_flags(t_flags *flags, const char *arg)
 	{
 		if (arg[i] == 'R' || arg[i] == 'r' || arg[i] == 'l' || arg[i] == 'a'
 		|| arg[i] == 't' || arg[i] == 'g' || arg[i] == 'm' || arg[i] == '1'
-		|| arg[i] == 'f' || arg[i] == 'i')
+		|| arg[i] == 'f')
 			collect_flags(flags, arg[i]);
 		else
 		{
