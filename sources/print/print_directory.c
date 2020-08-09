@@ -43,8 +43,8 @@ void			print_directory(const t_file *file, const t_flags *flags)
 			tmp = tmp->next;
 		}
 	}
-	//else
-		//print_column(file->origin, flags);
+	else
+		print_column(file->origin, flags);
 
 //	if (!flags->l && !flags->g)
 //		ft_printf("\n");

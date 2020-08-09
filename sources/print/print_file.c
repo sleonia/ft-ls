@@ -29,7 +29,7 @@ void		print_file(const t_file *file, const t_flags *flags, bool is_next)
 	else
 	{
 		print_with_color((const struct stat*)&file->stat,
-						(const char*)file->name);
+						(const char*)file->name, 0);
 		if (flags->one)
 			ft_printf("\n");
 		else
