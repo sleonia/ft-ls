@@ -130,7 +130,7 @@ add_executable(ft_ls_final
         sources/utils/build_path.c
         sources/utils/config.c
         sources/utils/del_last.c
-        sources/utils/free.c
+        sources/utils/free_all.c
         sources/utils/get_attributes.c
         sources/utils/get_type.c
         sources/utils/utils.c

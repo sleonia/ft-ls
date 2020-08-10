@@ -54,12 +54,12 @@ OBJ_SORT_FILES = $(addprefix $(OBJ_DIR), $(SORT_FILES:.c=.o))
 UTILS_FILES =							\
 				build_path.c			\
 				config.c				\
-				free.c					\
 				get_attributes.c		\
 				get_type.c				\
 				utils.c					\
 				del_last.c				\
 				free_matrix.c			\
+				free_all.c				\
 
 UTILS_DIR = ./sources/utils/
 
