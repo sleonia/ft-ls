@@ -1,6 +1,6 @@
 # ft_ls
 
-![Alt Text](https://media1.giphy.com/media/SwCAaCjWtPrMhnX7K7/giphy.gif)
+![Alt Text](https://media1.giphy.com/media/jpVOdKQMndWLrrSXUY/giphy.gif)
 
 > What it is?
 
