@@ -1,4 +1,7 @@
-ft_ls
+# ft_ls
+
+![Alt Text](https://media1.giphy.com/media/SwCAaCjWtPrMhnX7K7/giphy.gif)
+
 > What it is?
 
 A recoding of the **Unix** command `ls`.  
