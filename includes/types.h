@@ -1,19 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   types.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/08 14:21:50 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/09 19:49:19 by sleonia          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef TYPES_H
-# define TYPES_H
+#define TYPES_H
 
-/*
+/*!
 ** \file
 ** \brief Types of structs in program
 */
@@ -24,12 +12,11 @@
 # include <time.h>
 # include <sys/ioctl.h>
 
-/*
+/*!
 **	Types of files in unix
 */
 
-typedef enum			e_types
-{
+typedef enum			e_types {
 	Regular,
 	Directory,
 	Character_device,
@@ -39,7 +26,7 @@ typedef enum			e_types
 	Unknown
 }						t_types;
 
-/*
+/*!
 **	Struct for correct output of ls
 **	  filed:
 **		- total size
@@ -52,8 +39,7 @@ typedef enum			e_types
 **		- file serial number (inode number)
 */
 
-typedef	struct			s_conf
-{
+typedef	struct			s_conf {
 	unsigned			total;
 	unsigned			count_actual;
 	unsigned			count_total;
@@ -65,13 +51,16 @@ typedef	struct			s_conf
 	unsigned			name_len;
 }						t_conf;
 
-/*
+/*!
 ** file:
 **     - file name
 **     - full path
+**     - file descriptor
 **     - files in dir
-**     - ?
+**     - pointer to parent
 **     - pointer to next
+**     - info by lstat()
+**     - config for print
 **     - readdir info
 **     - type of file
 **     - is ignor
@@ -79,8 +68,7 @@ typedef	struct			s_conf
 **     - is done
 */
 
-typedef	struct			s_file
-{
+typedef	struct			s_file {
 	char				*name;
 	char				*full_path;
 	DIR					*fd;
@@ -96,7 +84,7 @@ typedef	struct			s_file
 	bool				done;
 }						t_file;
 
-/*
+/*!
 ** Parsing ls arguments - directories and flags
 ** struct for program flags contain:
 **   - R
@@ -106,13 +94,10 @@ typedef	struct			s_file
 **   - t
 **   - g
 **   - m
-**   - 1
 **   - f
-**   - i
 */
 
-typedef	struct			s_flags
-{
+typedef	struct			s_flags {
 	bool				big_r;
 	bool				little_r;
 	bool				l;
@@ -120,7 +105,6 @@ typedef	struct			s_flags
 	bool				t;
 	bool				g;
 	bool				m;
-	bool				one;
 	bool				f;
 	bool				no_flags;
 }						t_flags;

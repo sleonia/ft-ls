@@ -57,8 +57,6 @@ UTILS_FILES =							\
 				get_attributes.c		\
 				get_type.c				\
 				utils.c					\
-				del_last.c				\
-				free_matrix.c			\
 				free_all.c				\
 
 UTILS_DIR = ./sources/utils/

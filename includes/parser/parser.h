@@ -1,29 +1,17 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/08 14:28:35 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 15:59:42 by sleonia          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PARSER_H
-# define PARSER_H
+#define PARSER_H
 
-# include "types.h"
-# include "libft/libft.h"
-# include <stdio.h>
-# include <dirent.h>
-# include <stdbool.h>
-# include <string.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <unistd.h>
+#include "types.h"
+#include "libft/libft.h"
+#include <stdio.h>
+#include <dirent.h>
+#include <stdbool.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
-/*
+/*!
 ** \file
 ** \brief Functions for parse input by flags and folders
 */

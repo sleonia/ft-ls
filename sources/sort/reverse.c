@@ -1,24 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   reverse.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/08 14:41:06 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 14:41:39 by sleonia          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "types.h"
 
-/*
+/*!
 ** \file
-** \brief
+** \brief Reverse all files and files_inside
 */
 
-t_file		*reverse(t_file **files)
-{
+t_file		*reverse(t_file **files) {
 	t_file *current;
 	t_file *tail;
 	t_file *next;
@@ -27,8 +14,7 @@ t_file		*reverse(t_file **files)
 		return (NULL);
 	current = *files;
 	tail = NULL;
-	while (current)
-	{
+	while (current) {
 		if (current->files_inside)
 			current->files_inside = reverse(&(current->files_inside));
 		next = current->next;

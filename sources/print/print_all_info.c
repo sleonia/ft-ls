@@ -1,20 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   print_all_info.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/08 14:44:58 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 20:55:09 by sleonia          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "print/print.h"
 #include "utils/utils.h"
 #include "types.h"
 
-/*
+/*!
 **	What is info about file/link/folder?
 **		-rwxr-xr-x   1 a18573961  staff  38528 14 Jul 21:16 ft_ls
 **	Transcript:
@@ -27,12 +15,11 @@
 **		- file name
 */
 
-/*
+/*!
 **	Example of ctime(time) -> Tue Jul 14 02:36:07 2020
 */
 
-static void		print_time(const time_t *time)
-{
+static void		print_time(const time_t *time) {
 	char	buffer[13];
 	char	*line_time;
 	int		i;
@@ -51,8 +38,7 @@ static void		print_time(const time_t *time)
 	ft_printf("%s ", buffer);
 }
 
-static void		print_rights(const mode_t mode, const char *name)
-{
+static void		print_rights(const mode_t mode, const char *name) {
 	char		rights[12];
 
 	ft_memset(rights, 0, 12);
@@ -70,8 +56,7 @@ static void		print_rights(const mode_t mode, const char *name)
 	ft_printf("%s", rights);
 }
 
-void			print_all_info(const t_file *files, const t_flags *flags)
-{
+void			print_all_info(const t_file *files, const t_flags *flags) {
 	t_conf		conf;
 
 	if (files->origin && files->origin->conf)

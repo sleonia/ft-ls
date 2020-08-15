@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   build_path.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/08 14:34:21 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 19:59:37 by sleonia          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "utils/utils.h"
 
-/*
+/*!
 ** \file
 ** \brief Create full path
 **		Example of path:
@@ -21,8 +9,7 @@
 **			-	"/Users/sleonia/Desktop"
 */
 
-char	*build_path(t_file *file)
-{
+char	*build_path(t_file *file) {
 	char	*buf;
 	char	*result;
 	t_file	*file_counter;
@@ -30,8 +17,7 @@ char	*build_path(t_file *file)
 	result = ft_strdup(file->name);
 	buf = NULL;
 	file_counter = file;
-	if (file->origin)
-	{
+	if (file->origin) {
 		if (result[0] != '/' && !ft_strequ(file->origin->full_path, "./"))
 			buf = ft_strjoin("/", result);
 		else if (ft_strequ(file->origin->full_path, "./"))
@@ -50,16 +36,14 @@ char	*build_path(t_file *file)
 	return (result);
 }
 
-char	*build_path_for_arg(const char *name)
-{
+char	*build_path_for_arg(const char *name) {
 	char *buf;
 
 	if (name[0] == '/')
 		return (ft_strdup(name));
 	if (ft_strcmp("./", name) == 0)
 		buf = ft_strdup(name);
-	else
-	{
+	else {
 		buf = ft_strstr(name, "User");
 		if (!buf && name[0] != '.')
 			buf = ft_strjoin("./", name);

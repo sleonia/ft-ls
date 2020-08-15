@@ -1,25 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   validate_flags.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/08 14:52:21 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/09 19:55:54 by sleonia          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "parser/parser.h"
 #include "print/print.h"
 
-/*
+/*!
 ** \file
 ** \brief Validate and collect all flags to t_flags struct
 */
 
-static void		collect_flags(t_flags *flags, const char arg)
-{
+static void		collect_flags(t_flags *flags, const char arg) {
 	if (arg == 'R')
 		flags->big_r = true;
 	if (arg == 'r')
@@ -34,34 +21,27 @@ static void		collect_flags(t_flags *flags, const char arg)
 		flags->g = true;
 	if (arg == 'm')
 		flags->m = true;
-	if (arg == '1')
-		flags->one = true;
-	if (arg == 'f')
-	{
+	if (arg == 'f') {
 		flags->f = true;
 		flags->a = true;
 	}
 }
 
-/*
+/*!
 **	\return Index in user input that equals folder or error flag
 */
 
-int				validate_flags(t_flags *flags, const char *arg)
-{
+int				validate_flags(t_flags *flags, const char *arg) {
 	int	i;
 
 	if (arg[0] != '-')
 		return (1);
 	i = 0;
-	while (arg[++i])
-	{
+	while (arg[++i]) {
 		if (arg[i] == 'R' || arg[i] == 'r' || arg[i] == 'l' || arg[i] == 'a'
-		|| arg[i] == 't' || arg[i] == 'g' || arg[i] == 'm' || arg[i] == '1'
-		|| arg[i] == 'f')
+			|| arg[i] == 't' || arg[i] == 'g' || arg[i] == 'm' || arg[i] == 'f')
 			collect_flags(flags, arg[i]);
-		else
-		{
+		else {
 			print_illegal_opt(arg[i]);
 			exit(0);
 		}

@@ -1,26 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   print_with_color.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/08 14:49:26 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/08 14:50:03 by sleonia          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "print/print.h"
 #include <sys/stat.h>
 
-/*
+/*!
 ** \file
-** \brief
+** \brief Print name with color
 */
 
-void			print_with_color(const mode_t st_mode,
-					const char *name, int width)
-{
+void			print_with_color(const mode_t st_mode, const char *name, int width) {
 	if (S_ISDIR(st_mode))
 		ft_printf("%s", ANSI_COLOR_BOLD_CYAN);
 	else if (S_ISLNK(st_mode))

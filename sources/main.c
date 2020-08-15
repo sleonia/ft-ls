@@ -1,22 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/08 14:42:36 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/09 18:36:56 by sleonia          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "types.h"
 #include "utils/utils.h"
 #include "parser/parser.h"
 #include "print/print.h"
 #include "sort/sort.h"
 
-/*
+/*!
 ** \file
 ** \brief Main file.
 ** \details How if works:
@@ -29,8 +17,7 @@
 **		6. Free conf and files
 */
 
-int		main(int ac, char **av)
-{
+int		main(int ac, char **av) {
 	t_flags		*flags;
 	t_file		*files;
 

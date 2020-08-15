@@ -1,32 +1,22 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   fill_file.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/08 19:05:02 by sleonia           #+#    #+#             */
-/*   Updated: 2020/08/09 16:35:36 by sleonia          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "parser/parser.h"
 #include "utils/utils.h"
 #include "print/print.h"
 
-static bool		directory_to_ignore(t_file *file, t_flags *flags)
-{
+/*
+** \file
+** \brief	Main func of parser. Call parsing flags and files.
+*/
+
+static bool		directory_to_ignore(t_file *file, t_flags *flags) {
 	int			depth;
 	t_file		*depth_counter;
 
 	depth = 0;
 	if (file->name[0] == '.' && !file->no_ignore)
 		return (!(file->no_ignore = false));
-	if (!flags->big_r)
-	{
+	if (!flags->big_r) {
 		depth_counter = file;
-		while (depth_counter)
-		{
+		while (depth_counter) {
 			depth++;
 			depth_counter = depth_counter->origin;
 		}
@@ -36,19 +26,16 @@ static bool		directory_to_ignore(t_file *file, t_flags *flags)
 	return (false);
 }
 
-static void		fill_files_inside_dir(t_file *file, t_flags *flags)
-{
+static void		fill_files_inside_dir(t_file *file, t_flags *flags) {
 	t_file	*file_counter;
 	t_file	*prev;
 
 	file_counter = new_file(NULL);
 	file->files_inside = file_counter;
 	file_counter->origin = file;
-	while (true)
-	{
+	while (true) {
 		errno = 0;
-		if (!(file_counter->dirent = readdir(file->fd)))
-		{
+		if (!(file_counter->dirent = readdir(file->fd))) {
 			if (errno)
 				ft_printf("ft_ls: %s\n", strerror(errno));
 			break ;
@@ -60,20 +47,20 @@ static void		fill_files_inside_dir(t_file *file, t_flags *flags)
 		file_counter = new_file(file_counter);
 		file_counter->origin = file;
 	}
-	if (!file_counter->name)
-		del_last(prev, file_counter);
+	if (!file_counter->name) {
+		prev->next = NULL;
+		ft_memdel((void **)&file_counter);
+	}
 }
 
-static void		fill_directory(t_file *file, const char *name, t_flags *flags)
-{
+static void		fill_directory(t_file *file, const char *name, t_flags *flags) {
 	t_file		*file_counter;
 
 	file_counter = file;
 	file_counter->fd = opendir(name);
 	if (!file_counter->fd)
 		return ;
-	if (!directory_to_ignore(file_counter, flags))
-	{
+	if (!directory_to_ignore(file_counter, flags)) {
 		if (!file->conf)
 			file->conf = new_conf();
 		fill_files_inside_dir(file_counter, flags);
@@ -89,8 +76,7 @@ void			fill_file(const char *name, t_file *file, t_flags *flags)
 		file->name = ft_strdup(name);
 	if (!file->full_path)
 		file->full_path = build_path(file);
-	if (lstat(file->full_path, &file->stat) < 0)
-	{
+	if (lstat(file->full_path, &file->stat) < 0) {
 		ft_printf("ft_ls: %s: %s\n", file->name, strerror(errno));
 		file->is_error = true;
 		return ;
